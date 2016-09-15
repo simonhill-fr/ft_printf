@@ -1,46 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 11:42:33 by shill             #+#    #+#             */
-/*   Updated: 2016/09/15 11:42:36 by shill            ###   ########.fr       */
+/*   Created: 2015/12/28 15:24:30 by shill             #+#    #+#             */
+/*   Updated: 2015/12/28 15:28:05 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
-#include <stdarg.h>
+#include "libft.h"
 
-int	ft_printf(int max, ...)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int 		i = 0;
-	int			nb = 0;
-
-	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
+	if (n == -2147483648)
+		ft_putstr_fd("-2147483648", fd);
+	else if (n < 0)
 	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
-		i++;
+		ft_putchar_fd('-', fd);
+		ft_putnbr_fd(-n, fd);
 	}
-	va_end(ap);
-	return (0);
-
-
-
-
-}
-
-
-int 	main()
-{
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
-
-
-	return (0);
-
+	else if (n >= 10)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
+	else if (n < 10)
+		ft_putchar_fd(n + '0', fd);
 }

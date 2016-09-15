@@ -1,46 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_printlist.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 11:42:33 by shill             #+#    #+#             */
-/*   Updated: 2016/09/15 11:42:36 by shill            ###   ########.fr       */
+/*   Created: 2016/01/11 20:06:07 by shill             #+#    #+#             */
+/*   Updated: 2016/01/11 20:06:10 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
-#include <stdarg.h>
+#include "libft.h"
 
-int	ft_printf(int max, ...)
+void	ft_printlist(t_list *elem)
 {
-	int 		i = 0;
-	int			nb = 0;
-
-	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
+	while (elem)
 	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
-		i++;
+		ft_putendl(elem->content);
+		elem = elem->next;
 	}
-	va_end(ap);
-	return (0);
-
-
-
-
-}
-
-
-int 	main()
-{
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
-
-
-	return (0);
-
 }

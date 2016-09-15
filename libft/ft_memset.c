@@ -1,46 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 11:42:33 by shill             #+#    #+#             */
-/*   Updated: 2016/09/15 11:42:36 by shill            ###   ########.fr       */
+/*   Created: 2015/11/27 15:15:38 by shill             #+#    #+#             */
+/*   Updated: 2015/11/28 18:44:44 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
-#include <stdarg.h>
+#include "libft.h"
 
-int	ft_printf(int max, ...)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	int 		i = 0;
-	int			nb = 0;
+	unsigned char	*i;
+	size_t			index;
 
-	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
+	i = (unsigned char *)b;
+	index = 0;
+	while (index < len)
 	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
+		*i = (unsigned char)c;
 		i++;
+		index++;
 	}
-	va_end(ap);
-	return (0);
-
-
-
-
-}
-
-
-int 	main()
-{
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
-
-
-	return (0);
-
+	return (b);
 }

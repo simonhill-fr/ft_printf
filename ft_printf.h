@@ -1,46 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 11:42:33 by shill             #+#    #+#             */
-/*   Updated: 2016/09/15 11:42:36 by shill            ###   ########.fr       */
+/*   Created: 2016/09/15 13:39:56 by shill             #+#    #+#             */
+/*   Updated: 2016/09/15 13:46:46 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+
 #include <stdarg.h>
+#include "libft/libft.h"
 
-int	ft_printf(int max, ...)
-{
-	int 		i = 0;
-	int			nb = 0;
-
-	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
-	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
-		i++;
-	}
-	va_end(ap);
-	return (0);
+#include <stdio.h> //REMOVE
 
 
-
-
-}
-
-
-int 	main()
-{
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
-
-
-	return (0);
-
-}
+#endif

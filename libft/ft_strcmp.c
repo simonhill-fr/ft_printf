@@ -1,46 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_cmp.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 11:42:33 by shill             #+#    #+#             */
-/*   Updated: 2016/09/15 11:42:36 by shill            ###   ########.fr       */
+/*   Created: 2015/08/26 02:54:31 by shill             #+#    #+#             */
+/*   Updated: 2015/11/26 12:26:46 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
-#include <stdarg.h>
-
-int	ft_printf(int max, ...)
+int		ft_strcmp(const char *s1, const char *s2)
 {
-	int 		i = 0;
-	int			nb = 0;
+	int		i;
 
-	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
+	i = 0;
+	while (s1[i] || s2[i])
 	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
-		i++;
+		if (s1[i] == s2[i])
+			i++;
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 	}
-	va_end(ap);
 	return (0);
-
-
-
-
-}
-
-
-int 	main()
-{
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
-
-
-	return (0);
-
 }

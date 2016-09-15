@@ -1,46 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 11:42:33 by shill             #+#    #+#             */
-/*   Updated: 2016/09/15 11:42:36 by shill            ###   ########.fr       */
+/*   Created: 2015/12/27 17:19:44 by shill             #+#    #+#             */
+/*   Updated: 2015/12/27 17:19:48 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
-#include <stdarg.h>
+#include "libft.h"
 
-int	ft_printf(int max, ...)
+void	*ft_memalloc(size_t size)
 {
-	int 		i = 0;
-	int			nb = 0;
+	char	*mem;
 
-	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
-	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
-		i++;
-	}
-	va_end(ap);
-	return (0);
-
-
-
-
-}
-
-
-int 	main()
-{
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
-
-
-	return (0);
-
+	mem = (char*)malloc(sizeof(*mem) * size);
+	if (!mem)
+		return (NULL);
+	ft_memset(mem, '\0', size);
+	return (mem);
 }

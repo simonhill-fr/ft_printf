@@ -1,46 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 11:42:33 by shill             #+#    #+#             */
-/*   Updated: 2016/09/15 11:42:36 by shill            ###   ########.fr       */
+/*   Created: 2016/01/11 20:14:24 by shill             #+#    #+#             */
+/*   Updated: 2016/01/11 20:14:27 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
-#include <stdarg.h>
+#include "libft.h"
 
-int	ft_printf(int max, ...)
+int		ft_lstsize(t_list *begin_list)
 {
-	int 		i = 0;
-	int			nb = 0;
+	t_list	*tmp;
+	int		i;
 
-	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
+	i = 0;
+	tmp = begin_list;
+	while (tmp)
 	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
+		tmp = tmp->next;
 		i++;
 	}
-	va_end(ap);
-	return (0);
-
-
-
-
-}
-
-
-int 	main()
-{
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
-
-
-	return (0);
-
+	return (i);
 }

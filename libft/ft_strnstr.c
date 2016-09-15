@@ -1,46 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 11:42:33 by shill             #+#    #+#             */
-/*   Updated: 2016/09/15 11:42:36 by shill            ###   ########.fr       */
+/*   Created: 2015/12/26 14:10:01 by shill             #+#    #+#             */
+/*   Updated: 2015/12/26 14:10:07 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
-#include <stdarg.h>
+#include "libft.h"
 
-int	ft_printf(int max, ...)
+char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 {
-	int 		i = 0;
-	int			nb = 0;
-
-	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
+	if (!(*s2))
+		return ((char *)s1);
+	if (!(*s1) || n == 0)
+		return (NULL);
+	if (*s1 == *s2)
 	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
-		i++;
+		if (ft_strnstr(s1 + 1, s2 + 1, n - 1) - 1 == s1)
+			return ((char *)s1);
 	}
-	va_end(ap);
-	return (0);
-
-
-
-
-}
-
-
-int 	main()
-{
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
-
-
-	return (0);
-
+	return (ft_strnstr(s1 + 1, s2, n - 1));
 }

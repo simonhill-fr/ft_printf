@@ -1,46 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 11:42:33 by shill             #+#    #+#             */
-/*   Updated: 2016/09/15 11:42:36 by shill            ###   ########.fr       */
+/*   Created: 2015/12/01 13:20:35 by shill             #+#    #+#             */
+/*   Updated: 2015/12/01 16:40:00 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
-#include <stdarg.h>
+#include "libft.h"
 
-int	ft_printf(int max, ...)
+char	*ft_strdup(const char *s1)
 {
-	int 		i = 0;
-	int			nb = 0;
+	char	*buff;
+	int		i;
 
-	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
+	buff = malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	i = 0;
+	if (!buff)
+		return (0);
+	while (s1[i])
 	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
+		buff[i] = s1[i];
 		i++;
 	}
-	va_end(ap);
-	return (0);
-
-
-
-
-}
-
-
-int 	main()
-{
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
-
-
-	return (0);
-
+	buff[i] = '\0';
+	return (buff);
 }

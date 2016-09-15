@@ -1,46 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 11:42:33 by shill             #+#    #+#             */
-/*   Updated: 2016/09/15 11:42:36 by shill            ###   ########.fr       */
+/*   Created: 2016/01/09 13:36:02 by shill             #+#    #+#             */
+/*   Updated: 2016/01/09 13:36:11 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
-#include <stdarg.h>
+#include "libft.h"
 
-int	ft_printf(int max, ...)
+static void	ft_lstadd_end(t_list **alst, t_list *new)
 {
-	int 		i = 0;
-	int			nb = 0;
+	t_list		*tmp;
 
-	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
+	if (*alst != NULL)
 	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
-		i++;
+		tmp = *alst;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
-	va_end(ap);
-	return (0);
-
-
-
-
+	else
+		*alst = new;
 }
 
-
-int 	main()
+t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
+	t_list		*fresh;
 
-
-	return (0);
-
+	fresh = NULL;
+	while (lst)
+	{
+		ft_lstadd_end(&fresh, f(lst));
+		lst = lst->next;
+	}
+	return (fresh);
 }

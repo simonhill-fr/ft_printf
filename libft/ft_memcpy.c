@@ -1,46 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 11:42:33 by shill             #+#    #+#             */
-/*   Updated: 2016/09/15 11:42:36 by shill            ###   ########.fr       */
+/*   Created: 2015/11/28 19:56:14 by shill             #+#    #+#             */
+/*   Updated: 2015/12/27 12:29:01 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
-#include <stdarg.h>
+#include "libft.h"
 
-int	ft_printf(int max, ...)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	int 		i = 0;
-	int			nb = 0;
+	char	*b;
+	char	*c;
+	size_t	i;
 
-	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
+	b = (char*)dst;
+	c = (char*)src;
+	i = 0;
+	while (i < n)
 	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
+		*b = *c;
+		b++;
+		c++;
 		i++;
 	}
-	va_end(ap);
-	return (0);
-
-
-
-
-}
-
-
-int 	main()
-{
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
-
-
-	return (0);
-
+	return (dst);
 }

@@ -1,46 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 11:42:33 by shill             #+#    #+#             */
-/*   Updated: 2016/09/15 11:42:36 by shill            ###   ########.fr       */
+/*   Created: 2015/12/01 11:28:28 by shill             #+#    #+#             */
+/*   Updated: 2015/12/01 15:28:58 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
-#include <stdarg.h>
+#include "libft.h"
 
-int	ft_printf(int max, ...)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	int 		i = 0;
-	int			nb = 0;
+	size_t			i;
+	unsigned char	*str1;
+	unsigned char	*str2;
 
-	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
+	str1 = (unsigned char *)dest;
+	str2 = (unsigned char *)src;
+	i = 0;
+	if (str1 > str2)
 	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
-		i++;
+		while (i < n)
+		{
+			str1[n - 1] = str2[n - 1];
+			n--;
+		}
 	}
-	va_end(ap);
-	return (0);
-
-
-
-
-}
-
-
-int 	main()
-{
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
-
-
-	return (0);
-
+	else
+	{
+		while (i < n)
+		{
+			str1[i] = str2[i];
+			i++;
+		}
+	}
+	return (dest);
 }

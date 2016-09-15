@@ -1,46 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 11:42:33 by shill             #+#    #+#             */
-/*   Updated: 2016/09/15 11:42:36 by shill            ###   ########.fr       */
+/*   Created: 2015/12/26 13:56:23 by shill             #+#    #+#             */
+/*   Updated: 2015/12/26 13:58:02 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
-#include <stdarg.h>
+#include "libft.h"
 
-int	ft_printf(int max, ...)
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	int 		i = 0;
-	int			nb = 0;
+	unsigned char	*str1;
+	unsigned char	*str2;
+	size_t			i;
 
-	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
+	str1 = (unsigned char *)dst;
+	str2 = (unsigned char *)src;
+	i = 0;
+	while (i < n)
 	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
+		str1[i] = str2[i];
+		if (str1[i] == (unsigned char)c)
+			return ((void *)&str1[i + 1]);
 		i++;
 	}
-	va_end(ap);
-	return (0);
-
-
-
-
-}
-
-
-int 	main()
-{
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
-
-
-	return (0);
-
+	return (NULL);
 }

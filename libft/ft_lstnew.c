@@ -1,46 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 11:42:33 by shill             #+#    #+#             */
-/*   Updated: 2016/09/15 11:42:36 by shill            ###   ########.fr       */
+/*   Created: 2016/01/08 16:23:58 by shill             #+#    #+#             */
+/*   Updated: 2016/01/08 16:24:52 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
-#include <stdarg.h>
+#include "libft.h"
 
-int	ft_printf(int max, ...)
+t_list	*ft_lstnew(void const *content, size_t content_size)
 {
-	int 		i = 0;
-	int			nb = 0;
+	t_list	*elem;
 
-	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
+	elem = malloc(sizeof(t_list));
+	if (!elem)
+		return (NULL);
+	if (content == NULL)
 	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
-		i++;
+		elem->content = NULL;
+		elem->content_size = 0;
 	}
-	va_end(ap);
-	return (0);
-
-
-
-
-}
-
-
-int 	main()
-{
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
-
-
-	return (0);
-
+	else
+	{
+		elem->content = ft_memalloc(content_size);
+		ft_memmove(elem->content, content, content_size);
+		elem->content_size = content_size;
+	}
+	elem->next = NULL;
+	return (elem);
 }

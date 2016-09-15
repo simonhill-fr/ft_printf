@@ -1,46 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 11:42:33 by shill             #+#    #+#             */
-/*   Updated: 2016/09/15 11:42:36 by shill            ###   ########.fr       */
+/*   Created: 2015/12/27 20:54:10 by shill             #+#    #+#             */
+/*   Updated: 2015/12/27 21:47:38 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
-#include <stdarg.h>
+#include "libft.h"
 
-int	ft_printf(int max, ...)
+char	*ft_strtrim(char const *s)
 {
-	int 		i = 0;
-	int			nb = 0;
+	int					i;
+	unsigned long int	j;
 
-	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
+	i = 0;
+	j = 0;
+	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t' || s[i] == '\0')
 	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
+		if (s[i] == '\0')
+			return (ft_strdup(""));
 		i++;
 	}
-	va_end(ap);
-	return (0);
-
-
-
-
-}
-
-
-int 	main()
-{
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
-
-
-	return (0);
-
+	j = ft_strlen(s) - 1;
+	while (s[j] == ' ' || s[j] == '\n' || s[j] == '\t')
+		j--;
+	if (i == 0 && j == ft_strlen(s) - 1)
+		return (ft_strdup(s));
+	j = j - i;
+	return (ft_strsub(s, i, j + 1));
 }

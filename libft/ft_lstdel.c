@@ -1,46 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 11:42:33 by shill             #+#    #+#             */
-/*   Updated: 2016/09/15 11:42:36 by shill            ###   ########.fr       */
+/*   Created: 2016/01/09 12:18:07 by shill             #+#    #+#             */
+/*   Updated: 2016/01/09 12:19:14 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
-#include <stdarg.h>
+#include "libft.h"
 
-int	ft_printf(int max, ...)
+void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 {
-	int 		i = 0;
-	int			nb = 0;
+	t_list	*tmp;
+	t_list	*next;
 
-	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
+	if (!del)
+		return ;
+	tmp = *alst;
+	while (tmp)
 	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
-		i++;
+		next = tmp->next;
+		del(tmp->content, tmp->content_size);
+		free(tmp);
+		tmp = next;
 	}
-	va_end(ap);
-	return (0);
-
-
-
-
-}
-
-
-int 	main()
-{
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
-
-
-	return (0);
-
+	*alst = NULL;
 }

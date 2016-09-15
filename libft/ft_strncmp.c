@@ -1,46 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 11:42:33 by shill             #+#    #+#             */
-/*   Updated: 2016/09/15 11:42:36 by shill            ###   ########.fr       */
+/*   Created: 2015/08/26 02:54:31 by shill             #+#    #+#             */
+/*   Updated: 2015/11/26 12:31:37 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
-#include <stdarg.h>
+#include "libft.h"
 
-int	ft_printf(int max, ...)
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int 		i = 0;
-	int			nb = 0;
+	size_t		i;
 
-	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
+	i = 0;
+	while (i < n)
 	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		if (s1[i] == '\0' && s2[i] == '\0')
+			return (0);
 		i++;
 	}
-	va_end(ap);
 	return (0);
-
-
-
-
-}
-
-
-int 	main()
-{
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
-
-
-	return (0);
-
 }
