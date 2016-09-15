@@ -10,21 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //REMOVE
-#include <stdarg.h>
+#include "ft_printf.h"
 
-int	ft_printf(int max, ...)
+int	ft_printf(const char *format, ...)
 {
-	int 		i = 0;
-	int			nb = 0;
-
 	va_list		ap;
-	va_start(ap, max);
-	while (i < max)
+	va_start(ap, format);
+	while (*format)
 	{
-		nb = va_arg(ap, int);
-		printf("%d\n", nb);
-		i++;
+		if (*format != '%')
+			ft_putchar(*format);
+		else if (*format == '%' && *++format == 'd')
+		{
+			ft_putnbr(va_arg(ap, int));
+			format++;
+		}
+
+		format++;
 	}
 	va_end(ap);
 	return (0);
@@ -37,10 +39,28 @@ int	ft_printf(int max, ...)
 
 int 	main()
 {
-//	ft_printf(50, 66, 55);
-	printf("asf\n");
-
+	ft_printf("asf 1%d\n", 1);
 
 	return (0);
-
 }
+
+
+/*
+
+int 	arg_nb(char *s); //returns the number of %placeholders
+
+typedef struct 		s_flag
+{
+	int				placeholder_number;
+	int				type;
+	void			*value;
+	struct s_flag	*next;
+}					t_flag;
+
+void	read_input(char *s)
+{
+	
+}
+
+
+*/
