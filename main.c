@@ -20,26 +20,27 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format != '%')
 			ft_putchar(*format);
-		else if (*format == '%' && *++format == 'd')
+		else if (*format == '%')
 		{
-			ft_putnbr(va_arg(ap, int));
 			format++;
+			if (*format == 'd' || *format == 'i')
+				ft_putnbr(va_arg(ap, int));
+			else if (*format == 'c')
+				ft_putchar(va_arg(ap, int));
+			else if (*format == 's')
+				ft_putstr(va_arg(ap, char*));
 		}
-
 		format++;
 	}
 	va_end(ap);
 	return (0);
-
-
-
-
 }
 
 
 int 	main()
 {
-	ft_printf("asf 1%d\n", 1);
+	char	*string = "string";
+	ft_printf("number:%d %s\n", 1, string);
 
 	return (0);
 }
