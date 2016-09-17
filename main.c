@@ -12,11 +12,29 @@
 
 #include "ft_printf.h"
 
+t_param	*init_param()
+{
+	t_param *param;
+
+	param = malloc(sizeof(t_param));
+	param->minus = FALSE;
+	param->plus = FALSE;
+	param->space = FALSE;
+	param->zero = FALSE;
+	param->hash = FALSE;
+	param->width = 0;
+	param->precision = 0;
+	param->length = 0;
+	return (param);
+
+}
+
 int	placeholder(va_list ap, t_param *param) //if c == %
 {
 	/*create t_param for current placeholder
 	init params
 	add to list*/
+
 	return (1);
 }
 
@@ -26,22 +44,10 @@ int	minus(va_list ap, t_param *param)
 	return (1);
 }
 
-int	dec(va_list ap, t_param *param)
-{	
-	ft_putnbr(va_arg(ap, int));
-	return (0);
-}
-
-int	character(va_list ap, t_param *param)
+int plus(va_list ap, t_param *param)
 {
-	ft_putchar(va_arg(ap, int));
-	return (0);
-}
-
-int	string(va_list ap, t_param *param)
-{
-	ft_putstr(va_arg(ap, char *));
-	return (0);
+	param->plus = TRUE;
+	return (1);
 }
 
 int	ft_printf(const char *format, ...)
@@ -49,9 +55,10 @@ int	ft_printf(const char *format, ...)
 	t_param		*param;
 	int (*findex[128])(va_list, t_param *); //function pointer array
 
-	param = malloc(sizeof(t_param));
+//	param = malloc(sizeof(t_param));
 
 	(findex['%']) = placeholder;
+	(findex['+']) = plus;
 	(findex['d']) = dec;
 	(findex['c']) = character;
 	(findex['s']) = string;
@@ -62,11 +69,15 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format != '%')
 			ft_putchar(*format);
-		else 
+		else
+		{
+			param = init_param();
 			while (findex[(int)*format](ap, param))
 			{
 				format++;
 			}
+			free(param);
+		}
 		format++;
 	}
 	va_end(ap);
@@ -77,8 +88,8 @@ int	ft_printf(const char *format, ...)
 int 	main()
 {
 	char	*str = "string";
-//	printf("number:%+d %c %s\n", 1, 'E', str);
-	ft_printf("number:%d %c %s\n", 1, 'E', str);
+//	printf("number:%+d %c %s\n", -1, 'E', str);
+	ft_printf("number=%+d %d %+d\n", 1, 5, 9);
 
 
 	return (0);

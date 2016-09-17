@@ -23,17 +23,20 @@
 
 typedef struct 		s_param
 {
-	int				placeholder_number;
 	int 			minus;
 	int 			plus;
 	int 			space;
 	int 			zero;
 	int 			hash;
 	int 			width;
-	int 			pres;
+	int 			precision;
 	int 			length;
-	struct s_param	*next;
 }					t_param;
+
+int	dec(va_list ap, t_param *param);
+int	character(va_list ap, t_param *param);
+int	string(va_list ap, t_param *param);
+
 
 
 #endif
