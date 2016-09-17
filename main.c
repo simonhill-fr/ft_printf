@@ -12,8 +12,30 @@
 
 #include "ft_printf.h"
 
+void	dec(va_list ap)
+{	
+	ft_putnbr(va_arg(ap, int));
+}
+
+void	character(va_list ap)
+{
+	ft_putchar(va_arg(ap, int));
+}
+
+void	string(va_list ap)
+{
+	ft_putstr(va_arg(ap, char *));
+}
+
 int	ft_printf(const char *format, ...)
 {
+	void (*findex[128])(va_list); //function pointer array
+
+
+	(findex['d']) = dec;
+	(findex['c']) = character;
+	(findex['s']) = string;
+
 	va_list		ap;
 	va_start(ap, format);
 	while (*format)
@@ -23,12 +45,7 @@ int	ft_printf(const char *format, ...)
 		else if (*format == '%')
 		{
 			format++;
-			if (*format == 'd' || *format == 'i')
-				ft_putnbr(va_arg(ap, int));
-			else if (*format == 'c')
-				ft_putchar(va_arg(ap, int));
-			else if (*format == 's')
-				ft_putstr(va_arg(ap, char*));
+			findex[(int)*format](ap);
 		}
 		format++;
 	}
@@ -39,9 +56,9 @@ int	ft_printf(const char *format, ...)
 
 int 	main()
 {
-	char	*string = "string";
-	ft_printf("number:%d %s\n", 1, string);
-
+	char	*str = "string";
+	ft_printf("number:%d %c %s\n", 1, 'E', str);
+//	ft_printf("number:%c", 'g');
 	return (0);
 }
 
