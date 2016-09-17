@@ -34,6 +34,17 @@ int	placeholder(va_list ap, t_param *param) //if c == % .Useless.
 	return (1);
 }
 
+int ft_width(va_list ap, t_param *param)
+{
+/*	int 	n;
+
+	n = va_arg(ap, int);
+	param->width = param->width * 10 + n;*/
+	printf("enter\n");
+	ft_putchar(va_arg(ap, int));
+	return (1);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	t_param		*param;
@@ -52,6 +63,16 @@ int	ft_printf(const char *format, ...)
 	(findex['c']) = character;
 	(findex['s']) = string;
 
+	(findex['1']) = ft_width;
+	(findex['2']) = ft_width;
+	(findex['3']) = ft_width;
+	(findex['4']) = ft_width;
+	(findex['5']) = ft_width;
+	(findex['6']) = ft_width;
+	(findex['7']) = ft_width;
+	(findex['8']) = ft_width;
+	(findex['9']) = ft_width;
+
 	va_list		ap;
 	va_start(ap, format);
 	while (*format)
@@ -63,6 +84,7 @@ int	ft_printf(const char *format, ...)
 			param = init_param();
 			while (findex[(int)*format](ap, param))
 			{
+//				printf("%c\n", *format);
 				format++;
 			}
 			free(param);
@@ -78,7 +100,7 @@ int 	main()
 {
 	char	*str = "string";
 //	printf("%5d", 8);
-	ft_printf("%5d\n", 8);
+	ft_printf("%2d\n", 8);
 
 
 	return (0);
