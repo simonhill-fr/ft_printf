@@ -37,6 +37,13 @@ int	dec(va_list ap, t_param *param);
 int	character(va_list ap, t_param *param);
 int	string(va_list ap, t_param *param);
 
+int	minus(va_list ap, t_param *param);
+int plus(va_list ap, t_param *param);
+int	space(va_list ap, t_param *param);
+int	zero(va_list ap, t_param *param);
+int	hash(va_list ap, t_param *param);
+
+
 
 
 #endif

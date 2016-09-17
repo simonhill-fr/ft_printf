@@ -29,24 +29,8 @@ t_param	*init_param()
 
 }
 
-int	placeholder(va_list ap, t_param *param) //if c == %
+int	placeholder(va_list ap, t_param *param) //if c == % .Useless.
 {
-	/*create t_param for current placeholder
-	init params
-	add to list*/
-
-	return (1);
-}
-
-int	minus(va_list ap, t_param *param)
-{
-	param->minus = TRUE;
-	return (1);
-}
-
-int plus(va_list ap, t_param *param)
-{
-	param->plus = TRUE;
 	return (1);
 }
 
@@ -59,6 +43,11 @@ int	ft_printf(const char *format, ...)
 
 	(findex['%']) = placeholder;
 	(findex['+']) = plus;
+	(findex['-']) = minus;
+	(findex[' ']) = space;
+	(findex['0']) = zero;
+	(findex['#']) = hash;
+
 	(findex['d']) = dec;
 	(findex['c']) = character;
 	(findex['s']) = string;
@@ -88,15 +77,11 @@ int	ft_printf(const char *format, ...)
 int 	main()
 {
 	char	*str = "string";
-//	printf("number:%+d %c %s\n", -1, 'E', str);
-	ft_printf("number=%+d %d %+d\n", 1, 5, 9);
+//	printf("%5d", 8);
+	ft_printf("%5d\n", 8);
 
 
 	return (0);
 }
 
-/*
-Pour connaitre la fin de la lecture dun placeholder, les fonctions pourraient etre
-de type int, celles qui soccupent du type (d, s, c...) renverraient 0 pour
-siginier la fin du placeholder*/
 

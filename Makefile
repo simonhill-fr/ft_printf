@@ -26,7 +26,7 @@ else
     CFLAGS      = -Wall -Wextra -Werror
 endif
 
-SRC 	= main.c types_1.c
+SRC 	= main.c flags.c types_1.c 
 
 LIBFT	= libft/libft.a
 
