@@ -12,26 +12,46 @@
 
 #include "ft_printf.h"
 
-void	dec(va_list ap)
+int	placeholder(va_list ap, t_param *param) //if c == %
+{
+	/*create t_param for current placeholder
+	init params
+	add to list*/
+	return (1);
+}
+
+int	minus(va_list ap, t_param *param)
+{
+	param->minus = TRUE;
+	return (1);
+}
+
+int	dec(va_list ap, t_param *param)
 {	
 	ft_putnbr(va_arg(ap, int));
+	return (0);
 }
 
-void	character(va_list ap)
+int	character(va_list ap, t_param *param)
 {
 	ft_putchar(va_arg(ap, int));
+	return (0);
 }
 
-void	string(va_list ap)
+int	string(va_list ap, t_param *param)
 {
 	ft_putstr(va_arg(ap, char *));
+	return (0);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	void (*findex[128])(va_list); //function pointer array
+	t_param		*param;
+	int (*findex[128])(va_list, t_param *); //function pointer array
 
+	param = malloc(sizeof(t_param));
 
+	(findex['%']) = placeholder;
 	(findex['d']) = dec;
 	(findex['c']) = character;
 	(findex['s']) = string;
@@ -42,11 +62,11 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format != '%')
 			ft_putchar(*format);
-		else if (*format == '%')
-		{
-			format++;
-			findex[(int)*format](ap);
-		}
+		else 
+			while (findex[(int)*format](ap, param))
+			{
+				format++;
+			}
 		format++;
 	}
 	va_end(ap);
@@ -57,28 +77,15 @@ int	ft_printf(const char *format, ...)
 int 	main()
 {
 	char	*str = "string";
+//	printf("number:%+d %c %s\n", 1, 'E', str);
 	ft_printf("number:%d %c %s\n", 1, 'E', str);
-//	ft_printf("number:%c", 'g');
+
+
 	return (0);
 }
 
-
 /*
+Pour connaitre la fin de la lecture dun placeholder, les fonctions pourraient etre
+de type int, celles qui soccupent du type (d, s, c...) renverraient 0 pour
+siginier la fin du placeholder*/
 
-int 	arg_nb(char *s); //returns the number of %placeholders
-
-typedef struct 		s_flag
-{
-	int				placeholder_number;
-	int				type;
-	void			*value;
-	struct s_flag	*next;
-}					t_flag;
-
-void	read_input(char *s)
-{
-	
-}
-
-
-*/

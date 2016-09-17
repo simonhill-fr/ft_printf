@@ -18,5 +18,22 @@
 
 #include <stdio.h> //REMOVE
 
+#define TRUE 	1
+#define FALSE 	0
+
+typedef struct 		s_param
+{
+	int				placeholder_number;
+	int 			minus;
+	int 			plus;
+	int 			space;
+	int 			zero;
+	int 			hash;
+	int 			width;
+	int 			pres;
+	int 			length;
+	struct s_param	*next;
+}					t_param;
+
 
 #endif
