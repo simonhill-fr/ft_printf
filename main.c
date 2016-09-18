@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-t_param	*init_param()
+t_param	*init_param() //Better if malloc wouldnt occur on every call
 {
 	t_param *param;
 
@@ -26,54 +26,29 @@ t_param	*init_param()
 	param->precision = 0;
 	param->length = 0;
 	return (param);
-
 }
 
-int	placeholder(va_list ap, t_param *param) //if c == % .Useless.
+void	get_digits(const char **format, t_param *param)
 {
-	return (1);
-}
-
-int ft_width(va_list ap, t_param *param)
-{
-/*	int 	n;
-
-	n = va_arg(ap, int);
-	param->width = param->width * 10 + n;*/
-	printf("enter\n");
-	ft_putchar(va_arg(ap, int));
-	return (1);
+	int 	n;
+	while (ft_isdigit(n = **format))
+	{
+		param->width = param->width * 10 + n - 48;
+		*(*format)++;
+	}
+	*(*format)--;
 }
 
 int	ft_printf(const char *format, ...)
 {
-	t_param		*param;
-	int (*findex[128])(va_list, t_param *); //function pointer array
-
-//	param = malloc(sizeof(t_param));
-
-	(findex['%']) = placeholder;
-	(findex['+']) = plus;
-	(findex['-']) = minus;
-	(findex[' ']) = space;
-	(findex['0']) = zero;
-	(findex['#']) = hash;
-
-	(findex['d']) = dec;
-	(findex['c']) = character;
-	(findex['s']) = string;
-
-	(findex['1']) = ft_width;
-	(findex['2']) = ft_width;
-	(findex['3']) = ft_width;
-	(findex['4']) = ft_width;
-	(findex['5']) = ft_width;
-	(findex['6']) = ft_width;
-	(findex['7']) = ft_width;
-	(findex['8']) = ft_width;
-	(findex['9']) = ft_width;
-
 	va_list		ap;
+	int 		ret;
+	t_param		*param;
+	t_functab 	*func_array;
+
+	func_array = malloc(sizeof(t_functab) * 128);
+	init_index_array(func_array);
+
 	va_start(ap, format);
 	while (*format)
 	{
@@ -82,9 +57,10 @@ int	ft_printf(const char *format, ...)
 		else
 		{
 			param = init_param();
-			while (findex[(int)*format](ap, param))
+			while ((ret = func_array[(int)*format](ap, param)))
 			{
-//				printf("%c\n", *format);
+				if (ret == DIGIT)
+					get_digits(&format, param);
 				format++;
 			}
 			free(param);
@@ -99,10 +75,9 @@ int	ft_printf(const char *format, ...)
 int 	main()
 {
 	char	*str = "string";
-//	printf("%5d", 8);
-	ft_printf("%2d\n", 8);
-
-
+	
+	ft_printf("p=%14d\n", 65);
+	   printf("o=%14d\n", 65);
 	return (0);
 }
 

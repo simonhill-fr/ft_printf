@@ -20,6 +20,8 @@
 
 #define TRUE 	1
 #define FALSE 	0
+#define DIGIT	2
+#define EMPTY	-1
 
 typedef struct 		s_param
 {
@@ -33,17 +35,24 @@ typedef struct 		s_param
 	int 			length;
 }					t_param;
 
-int	dec(va_list ap, t_param *param);
-int	character(va_list ap, t_param *param);
-int	string(va_list ap, t_param *param);
+typedef	int (*t_functab)(va_list, t_param *);
 
-int	minus(va_list ap, t_param *param);
-int plus(va_list ap, t_param *param);
-int	space(va_list ap, t_param *param);
-int	zero(va_list ap, t_param *param);
-int	hash(va_list ap, t_param *param);
+int		dec(va_list ap, t_param *param);
+int		character(va_list ap, t_param *param);
+int		string(va_list ap, t_param *param);
 
+int		placeholder(va_list ap, t_param *param);
+int 	empty(va_list ap, t_param *param);
+int 	digit(va_list ap, t_param *param);
 
+int		minus(va_list ap, t_param *param);
+int 	plus(va_list ap, t_param *param);
+int		space(va_list ap, t_param *param);
+int		zero(va_list ap, t_param *param);
+int		hash(va_list ap, t_param *param);
+
+void	init_index_array(t_functab *func_array);
+void	print_width(t_param *param);
 
 
 #endif

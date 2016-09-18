@@ -12,9 +12,6 @@
 
 .PHONY: all clean fclean re
 
-NAME 	= ft_printf
-CC		= gcc
-
 ifdef FLAGS
     ifeq ($(FLAGS), no)
         CFLAGS=
@@ -26,7 +23,15 @@ else
     CFLAGS      = -Wall -Wextra -Werror
 endif
 
-SRC 	= main.c flags.c types_1.c 
+NAME 	= ft_printf
+CC		= gcc
+
+SRC 	= 	main.c 				\
+			print_out.c 		\
+			handle_general.c 	\
+			handle_flags.c 		\
+			handle_types_1.c 	\
+			init_index_array.c 	
 
 LIBFT	= libft/libft.a
 
