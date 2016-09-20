@@ -12,6 +12,19 @@
 
 #include "ft_printf.h"
 
+/*Proble matique : gestion des types differents de int et de float. 
+Since n, the number to be printed has to be typed, and that it is not possible
+to predict the type in advance, this results in having to either create an if forest 
+in the dec() function, or to create a specific function for each 7 possible type
+of integer. This brings the problem of the func_array() function-pointer indexing.
+First idea that comes to mind : creating a simple hashtable-like function to
+determine the index of the function to be executed. For that purpose, the 
+hash table will have to take as argument a char * string to hash it into an
+unique int. Is this possible? How? */
+
+
+#define SHORT 	1
+#define LONG	2
 
 static int	get_int_len(int n)
 {
@@ -30,12 +43,20 @@ static int	get_int_len(int n)
 	return (len);
 } //add to libft ?
 
-
+/*void cast_short(va_list ap, int *n)
+{
+	*n = va_arg(ap, short));
+}*/
 
 int	dec(va_list ap, t_param *param)
 {	
 	int		n;
 
+	if (param->length == SHORT)
+	{
+		n = (short)va_arg(ap, int);
+	}// not possible as n is of type int
+	
 	n = va_arg(ap, int);
 	print_width(param, get_int_len(n));
 	if (n > 0 && param->plus == TRUE)

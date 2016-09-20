@@ -75,7 +75,6 @@ int	ft_printf(const char *format, ...)
 					get_digits(&format, param);
 				format++;
 			}
-//			printf("w=%d .=%d\n",param->width, param->precision);
 			free(param);
 		}
 		format++;
@@ -88,9 +87,10 @@ int	ft_printf(const char *format, ...)
 int 	main()
 {
 	char	*str = "string";
+	int 	i = 2;
 	
-	ft_printf("p=%12.2s\n", "Hello");
-	   printf("o=%12.2s\n", "Hello");
+	ft_printf("p=%hd\n", i);
+//	   printf("o=%hd\n", i);
 	return (0);
 }
 
