@@ -31,12 +31,13 @@ t_param	*init_param() //Better if malloc wouldnt occur on every call
 void	get_digits(const char **format, t_param *param)
 {
 	int 	n;
+
 	while (ft_isdigit(n = **format))
 	{
 		param->width = param->width * 10 + n - 48;
-		*(*format)++;
-	}
-	*(*format)--;
+		(*format)++;
+	}	
+	(*format)--;
 }//would be better to index all digits to this function instead of 
 // using if (ret == DIGIT)
 
@@ -77,8 +78,8 @@ int 	main()
 {
 	char	*str = "string";
 	
-	ft_printf("p=%14d\n", 65);
-	   printf("o=%14d\n", 65);
+	ft_printf("p=%14d\n", 6);
+	   printf("o=%14d\n", 6);
 	return (0);
 }
 
