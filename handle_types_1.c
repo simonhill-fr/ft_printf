@@ -12,6 +12,7 @@
 
 #include "ft_printf.h"
 
+
 static int	get_int_len(int n)
 {
 	int	len;
@@ -53,6 +54,17 @@ int	character(va_list ap, t_param *param)
 
 int	string(va_list ap, t_param *param)
 {
-	ft_putstr(va_arg(ap, char *));
+	char 	*str;
+
+	str = va_arg(ap, char *);
+	if (param->precision)
+	{
+		print_width(param, param->precision);
+		str = ft_strndup(str, param->precision);
+		ft_putstr(str);
+		return (0);
+	}
+	print_width(param, ft_strlen(str));
+	ft_putstr(str);
 	return (0);
 }

@@ -36,8 +36,18 @@ void	get_digits(const char **format, t_param *param)
 	{
 		param->width = param->width * 10 + n - 48;
 		(*format)++;
-	}	
+	}
+	if (**format == '.')
+	{
+		(*format)++;
+		while (ft_isdigit(n = **format))
+		{
+			param->precision = param->precision * 10 + n - 48;
+			(*format)++;
+		}
+	}
 	(*format)--;
+
 }//would be better to index all digits to this function instead of 
 // using if (ret == DIGIT)
 
@@ -65,6 +75,7 @@ int	ft_printf(const char *format, ...)
 					get_digits(&format, param);
 				format++;
 			}
+//			printf("w=%d .=%d\n",param->width, param->precision);
 			free(param);
 		}
 		format++;
@@ -78,8 +89,8 @@ int 	main()
 {
 	char	*str = "string";
 	
-	ft_printf("p=%14d\n", 6);
-	   printf("o=%14d\n", 6);
+	ft_printf("p=%12.2s\n", "Hello");
+	   printf("o=%12.2s\n", "Hello");
 	return (0);
 }
 
