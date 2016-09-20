@@ -52,7 +52,7 @@ int		zero(va_list ap, t_param *param);
 int		hash(va_list ap, t_param *param);
 
 void	init_index_array(t_functab *func_array);
-void	print_width(t_param *param);
+void	print_width(t_param *param, int n);
 
 
 #endif

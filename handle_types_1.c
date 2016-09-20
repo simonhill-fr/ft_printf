@@ -12,12 +12,31 @@
 
 #include "ft_printf.h"
 
+static int	get_int_len(int n)
+{
+	int	len;
+
+	len = 0;
+	if (n < 0)
+		len++;
+	if (n == 0)
+		return (1);
+	while (n != 0)
+	{
+		n = n / 10;
+		len++;
+	}
+	return (len);
+} //add to libft ?
+
+
+
 int	dec(va_list ap, t_param *param)
 {	
 	int		n;
 
-	print_width(param);
 	n = va_arg(ap, int);
+	print_width(param, get_int_len(n));
 	if (n > 0 && param->plus == TRUE)
 		ft_putchar('+');
 	else if (n > 0 && param->space == TRUE)

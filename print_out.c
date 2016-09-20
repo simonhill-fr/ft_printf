@@ -12,11 +12,11 @@
 
 #include "ft_printf.h"
 
-void	print_width(t_param *param)
+void	print_width(t_param *param, int n)
 {
 	int		i;
 
-	i = 1;
+	i = 1 + n;
 	while (i <= param->width)
 	{
 		ft_putchar(' ');

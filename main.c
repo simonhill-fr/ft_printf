@@ -37,7 +37,8 @@ void	get_digits(const char **format, t_param *param)
 		*(*format)++;
 	}
 	*(*format)--;
-}
+}//would be better to index all digits to this function instead of 
+// using if (ret == DIGIT)
 
 int	ft_printf(const char *format, ...)
 {
