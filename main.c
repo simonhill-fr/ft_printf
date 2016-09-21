@@ -60,7 +60,6 @@ int	ft_printf(const char *format, ...)
 
 	func_array = malloc(sizeof(t_functab) * 128);
 	init_index_array(func_array);
-
 	va_start(ap, format);
 	while (*format)
 	{
@@ -87,10 +86,10 @@ int	ft_printf(const char *format, ...)
 int 	main()
 {
 	char	*str = "string";
-	int 	i = 2;
+	long 	i = 2147483650;
 	
-	ft_printf("p=%hd\n", i);
-//	   printf("o=%hd\n", i);
+	ft_printf("p=%ld\n", i);
+	   printf("o=%ld\n", i);
 	return (0);
 }
 

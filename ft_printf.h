@@ -20,8 +20,13 @@
 
 #define TRUE 	1
 #define FALSE 	0
+
 #define DIGIT	2
 #define EMPTY	-1
+
+#define CHAR 	0
+#define SHORT 	1
+#define LONG	2
 
 typedef struct 		s_param
 {
@@ -53,6 +58,8 @@ int		hash(va_list ap, t_param *param);
 
 void	init_index_array(t_functab *func_array);
 void	print_width(t_param *param, int n);
+
+int 	long_len(va_list ap, t_param *param);
 
 
 #endif
