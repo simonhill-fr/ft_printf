@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_length.c                                    :+:      :+:    :+:   */
+/*   init_integer_array.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/21 14:20:52 by shill             #+#    #+#             */
-/*   Updated: 2016/09/21 14:20:54 by shill            ###   ########.fr       */
+/*   Created: 2016/09/21 15:07:28 by shill             #+#    #+#             */
+/*   Updated: 2016/09/21 15:07:30 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int 	long_len(va_list ap, t_param *param)
-{
-	param->length = LONG;
-	return (1);
-}
 
+void 	init_integer_array(t_functab *int_array)
+{
+	int_array[LONG] = long_len;
+}

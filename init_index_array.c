@@ -39,7 +39,8 @@ void	init_index_array(t_functab *func_array)
 	func_array['8'] = digit;
 	func_array['9'] = digit;
 
-	func_array['d'] = dec;
+	func_array['d'] = integer;
+	func_array['i'] = integer;
 	func_array['c'] = character;
 	func_array['s'] = string;
 

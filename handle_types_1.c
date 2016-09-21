@@ -12,9 +12,6 @@
 
 #include "ft_printf.h"
 
-/* */
-
-
 static int	get_int_len(int n)
 {
 	int	len;
@@ -32,7 +29,6 @@ static int	get_int_len(int n)
 	return (len);
 } //add to libft ?
 
-
 int print_long_int(va_list ap, t_param *param)
 {
 	long n;
@@ -47,9 +43,16 @@ int print_long_int(va_list ap, t_param *param)
 	return (0);
 }
 
-int	dec(va_list ap, t_param *param)
+int	integer(va_list ap, t_param *param)
 {	
 	int		n;
+
+	t_functab 	*int_array;
+
+	int_array = malloc(sizeof(t_functab) * 6);
+	init_integer_array(int_array);
+
+	//function pointer array here
 
 	if (param->length == CHAR)
 	{
