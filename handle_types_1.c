@@ -29,58 +29,51 @@ static int	get_int_len(int n)
 	return (len);
 } //add to libft ?
 
-int print_long_int(va_list ap, t_param *param)
+static int print_long_int(va_list ap, t_param *param)
 {
 	long n;
 
 	n = va_arg(ap, long);
 	print_width(param, get_int_len(n));
+	
 	if (n > 0 && param->plus == TRUE)
 		ft_putchar('+');
 	else if (n > 0 && param->space == TRUE)
 		ft_putchar(' ');
+
 	ft_putnbr(n);
+
 	return (0);
 }
 
 int	integer(va_list ap, t_param *param)
 {	
-	int		n;
-
-	t_functab 	*int_array;
-
-	int_array = malloc(sizeof(t_functab) * 6);
-	init_integer_array(int_array);
-
-	//function pointer array here
-
 	if (param->length == CHAR)
-	{
-		n = va_arg(ap, int);
+	{		
+		int n = va_arg(ap, int);
 		return (0);
 	}
 	if (param->length == SHORT)
 	{
-		n = (short)va_arg(ap, int);
-		return (0);
+		int n = (short)va_arg(ap, int);
 	}
 	else if (param->length == LONG)
 	{
-		print_long_int(ap, param);
-		return (0);
+		printf("enter\n");
+		long n = va_arg(ap, long);
 	}
-	/*else if (param->length == LONGLONG)
+	else if (param->length == LONGLONG)
 	{
-		print_longlong_int(ap, param);
+		long long n = va_arg(ap, long long);
 	}
-	else if (param->length == SYZE_T)
+	else if (param->length == SIZE_T)
 	{
-		print_sizet_int(ap, param);
-
-	}*/
-
+		size_t n = va_arg(ap, size_t);
+	}
+	else
+		int n;
 	
-	n = va_arg(ap, int);
+//	n = va_arg(ap, int);
 	print_width(param, get_int_len(n));
 	if (n > 0 && param->plus == TRUE)
 		ft_putchar('+');

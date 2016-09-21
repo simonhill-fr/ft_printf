@@ -32,7 +32,6 @@ SRC 	= 	main.c 					\
 			handle_flags.c 			\
 			handle_types_1.c 		\
 			handle_length.c 		\
-			init_integer_array.c 	\
 			init_index_array.c 	
 
 LIBFT	= libft/libft.a
