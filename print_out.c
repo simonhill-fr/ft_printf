@@ -23,3 +23,14 @@ void	print_width(t_param *param, int n)
 		i++;
 	}
 }
+
+/*int		print_decimal(size_t n, t_param *param)
+{
+	if (n > 0 && param->plus == TRUE)
+		ft_putchar('+');
+	else if (n > 0 && param->space == TRUE)
+		ft_putchar(' ');
+	ft_putnbr(n);
+	return (0);
+
+}*/

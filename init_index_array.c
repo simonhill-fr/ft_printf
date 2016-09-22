@@ -44,6 +44,8 @@ void	init_index_array(t_functab *func_array)
 	func_array['c'] = character;
 	func_array['s'] = string;
 
-	func_array['l'] = long_len;
- 
+	func_array['h'] = short_len;
+	func_array['l'] = long_len;	
+	func_array['z'] = sizet_len;
+	func_array['j'] = intmax_len;
 }

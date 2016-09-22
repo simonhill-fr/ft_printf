@@ -24,12 +24,14 @@
 #define DIGIT		2
 #define EMPTY		-1
 
-#define CHAR 		0
-#define SHORT 		1
-#define LONG		2
-#define LONGLONG	3
-#define SIZE_T		4
-#define INTMAX		5
+//replace by enum
+#define INT 		0
+#define	CHAR 		1
+#define SHORT 		2
+#define LONG		3
+#define LONG_LONG	4
+#define SIZE_T		5
+#define INTMAX		6
 
 typedef struct 		s_param
 {
@@ -44,6 +46,15 @@ typedef struct 		s_param
 }					t_param;
 
 typedef	int (*t_functab)(va_list, t_param *);
+
+union	u_types
+{
+	int 			i;
+	long 			l;
+	long long 		ll;
+	size_t 			szt;
+	intmax_t		imax;
+};
 
 int		integer(va_list ap, t_param *param);
 int		character(va_list ap, t_param *param);
@@ -63,7 +74,10 @@ void	init_index_array(t_functab *func_array);
 void	init_integer_array(t_functab *int_array);
 void	print_width(t_param *param, int n);
 
+int 	short_len(va_list ap, t_param *param);
 int 	long_len(va_list ap, t_param *param);
+int 	sizet_len(va_list ap, t_param *param);
+int 	intmax_len(va_list ap, t_param *param);
 
 
 #endif

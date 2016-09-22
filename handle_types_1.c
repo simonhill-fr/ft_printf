@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-static int	get_int_len(int n)
+static int	get_int_len(long long n)
 {
-	int	len;
+	long long	len;
 
 	len = 0;
 	if (n < 0)
@@ -29,59 +29,63 @@ static int	get_int_len(int n)
 	return (len);
 } //add to libft ?
 
-static int print_long_int(va_list ap, t_param *param)
+static void	ft_put_long_nbr(long long n)
 {
-	long n;
-
-	n = va_arg(ap, long);
-	print_width(param, get_int_len(n));
-	
-	if (n > 0 && param->plus == TRUE)
-		ft_putchar('+');
-	else if (n > 0 && param->space == TRUE)
-		ft_putchar(' ');
-
-	ft_putnbr(n);
-
-	return (0);
+	if (n == -2147483648)
+		ft_putstr("-2147483648");
+	else if (n < 0)
+	{
+		ft_putchar('-');
+		ft_put_long_nbr(-n);
+	}
+	else if (n >= 10)
+	{
+		ft_put_long_nbr(n / 10);
+		ft_put_long_nbr(n % 10);
+	}
+	else if (n < 10)
+		ft_putchar(n + '0');
 }
+
+
 
 int	integer(va_list ap, t_param *param)
 {	
-	if (param->length == CHAR)
-	{		
-		int n = va_arg(ap, int);
-		return (0);
-	}
-	if (param->length == SHORT)
-	{
-		int n = (short)va_arg(ap, int);
-	}
-	else if (param->length == LONG)
-	{
-		printf("enter\n");
-		long n = va_arg(ap, long);
-	}
-	else if (param->length == LONGLONG)
-	{
-		long long n = va_arg(ap, long long);
-	}
-	else if (param->length == SIZE_T)
-	{
-		size_t n = va_arg(ap, size_t);
-	}
-	else
-		int n;
-	
-//	n = va_arg(ap, int);
-	print_width(param, get_int_len(n));
-	if (n > 0 && param->plus == TRUE)
+//	union u_types type;
+	long long type;
+
+	if (param->length == INT)
+		type = va_arg(ap, int);
+	if (param->length == LONG)
+		type = va_arg(ap, long);
+	if (param->length == LONG_LONG)
+		type = va_arg(ap, long long);
+	if (param->length == SIZE_T)
+		type = va_arg(ap, size_t);
+	if (param->length == INTMAX)
+		type = va_arg(ap, intmax_t);
+
+	print_width(param, get_int_len(type));
+	if (type > 0 && param->plus == TRUE)
 		ft_putchar('+');
-	else if (n > 0 && param->space == TRUE)
+	else if (type > 0 && param->space == TRUE)
 		ft_putchar(' ');
-	ft_putnbr(n);
+	printf("type=%lld\n", type);
+	ft_put_long_nbr(type);
 	return (0);
 }
+
+/*int hexadecimal(va_list ap, t_param *param)
+{
+	int n; //replace with union
+
+	if (len == UNSIGNED_INT)
+		n = va_arg(ap, unsigned_int);
+	if (len == UNSIGNED_LONG)
+		n = va_arg(ap, unsigned_long);
+	if (len == UNSIGNED_LONG_LONG)
+		n = va_arg(ap, unsigned_LONG_LONG);
+}*/
 
 int	character(va_list ap, t_param *param)
 {

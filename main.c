@@ -86,10 +86,10 @@ int	ft_printf(const char *format, ...)
 int 	main()
 {
 	char	*str = "string";
-	long 	i = 2147483650;
+	long long 	i = 9223372036854775807;
 	
-	ft_printf("p=%ld\n", i);
-	   printf("o=%ld\n", i);
+	ft_printf("p=%lld\n", i);
+	   printf("o=%lld\n", i);
 	return (0);
 }
 
