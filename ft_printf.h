@@ -17,6 +17,7 @@
 #include "libft/libft.h"
 
 #include <stdio.h> //REMOVE
+#include <limits.h> // REMOVE
 
 #define TRUE 		1
 #define FALSE 		0

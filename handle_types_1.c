@@ -31,8 +31,8 @@ static int	get_int_len(long long n)
 
 static void	ft_put_long_nbr(long long n)
 {
-	if (n == -2147483648)
-		ft_putstr("-2147483648");
+	if (n == -9223372036854775807 - 1)
+		ft_putstr("-9223372036854775808");
 	else if (n < 0)
 	{
 		ft_putchar('-');
@@ -47,8 +47,6 @@ static void	ft_put_long_nbr(long long n)
 		ft_putchar(n + '0');
 }
 
-
-
 int	integer(va_list ap, t_param *param)
 {	
 //	union u_types type;
@@ -56,6 +54,10 @@ int	integer(va_list ap, t_param *param)
 
 	if (param->length == INT)
 		type = va_arg(ap, int);
+	if (param->length == CHAR)
+		type = va_arg(ap, int);
+	if (param->length == SHORT)
+		type = (short)va_arg(ap, int);
 	if (param->length == LONG)
 		type = va_arg(ap, long);
 	if (param->length == LONG_LONG)
@@ -70,7 +72,6 @@ int	integer(va_list ap, t_param *param)
 		ft_putchar('+');
 	else if (type > 0 && param->space == TRUE)
 		ft_putchar(' ');
-	printf("type=%lld\n", type);
 	ft_put_long_nbr(type);
 	return (0);
 }

@@ -85,11 +85,13 @@ int	ft_printf(const char *format, ...)
 
 int 	main()
 {
-	char	*str = "string";
-	long long 	i = 9223372036854775807;
+	char		*str = "string";
+	long long		i = LLONG_MIN;
+	int 		j = 92;
+	int		 	k = 92;
 	
-	ft_printf("p=%lld\n", i);
-	   printf("o=%lld\n", i);
+	ft_printf("p=%lld %d %d\n", i, j, k);
+	   printf("o=%lld %d %d\n", i, j, k);
 	return (0);
 }
 
