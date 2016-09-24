@@ -21,7 +21,13 @@
 
 #define TRUE 		1
 #define FALSE 		0
-	
+#define	SET			1
+#define	CLEAR		0
+
+/*
+RETURN VALUES
+*/
+#define	END			0
 #define DIGIT		2
 #define EMPTY		-1
 
@@ -36,6 +42,7 @@
 
 typedef struct 		s_param
 {
+	int				flag;
 	int 			minus;
 	int 			plus;
 	int 			space;
@@ -62,6 +69,8 @@ int		ft_printf(const char *format, ...);
 int		integer(va_list ap, t_param *param);
 int		character(va_list ap, t_param *param);
 int		string(va_list ap, t_param *param);
+int		hexadecimal(va_list ap, t_param *param);
+
 
 int		placeholder(va_list ap, t_param *param);
 int 	empty(va_list ap, t_param *param);

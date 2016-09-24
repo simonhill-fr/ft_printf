@@ -15,11 +15,15 @@
 void	print_width(t_param *param, int n)
 {
 	int		i;
+	char	c;
 
+	c = ' ';
+	if (param->zero == TRUE)
+		c = '0';
 	i = 1 + n;
 	while (i <= param->width)
 	{
-		ft_putchar(' ');
+		ft_putchar(c);
 		i++;
 	}
 }

@@ -41,7 +41,7 @@ OBJ	= $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@make -C libft/
+#	@make -C libft/ 	//UN-COMMENT
 	@cp $(LIBFT) $(NAME)
 	@ar r $(NAME) $(OBJ) 
 #	@ranlib $(NAME)
@@ -53,11 +53,11 @@ $(NAME): $(OBJ)
 	@$(CC) -o $@ -c $< $(CFLAGS)
 	
 clean:
-	@make clean -C libft/
+#	@make clean -C libft/ //UNCOMMENT
 	@rm -f $(OBJ)
 	
 fclean: clean
-	@make fclean -C libft/
+#	@make fclean -C libft/ //UNCOMMENT
 	@rm -f $(NAME)
 
 re: fclean all

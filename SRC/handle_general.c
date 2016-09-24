@@ -12,22 +12,30 @@
 
 #include "ft_printf.h"
 
-int		placeholder(va_list ap, t_param *param) 
+int		placeholder(va_list ap, t_param *param)
 {
-	(void) (ap);
-	(void) (param);
+	(void)(ap);
+	if (param->minus == TRUE)
+	{
+		ft_putchar('%');
+		print_width(param, 1);
+	}
+	else if (param->minus == FALSE)
+	{
+		print_width(param, 1);
+		ft_putchar('%');
+	}
+	return (END);
+}
 
-	return (1);
-}//if c == % .Might be usefull for error handling
-
-int 	empty(va_list ap, t_param *param)
+int		empty(va_list ap, t_param *param)
 {
 	(void)(ap);
 	(void)(param);
 	return (EMPTY);
 }
 
-int 	digit(va_list ap, t_param *param)
+int		digit(va_list ap, t_param *param)
 {
 	(void)(ap);
 	(void)(param);

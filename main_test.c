@@ -14,12 +14,7 @@
 
 int 	main()
 {
-//	char		*str = "string";
-	long long		i = LLONG_MIN;
-	int 		j = 92;
-	int		 	k = 92;
-	
-	ft_printf("p=%lld %d %d\n", i, j, k);
-	   printf("o=%lld %d %d\n", i, j, k);
+	ft_printf("p=%06x\n", 42);
+	   printf("o=%06x\n", 42);
 	return (0);
 }

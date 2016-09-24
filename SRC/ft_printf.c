@@ -17,6 +17,7 @@ t_param	*init_param() //Better if malloc wouldnt occur on every call
 	t_param *param;
 
 	param = malloc(sizeof(t_param));
+	param->flag = TRUE;
 	param->minus = FALSE;
 	param->plus = FALSE;
 	param->space = FALSE;
@@ -67,6 +68,7 @@ int	ft_printf(const char *format, ...)
 			ft_putchar(*format);
 		else
 		{
+			format++;
 			param = init_param();
 			while ((ret = func_array[(int)*format](ap, param)))
 			{
@@ -81,18 +83,4 @@ int	ft_printf(const char *format, ...)
 	va_end(ap);
 	return (0);
 }
-
-
-/*int 	main()
-{
-//	char		*str = "string";
-	long long		i = LLONG_MIN;
-	int 		j = 92;
-	int		 	k = 92;
-	
-	ft_printf("p=%lld %d %d\n", i, j, k);
-	   printf("o=%lld %d %d\n", i, j, k);
-	return (0);
-}
-*/
 
