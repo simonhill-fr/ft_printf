@@ -23,16 +23,16 @@ else
     CFLAGS      = -Wall -Wextra -Werror
 endif
 
-NAME 	= ft_printf
+NAME 	= libftprintf.a
 CC		= gcc
 
-SRC 	= 	main.c 					\
-			print_out.c 			\
-			handle_general.c 		\
-			handle_flags.c 			\
-			handle_types_1.c 		\
-			handle_length.c 		\
-			init_index_array.c 	
+SRC 	= 	SRC/ft_printf.c 			\
+			SRC/print_out.c 			\
+			SRC/handle_general.c 		\
+			SRC/handle_flags.c 			\
+			SRC/handle_types_1.c 		\
+			SRC/handle_length.c 		\
+			SRC/init_index_array.c 	
 
 LIBFT	= libft/libft.a
 
@@ -42,9 +42,12 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C libft/
-	@$(CC) -o $@ $^ $(LIBFT)
+	@cp $(LIBFT) $(NAME)
+	@ar r $(NAME) $(OBJ) 
+#	@ranlib $(NAME)
+#	@$(CC) -o $@ $^ $(LIBFT)
 
-main.o: $(NAME).h
+#main.o: $(NAME).h
 
 %.o:%.c
 	@$(CC) -o $@ -c $< $(CFLAGS)
