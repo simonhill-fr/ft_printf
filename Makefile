@@ -26,13 +26,13 @@ endif
 NAME 	= ft_printf
 CC		= gcc
 
-SRC 	= 	SRC/main.c 					\
-			SRC/print_out.c 			\
-			SRC/handle_general.c 		\
-			SRC/handle_flags.c 			\
-			SRC/handle_types_1.c 		\
-			SRC/handle_length.c 		\
-			SRC/init_index_array.c 	
+SRC 	= 	main.c 					\
+			print_out.c 			\
+			handle_general.c 		\
+			handle_flags.c 			\
+			handle_types_1.c 		\
+			handle_length.c 		\
+			init_index_array.c 	
 
 LIBFT	= libft/libft.a
 
