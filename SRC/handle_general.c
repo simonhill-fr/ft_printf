@@ -15,16 +15,11 @@
 int		placeholder(va_list ap, t_param *param)
 {
 	(void)(ap);
-	if (param->minus == TRUE)
-	{
-		ft_putchar('%');
+	if (param->minus == FALSE && param->width)
 		print_width(param, 1);
-	}
-	else if (param->minus == FALSE)
-	{
+	ft_putchar('%');
+	if (param->minus == TRUE && param->width)
 		print_width(param, 1);
-		ft_putchar('%');
-	}
 	return (END);
 }
 

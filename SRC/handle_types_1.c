@@ -27,9 +27,22 @@ static int	get_int_len(uintmax_t n)
 	return (len);
 } //add to libft ?
 
-int	integer(va_list ap, t_param *param)
+int	decimal(va_list ap, t_param *param)
 {	
 	intmax_t nb;
+
+	nb = va_arg(ap, intmax_t);
+	if (param->minus == FALSE)
+		print_width(param, get_int_len(nb));	
+	ft_putnbr(nb);
+	if (param->minus == TRUE)
+		print_width(param, get_int_len(nb));
+	return (0);
+}
+
+int	udecimal(va_list ap, t_param *param)
+{	
+	uintmax_t nb;
 
 	nb = va_arg(ap, uintmax_t);
 	if (param->minus == FALSE)
@@ -45,15 +58,43 @@ int hexadecimal(va_list ap, t_param *param)
 	uintmax_t nb;
 	
 	nb = va_arg(ap, uintmax_t);
-	print_width(param, get_int_len(nb));
-	ft_putstr(ft_itoa_base(42, 16));
+	if (param->minus == FALSE)
+		print_width(param, get_int_len(nb));
+	ft_putstr(ft_itoa_base(nb, 16));
+	if (param->minus == TRUE)
+		print_width(param, get_int_len(nb));
+	return (0);
+}
+
+int upper_hexadecimal(va_list ap, t_param *param)
+{
+	uintmax_t 	nb;
+	char		*str;
+	int			i;
+
+	nb = va_arg(ap, uintmax_t);
+	if (param->minus == FALSE)
+		print_width(param, get_int_len(nb));
+	str = ft_itoa_base(nb, 16);
+	i = 0;
+	while (str[i])
+	{
+		str[i] = ft_toupper(str[i]);
+		i++;
+	}
+	ft_putstr(str);
+	if (param->minus == TRUE)
+		print_width(param, get_int_len(nb));
 	return (0);
 }
 
 int	character(va_list ap, t_param *param)
 {
-	(void)(param);
+	if (param->minus == FALSE)
+		print_width(param, 1);
 	ft_putchar(va_arg(ap, int));
+	if (param->minus == TRUE)
+		print_width(param, 1);
 	return (0);
 }
 

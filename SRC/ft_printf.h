@@ -66,11 +66,12 @@ union	u_types
 
 int		ft_printf(const char *format, ...);
 
-int		integer(va_list ap, t_param *param);
+int		decimal(va_list ap, t_param *param);
+int		udecimal(va_list ap, t_param *param);
 int		character(va_list ap, t_param *param);
 int		string(va_list ap, t_param *param);
 int		hexadecimal(va_list ap, t_param *param);
-
+int		upper_hexadecimal(va_list ap, t_param *param);
 
 int		placeholder(va_list ap, t_param *param);
 int 	empty(va_list ap, t_param *param);

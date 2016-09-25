@@ -39,11 +39,13 @@ void	init_index_array(t_functab *func_array)
 	func_array['8'] = digit;
 	func_array['9'] = digit;
 
-	func_array['d'] = integer;
-	func_array['i'] = integer;
+	func_array['d'] = decimal;
+	func_array['i'] = decimal;
+	func_array['u'] = udecimal;
+	func_array['x'] = hexadecimal;
+	func_array['X'] = upper_hexadecimal;
 	func_array['c'] = character;
 	func_array['s'] = string;
-	func_array['x'] = hexadecimal;
 
 	func_array['h'] = short_len;
 	func_array['l'] = long_len;	

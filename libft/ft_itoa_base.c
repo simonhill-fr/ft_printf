@@ -15,7 +15,7 @@
 static  int get_char(int c)
 {
 	if (c >= 10 && c <= 15)
-		return (c + 55);
+		return (c + 87);
 	else
 		return (c + 48);
 }

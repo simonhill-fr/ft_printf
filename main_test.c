@@ -14,7 +14,7 @@
 
 int 	main()
 {
-	ft_printf("p=%16s\n", "string");
-	   printf("o=%16s\n", "string");
+	ft_printf("p=%   %\n", "test");
+	   printf("o=%   %\n", "test");
 	return (0);
 }
