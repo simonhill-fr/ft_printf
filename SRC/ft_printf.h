@@ -42,7 +42,7 @@ RETURN VALUES
 
 typedef struct 		s_param
 {
-	int				flag;
+	int				ret;
 	int 			minus;
 	int 			plus;
 	int 			space;

@@ -49,6 +49,6 @@ char	*ft_itoa_base(uintmax_t x, int base)
 		n++;
 	n--;
 	str = ft_strnew(n);
-	str = do_conversion(x, base, n, str);	
+	str = do_conversion(x, base, n, str);
 	return (str);
 }

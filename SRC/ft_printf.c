@@ -17,7 +17,7 @@ t_param	*init_param() //Better if malloc wouldnt occur on every call
 	t_param *param;
 
 	param = malloc(sizeof(t_param));
-	param->flag = TRUE;
+	param->ret = 0;
 	param->minus = FALSE;
 	param->plus = FALSE;
 	param->space = FALSE;
@@ -52,16 +52,12 @@ void	get_digits(const char **format, t_param *param)
 }//would be better to index all digits to this function instead of 
 // using if (ret == DIGIT)
 
-int	ft_printf(const char *format, ...)
-{
-	va_list		ap;
-	int 		ret;
-	t_param		*param;
-	t_functab 	*func_array;
 
-	func_array = malloc(sizeof(t_functab) * 128);
-	init_index_array(func_array);
-	va_start(ap, format);
+int	parse(const char *format, va_list ap, t_functab *func_array)
+{
+	t_param		*param;
+	int 		ret;
+
 	while (*format)
 	{
 		if (*format != '%')
@@ -80,7 +76,20 @@ int	ft_printf(const char *format, ...)
 		}
 		format++;
 	}
+	return (ret);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	va_list		ap;
+	t_functab 	*func_array;
+	int			total;
+
+	func_array = malloc(sizeof(t_functab) * 128);
+	init_index_array(func_array);
+	va_start(ap, format);
+	total = parse(format, ap, func_array);
 	va_end(ap);
-	return (0);
+	return (total);
 }
 
