@@ -28,7 +28,7 @@
 RETURN VALUES
 */
 #define	END			0
-#define DIGIT		2
+#define DIGIT		-2
 #define EMPTY		-1
 
 //replace by enum
