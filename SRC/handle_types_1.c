@@ -12,13 +12,11 @@
 
 #include "ft_printf.h"
 
-static int	get_int_len(long long n)
+static int	get_int_len(uintmax_t n)
 {
-	long long	len;
+	uintmax_t	len;
 
 	len = 0;
-	if (n < 0)
-		len++;
 	if (n == 0)
 		return (1);
 	while (n != 0)
@@ -29,32 +27,16 @@ static int	get_int_len(long long n)
 	return (len);
 } //add to libft ?
 
-/*static void	ft_put_long_nbr(long long n)
-{
-	if (n == -9223372036854775807 - 1)
-		ft_putstr("-9223372036854775808");
-	else if (n < 0)
-	{
-		ft_putchar('-');
-		ft_put_long_nbr(-n);
-	}
-	else if (n >= 10)
-	{
-		ft_put_long_nbr(n / 10);
-		ft_put_long_nbr(n % 10);
-	}
-	else if (n < 10)
-		ft_putchar(n + '0');
-}*/
-
 int	integer(va_list ap, t_param *param)
 {	
 	intmax_t nb;
 
 	nb = va_arg(ap, uintmax_t);
-	print_width(param, get_int_len(nb));
-	
+	if (param->minus == FALSE)
+		print_width(param, get_int_len(nb));	
 	ft_putnbr(nb);
+	if (param->minus == TRUE)
+		print_width(param, get_int_len(nb));
 	return (0);
 }
 
@@ -81,13 +63,11 @@ int	string(va_list ap, t_param *param)
 
 	str = va_arg(ap, char *);
 	if (param->precision)
-	{
-		print_width(param, param->precision);
 		str = ft_strndup(str, param->precision);
-		ft_putstr(str);
-		return (0);
-	}
-	print_width(param, ft_strlen(str));
+	if (param->minus == FALSE)
+		print_width(param, ft_strlen(str));	
 	ft_putstr(str);
+	if (param->minus == TRUE)
+		print_width(param, ft_strlen(str));
 	return (0);
 }

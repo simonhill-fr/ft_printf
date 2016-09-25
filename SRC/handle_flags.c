@@ -16,6 +16,7 @@ int	minus(va_list ap, t_param *param)
 {
 	(void)(ap);
 	param->minus = TRUE;
+	param->zero = FALSE;
 	return (1);
 }
 
@@ -38,7 +39,8 @@ int	space(va_list ap, t_param *param)
 int	zero(va_list ap, t_param *param)
 {
 	(void)(ap);
-	param->zero = TRUE;
+	if (param->minus == FALSE)
+		param->zero = TRUE;
 	return (1);
 }
 

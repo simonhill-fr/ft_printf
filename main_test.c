@@ -14,7 +14,7 @@
 
 int 	main()
 {
-	ft_printf("p=%06lld\n", LLONG_MAX);
-	   printf("o=%06lld\n", LLONG_MAX);
+	ft_printf("p=%16s\n", "string");
+	   printf("o=%16s\n", "string");
 	return (0);
 }
