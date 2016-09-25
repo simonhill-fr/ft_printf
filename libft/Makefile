@@ -32,7 +32,7 @@ SRC 	= \
 		ft_strnstr.c	ft_pow.c		ft_printlist.c	ft_lstsize.c	\
 		ft_lstnew.c		ft_lstdelone.c	ft_lstdel.c		ft_lstadd.c		\
 		ft_lstiter.c	ft_lstmap.c		ft_strndup.c	ft_strnjoin.c	\
-		get_next_line.c	ft_atoi_short.c									\
+		get_next_line.c	ft_atoi_short.c	ft_itoa_base.c
 		
 OBJ	= $(SRC:.c=.o)
 
