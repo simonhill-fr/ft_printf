@@ -14,7 +14,7 @@
 
 int 	main()
 {
-	ft_printf("p=%06x\n", 42);
-	   printf("o=%06x\n", 42);
+	ft_printf("p=%06lld\n", LLONG_MAX);
+	   printf("o=%06lld\n", LLONG_MAX);
 	return (0);
 }

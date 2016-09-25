@@ -29,7 +29,7 @@ static int	get_int_len(long long n)
 	return (len);
 } //add to libft ?
 
-static void	ft_put_long_nbr(long long n)
+/*static void	ft_put_long_nbr(long long n)
 {
 	if (n == -9223372036854775807 - 1)
 		ft_putstr("-9223372036854775808");
@@ -45,79 +45,26 @@ static void	ft_put_long_nbr(long long n)
 	}
 	else if (n < 10)
 		ft_putchar(n + '0');
-}
-
-// Need to code atoi_base!
-/*static void	ft_put_hex(long long i)
-{
-	int 	n;
-
-	n = 0;
-	while (ft_pow(16, n) < i)
-		n++;
-	n--;
-	d = (i / ft_pow(16, n))
-	ft_putchar('')
-
 }*/
 
 int	integer(va_list ap, t_param *param)
 {	
-//	union u_types type;
-	long long type;
+	intmax_t nb;
 
-	if (param->length == INT)
-		type = va_arg(ap, int);
-	if (param->length == CHAR)
-		type = va_arg(ap, int);
-	if (param->length == SHORT)
-		type = (short)va_arg(ap, int);
-	if (param->length == LONG)
-		type = va_arg(ap, long);
-	if (param->length == LONG_LONG)
-		type = va_arg(ap, long long);
-	if (param->length == SIZE_T)
-		type = va_arg(ap, size_t);
-	if (param->length == INTMAX)
-		type = va_arg(ap, intmax_t);
-
-	print_width(param, get_int_len(type));
-	if (type >= 0 && param->plus == TRUE)
-		ft_putchar('+');
-	else if (type > 0 && param->space == TRUE)
-		ft_putchar(' ');
-	ft_put_long_nbr(type);
+	nb = va_arg(ap, uintmax_t);
+	print_width(param, get_int_len(nb));
+	
+	ft_putnbr(nb);
 	return (0);
 }
 
 int hexadecimal(va_list ap, t_param *param)
 {
-	long long type;
-
-	if (param->length == INT)
-		type = va_arg(ap, unsigned int);
-	if (param->length == CHAR)
-		type = va_arg(ap, unsigned int);
-	if (param->length == SHORT)
-		type = (unsigned short)va_arg(ap, unsigned int);
-	if (param->length == LONG)
-		type = va_arg(ap, unsigned long);
-	if (param->length == LONG_LONG)
-		type = va_arg(ap, unsigned long long);
-	if (param->length == SIZE_T)
-		type = va_arg(ap, size_t);
-	if (param->length == INTMAX)
-		type = va_arg(ap, intmax_t);
-
-
-
-	print_width(param, get_int_len(type));
-	if (type > 0 && param->plus == TRUE)
-		ft_putchar('+');
-	else if (type > 0 && param->space == TRUE)
-		ft_putchar(' ');
-//	ft_put_hex(type);
-	ft_put_long_nbr(type); // will be replaced by put_hex()
+	uintmax_t nb;
+	
+	nb = va_arg(ap, uintmax_t);
+	print_width(param, get_int_len(nb));
+	ft_putstr(ft_itoa_base(42, 16));
 	return (0);
 }
 

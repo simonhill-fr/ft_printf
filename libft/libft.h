@@ -77,7 +77,7 @@ char				*ft_itoa_base(uintmax_t x, int base);
 void				ft_putchar(char c);
 void				ft_putstr(const char *s);
 void				ft_putendl(char const *s);
-void				ft_putnbr(int n);
+void				ft_putnbr(intmax_t n);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);

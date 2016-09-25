@@ -12,6 +12,7 @@
 
 #include "ft_printf.h"
 
+
 void	print_width(t_param *param, int n)
 {
 	int		i;
@@ -26,15 +27,8 @@ void	print_width(t_param *param, int n)
 		ft_putchar(c);
 		i++;
 	}
-}
-
-/*int		print_decimal(size_t n, t_param *param)
-{
-	if (n > 0 && param->plus == TRUE)
+	if (n >= 0 && param->plus == TRUE)
 		ft_putchar('+');
 	else if (n > 0 && param->space == TRUE)
 		ft_putchar(' ');
-	ft_putnbr(n);
-	return (0);
-
-}*/
+}
