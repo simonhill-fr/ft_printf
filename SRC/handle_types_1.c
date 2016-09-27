@@ -34,7 +34,7 @@ int	decimal(va_list ap, t_param *param)
 	nb = va_arg(ap, intmax_t);
 	if (param->minus == FALSE)
 		print_width(param, get_int_len(nb));	
-	ft_putnbr(nb);
+	param->ret += ft_putnbr(nb);
 	if (param->minus == TRUE)
 		print_width(param, get_int_len(nb));
 	return (0);
@@ -47,7 +47,7 @@ int	udecimal(va_list ap, t_param *param)
 	nb = va_arg(ap, uintmax_t);
 	if (param->minus == FALSE)
 		print_width(param, get_int_len(nb));	
-	ft_putnbr(nb);
+	param->ret += ft_putnbr(nb);
 	if (param->minus == TRUE)
 		print_width(param, get_int_len(nb));
 	return (0);
@@ -60,7 +60,7 @@ int hexadecimal(va_list ap, t_param *param)
 	nb = va_arg(ap, uintmax_t);
 	if (param->minus == FALSE)
 		print_width(param, get_int_len(nb));
-	ft_putstr(ft_itoa_base(nb, 16));
+	param->ret += ft_putstr(ft_itoa_base(nb, 16));
 	if (param->minus == TRUE)
 		print_width(param, get_int_len(nb));
 	return (0);
@@ -82,7 +82,7 @@ int upper_hexadecimal(va_list ap, t_param *param)
 		str[i] = ft_toupper(str[i]);
 		i++;
 	}
-	ft_putstr(str);
+	param->ret += ft_putstr(str);
 	if (param->minus == TRUE)
 		print_width(param, get_int_len(nb));
 	return (0);
@@ -92,7 +92,7 @@ int	character(va_list ap, t_param *param)
 {
 	if (param->minus == FALSE)
 		print_width(param, 1);
-	ft_putchar(va_arg(ap, int));
+	param->ret += ft_putchar(va_arg(ap, int));
 	if (param->minus == TRUE)
 		print_width(param, 1);
 	return (0);
@@ -107,7 +107,7 @@ int	string(va_list ap, t_param *param)
 		str = ft_strndup(str, param->precision);
 	if (param->minus == FALSE)
 		print_width(param, ft_strlen(str));	
-	ft_putstr(str);
+	param->ret += ft_putstr(str);
 	if (param->minus == TRUE)
 		print_width(param, ft_strlen(str));
 	return (0);

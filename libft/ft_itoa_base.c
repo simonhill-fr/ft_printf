@@ -20,7 +20,7 @@ static  int get_char(int c)
 		return (c + 48);
 }
 
-static	char	*do_conversion(uintmax_t x, int base, int n, char *str)
+static	char	*do_conversion(unsigned int x, int base, int n, char *str)
 {
 	int	d;
 	int	i;
@@ -37,13 +37,13 @@ static	char	*do_conversion(uintmax_t x, int base, int n, char *str)
 	return (str);
 }
 
-char	*ft_itoa_base(uintmax_t x, int base)
+char	*ft_itoa_base(unsigned int x, int base)
 {
 	int		n;
 	char	*str;
 
 	n = 0;
-	if (x <= 0)
+	if (x == 0)
 		return (ft_strdup("0"));
 	while (ft_pow(base, n) < x)
 		n++;

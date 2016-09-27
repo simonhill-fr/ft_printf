@@ -17,7 +17,7 @@ int		placeholder(va_list ap, t_param *param)
 	(void)(ap);
 	if (param->minus == FALSE && param->width)
 		print_width(param, 1);
-	ft_putchar('%');
+	param->ret += ft_putchar('%');
 	if (param->minus == TRUE && param->width)
 		print_width(param, 1);
 	return (END);

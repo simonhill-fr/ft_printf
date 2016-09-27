@@ -24,11 +24,11 @@ void	print_width(t_param *param, int n)
 	i = 1 + n;
 	while (i <= param->width)
 	{
-		ft_putchar(c);
+		param->ret += ft_putchar(c);
 		i++;
 	}
 	if (n >= 0 && param->plus == TRUE)
-		ft_putchar('+');
+		param->ret += ft_putchar('+');
 	else if (n > 0 && param->space == TRUE)
-		ft_putchar(' ');
+		param->ret += ft_putchar(' ');
 }

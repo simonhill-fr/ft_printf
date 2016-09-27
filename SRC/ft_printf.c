@@ -12,11 +12,8 @@
 
 #include "ft_printf.h"
 
-t_param	*init_param() //Better if malloc wouldnt occur on every call
+t_param	*init_param(t_param *param) //Better if malloc wouldnt occur on every call
 {
-	t_param *param;
-
-	param = malloc(sizeof(t_param));
 	param->ret = 0;
 	param->minus = FALSE;
 	param->plus = FALSE;
@@ -57,26 +54,30 @@ int	parse(const char *format, va_list ap, t_functab *func_array)
 {
 	t_param		*param;
 	int 		ret;
+	int			print;
 
+	param = malloc(sizeof(t_param));
+	print = 0;
 	while (*format)
 	{
 		if (*format != '%')
-			ft_putchar(*format);
+			print += ft_putchar(*format);
 		else
 		{
 			format++;
-			param = init_param();
+			param = init_param(param);
 			while ((ret = func_array[(int)*format](ap, param)))
 			{
 				if (ret == DIGIT)
 					get_digits(&format, param);
 				format++;
 			}
-			free(param);
 		}
+		print += param->ret;
 		format++;
 	}
-	return (ret);
+	free(param);
+	return (print);
 }
 
 int	ft_printf(const char *format, ...)

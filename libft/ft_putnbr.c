@@ -12,20 +12,24 @@
 
 #include "libft.h"
 
-void	ft_putnbr(intmax_t n)
+int	ft_putnbr(intmax_t n)
 {
+	int	ret;
+
+	ret = 0;
 	if (n == -2147483648)
-		ft_putstr("-2147483648");
+		ret += ft_putstr("-2147483648");
 	else if (n < 0)
 	{
-		ft_putchar('-');
-		ft_putnbr(-n);
+		ret += ft_putchar('-');
+		ret += ft_putnbr(-n);
 	}
 	else if (n >= 10)
 	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
+		ret += ft_putnbr(n / 10);
+		ret += ft_putnbr(n % 10);
 	}
 	else if (n < 10)
-		ft_putchar(n + '0');
+		ret += ft_putchar(n + '0');
+	return (ret);
 }
