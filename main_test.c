@@ -15,8 +15,8 @@
 int 	main()
 {
 	int a, b;
-	a = ft_printf("@moulitest: %s\n", NULL); 
-	   b = printf("@moulitest: %s\n", NULL); 
+	a = ft_printf("%#16x\n", 2500); 
+	   b = printf("%#16x\n", 2500); 
 
 	printf("(%d),(%d)\n", a, b);
 

@@ -141,9 +141,43 @@ int upper_hexadecimal(va_list ap, t_param *param)
 	return (0);
 }
 
+int octal(va_list ap, t_param *param)
+{
+	uintmax_t	nb;
+	char		*str;
+	char		*prefix;
+
+	prefix = ft_strdup("0");
+	nb = 0;
+	if (param->length == INT)
+		nb = va_arg(ap, unsigned int);
+	else if (param->length == LONG)
+		nb = va_arg(ap, unsigned long);
+	else if (param->length == LONG_LONG)
+		nb = va_arg(ap, unsigned long long);
+	else if (param->length == SIZE_T)
+		nb = va_arg(ap, size_t);
+	else if (param->length == INTMAX)
+		nb = (uintmax_t)va_arg(ap, intmax_t);
+
+	print_pre(param, nb, prefix);
+	str = ft_itoa_base(nb, 8);
+	if (param->precision == 0 && nb == 0)
+	{
+		if (param->width == 0)
+			return (0);
+		str = ft_strdup(" ");
+	}
+	param->ret += ft_putstr(str);
+
+	if (param->minus == TRUE && param->width)
+		print_width(param, get_int_len(nb));
+	return (0);
+}
+
 int	character(va_list ap, t_param *param)
 {
-	if (param->minus == FALSE)
+	if (param->minus == FALSE && param->width > 0)
 		print_width(param, 1);
 	param->ret += ft_putchar(va_arg(ap, int));
 	if (param->minus == TRUE)
