@@ -69,10 +69,15 @@ int hexadecimal(va_list ap, t_param *param)
 	else if (param->length == INTMAX)
 		nb = (uintmax_t)va_arg(ap, intmax_t);
 
-	if (param->minus == FALSE)
-		print_width(param, get_int_len(nb));
+	if (nb == 0)
+		param->hash = FALSE;
+	if (param->hash == TRUE)
+		param->ret = ft_putstr("0x");
+
+	if (param->minus == FALSE && param->width)
+		print_width(param, get_int_len(nb));	
 	param->ret += ft_putstr(ft_itoa_base(nb, 16));
-	if (param->minus == TRUE)
+	if (param->minus == TRUE && param->width)
 		print_width(param, get_int_len(nb));
 	return (0);
 }
@@ -99,6 +104,8 @@ int upper_hexadecimal(va_list ap, t_param *param)
 		str[i] = ft_toupper(str[i]);
 		i++;
 	}
+	if (param->hash == TRUE)
+		param->ret = ft_putstr("0X");
 	param->ret += ft_putstr(str);
 	if (param->minus == TRUE)
 		print_width(param, get_int_len(nb));

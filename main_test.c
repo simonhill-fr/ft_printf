@@ -14,8 +14,11 @@
 
 int 	main()
 {
-	ft_printf("%lx\n", 4294967296);
-//	   printf("o=%x\n", -4);
+	int a, b;
+	a = ft_printf("%x ", 0);
+	   b = printf("%x ", 0);
+
+//	printf("(%d),(%d)\n", a, b);
 
 	return (0);
 }

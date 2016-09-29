@@ -60,12 +60,12 @@ int	parse(const char *format, va_list ap, t_functab *func_array)
 	print = 0;
 	while (*format)
 	{
+		param = init_param(param);
 		if (*format != '%')
 			print += ft_putchar(*format);
 		else
 		{
-			format++;
-			param = init_param(param);
+			format++;			
 			while ((ret = func_array[(int)*format](ap, param)))
 			{
 				if (ret == DIGIT)
