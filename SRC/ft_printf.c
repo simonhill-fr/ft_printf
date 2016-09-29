@@ -21,7 +21,7 @@ t_param	*init_param(t_param *param) //Better if malloc wouldnt occur on every ca
 	param->zero = FALSE;
 	param->hash = FALSE;
 	param->width = 0;
-	param->precision = 0;
+	param->precision = -1;
 	param->length = 0;
 	return (param);
 }
@@ -37,6 +37,7 @@ void	get_digits(const char **format, t_param *param)
 	}
 	if (**format == '.')
 	{
+		param->precision = 0;
 		(*format)++;
 		while (ft_isdigit(n = **format))
 		{

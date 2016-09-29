@@ -15,10 +15,10 @@
 int 	main()
 {
 	int a, b;
-	a = ft_printf("%x ", 0);
-	   b = printf("%x ", 0);
+	a = ft_printf("@moulitest: %s\n", NULL); 
+	   b = printf("@moulitest: %s\n", NULL); 
 
-//	printf("(%d),(%d)\n", a, b);
+	printf("(%d),(%d)\n", a, b);
 
 	return (0);
 }

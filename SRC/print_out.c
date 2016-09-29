@@ -23,10 +23,7 @@ void	print_width(t_param *param, int n)
 		c = '0';
 	i = 1 + n;
 	if (param->hash == TRUE)
-	{
 		i += 2;
-		param->ret += 2;
-	}
 	while (i <= param->width)
 	{
 		param->ret += ft_putchar(c);

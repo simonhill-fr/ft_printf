@@ -25,7 +25,29 @@ static int	get_int_len(uintmax_t n)
 		len++;
 	}
 	return (len);
-} //add to libft ?
+}
+
+void	print_pre(t_param *param, uintmax_t nb, char *prefix)
+{
+	if (nb == 0)
+		param->hash = FALSE;
+	if (param->width == 0 || param->minus == TRUE)
+	{
+		if (param->hash == TRUE)
+			param->ret += ft_putstr(prefix);
+		return ;
+	}
+	if (param->zero == TRUE)
+	{
+		if (param->hash)
+			param->ret += ft_putstr(prefix);
+		print_width(param, get_int_len(nb));
+		return ;
+	}
+	print_width(param, get_int_len(nb));
+	if (param->hash)
+		param->ret += ft_putstr(prefix);
+}
 
 int	decimal(va_list ap, t_param *param)
 {	
@@ -55,8 +77,11 @@ int	udecimal(va_list ap, t_param *param)
 
 int hexadecimal(va_list ap, t_param *param)
 {
-	uintmax_t nb;
-	
+	uintmax_t	nb;
+	char		*str;
+	char		*prefix;
+
+	prefix = ft_strdup("0x");
 	nb = 0;
 	if (param->length == INT)
 		nb = va_arg(ap, unsigned int);
@@ -69,16 +94,20 @@ int hexadecimal(va_list ap, t_param *param)
 	else if (param->length == INTMAX)
 		nb = (uintmax_t)va_arg(ap, intmax_t);
 
-	if (nb == 0)
-		param->hash = FALSE;
-	if (param->hash == TRUE)
-		param->ret = ft_putstr("0x");
+	print_pre(param, nb, prefix);
+	str = ft_itoa_base(nb, 16);
+	if (param->precision == 0 && nb == 0)
+	{
+		if (param->width == 0)
+			return (0);
+		str = ft_strdup(" ");
+	}
+	param->ret += ft_putstr(str);
 
-	if (param->minus == FALSE && param->width)
-		print_width(param, get_int_len(nb));	
-	param->ret += ft_putstr(ft_itoa_base(nb, 16));
 	if (param->minus == TRUE && param->width)
 		print_width(param, get_int_len(nb));
+	
+
 	return (0);
 }
 
@@ -127,7 +156,13 @@ int	string(va_list ap, t_param *param)
 	char 	*str;
 
 	str = va_arg(ap, char *);
-	if (param->precision)
+	if (!(str))
+	{
+		param->ret += ft_putstr("(null)");
+		return (0);
+	}
+
+	if (param->precision != -1)
 		str = ft_strndup(str, param->precision);
 	if (param->minus == FALSE)
 		print_width(param, ft_strlen(str));	
