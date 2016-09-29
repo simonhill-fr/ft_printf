@@ -14,12 +14,8 @@
 
 int 	main()
 {
-//	ft_printf("p=%   %\n", "test");
-//	   printf("o=%   %\n", "test");
-	int i;
+	ft_printf("%lx\n", 4294967296);
+//	   printf("o=%x\n", -4);
 
-	i = -42;
-//printf("%u\n", (unsigned long int)i);
-printf("%s\n",ft_itoa_base(i, 16));  
 	return (0);
 }

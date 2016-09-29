@@ -11,35 +11,45 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>//REMOVE
 
-#define	RADIX		"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+//#define	RADIX		"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-/*static  int get_char(int c)
+static  int		get_char(int c)
 {
+	
 	if (c >= 10 && c <= 15)
 		return (c + 87);
 	else
 		return (c + 48);
 }
 
-static	char	*do_conversion(uintmax_t x, int base, int n, char *str)
+static	char	*do_conversion(unsigned long x, int base, int n, char *str)
 {
-	int	d;
-	int	i;
+	unsigned long long	d;
+	int					i;
 
 	i = 0;
 	while (n >= 0)
 	{
 		d = x / (ft_pow(base, n));
 		x = x - d * ft_pow(base, n);
-		str[i] = get_char(d);
+		if (d == 16)
+		{
+			str[i] = '1';
+			str[i + 1] = '0';
+			i++;;
+		}
+		else
+			str[i] = get_char(d);
 		n--;
 		i++;
 	}
+	str[i] = '\0';
 	return (str);
 }
 
-char	*ft_itoa_base(uintmax_t x, int base)
+char			*ft_itoa_base(unsigned long x, int base)
 {
 	int		n;
 	char	*str;
@@ -52,11 +62,12 @@ char	*ft_itoa_base(uintmax_t x, int base)
 	n--;
 	str = ft_strnew(n);
 	str = do_conversion(x, base, n, str);
+		
 	return (str);
-}*/
+}
 
 
-/* ------- OTHER VERSION ----- */
+/* ------- OTHER VERSION ------- */
 /*static size_t	nbrlen(int input, unsigned int radix)
 {
   size_t	i;
@@ -69,7 +80,7 @@ char	*ft_itoa_base(uintmax_t x, int base)
   return (i);
 }
 
-void		ft_itoa_base(int input, char *buffer, unsigned int radix)
+void		ft_itoa_base(long input, char *buffer, unsigned int radix)
 {
   size_t	i;
 
@@ -96,5 +107,5 @@ char *		itoadup(int input, unsigned int radix)
     return (NULL);
   ft_itoa_base(input, buffer, radix);
   return (buffer);
-}*/
-
+}
+*/

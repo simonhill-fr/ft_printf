@@ -55,9 +55,20 @@ int	udecimal(va_list ap, t_param *param)
 
 int hexadecimal(va_list ap, t_param *param)
 {
-	uintmax_t nb;
+	unsigned long nb;
 	
-	nb = va_arg(ap, uintmax_t);
+	nb = 0;
+	if (param->length == INT)
+		nb = va_arg(ap, unsigned int);
+	else if (param->length == LONG)
+		nb = va_arg(ap, unsigned long);
+	else if (param->length == LONG_LONG)
+		nb = va_arg(ap, unsigned long long);
+	else if (param->length == SIZE_T)
+		nb = va_arg(ap, size_t);
+	else if (param->length == INTMAX)
+		nb = va_arg(ap, intmax_t);
+
 	if (param->minus == FALSE)
 		print_width(param, get_int_len(nb));
 	param->ret += ft_putstr(ft_itoa_base(nb, 16));
@@ -68,11 +79,17 @@ int hexadecimal(va_list ap, t_param *param)
 
 int upper_hexadecimal(va_list ap, t_param *param)
 {
-	uintmax_t 	nb;
+	unsigned long 	nb;
 	char		*str;
 	int			i;
 
-	nb = va_arg(ap, uintmax_t);
+	nb = 0;
+	if (param->length == INT)
+		nb = va_arg(ap, unsigned int);
+	else if (param->length == LONG)
+		nb = va_arg(ap, unsigned long);
+	else if (param->length == LONG_LONG)
+		nb = va_arg(ap, unsigned long long);
 	if (param->minus == FALSE)
 		print_width(param, get_int_len(nb));
 	str = ft_itoa_base(nb, 16);
