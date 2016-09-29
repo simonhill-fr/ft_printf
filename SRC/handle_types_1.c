@@ -55,7 +55,7 @@ int	udecimal(va_list ap, t_param *param)
 
 int hexadecimal(va_list ap, t_param *param)
 {
-	unsigned long nb;
+	uintmax_t nb;
 	
 	nb = 0;
 	if (param->length == INT)
@@ -67,7 +67,7 @@ int hexadecimal(va_list ap, t_param *param)
 	else if (param->length == SIZE_T)
 		nb = va_arg(ap, size_t);
 	else if (param->length == INTMAX)
-		nb = va_arg(ap, intmax_t);
+		nb = (uintmax_t)va_arg(ap, intmax_t);
 
 	if (param->minus == FALSE)
 		print_width(param, get_int_len(nb));
