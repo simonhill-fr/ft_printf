@@ -113,7 +113,7 @@ int hexadecimal(va_list ap, t_param *param)
 
 int upper_hexadecimal(va_list ap, t_param *param)
 {
-	unsigned long 	nb;
+	uintmax_t 	nb;
 	char		*str;
 	int			i;
 
