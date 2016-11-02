@@ -12,19 +12,14 @@
 
 #include "SRC/ft_printf.h"
 #include <limits.h>
+#include <stdio.h>
+
 
 int 	main()
 {
-/*	int a, b;
-	a = ft_printf("%#16x\n", 2500);
-	   b = printf("%#16x\n", 2500);
+	ft_printf("%x", 42);
 
-	printf("(%d),(%d)\n", a, b);
-*/
-//	printf("%ju\n", UINTMAX_MAX);
-//	printf("%lu\n", ULONG_MAX);
 
-	printf("%x\n", -42);
-	printf("%s\n", ft_itoa_base(-42, 16));
+
 	return (0);
 }

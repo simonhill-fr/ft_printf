@@ -13,102 +13,46 @@
 #include "libft.h"
 #include <stdio.h>//REMOVE
 
-/*#define	RADIX		"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-*/
-static  int		get_char(int c)
+#define	SLIDER		"0123456789abcdefghijklmnopqrstuvwxyz"
+
+static size_t	buffer_len(uintmax_t input, unsigned int radix)
 {
-	
-	if (c >= 10 && c <= 15)
-		return (c + 87);
-	else
-		return (c + 48);
+	size_t	i;
+
+	if (input == 0)
+		return (2);
+	i = 1;
+	while (radix > 1 && (input /= radix))
+		++i;
+	return (i);
 }
 
-static	char	*do_conversion(uintmax_t x, int base, int n, char *str)
+void			ft_itoa_base(uintmax_t input, char *buffer, unsigned int radix)
 {
-	unsigned long long	d;
-	int					i;
+	size_t	i;
 
-	i = 0;
-	while (n >= 0)
+	if (radix > 16)
+		return ;
+	i = buffer_len(input, radix) - 1;
+	buffer[i] = '\0';
+	if (input == 0)
+		buffer[0] = '0';
+	while ((input))
 	{
-		d = x / (ft_pow(base, n));
-		x = x - d * ft_pow(base, n);
-
-		if (d == 16)
-		{
-			str[i] = '1';
-			str[i + 1] = '0';
-			i++;;
-		}
-		else
-			str[i] = get_char(d);
-		n--;
-		i++;
+		buffer[i] = SLIDER[input % radix];
+		input /= radix;
+		--i;
 	}
-	str[i] = '\0';
-	return (str);
 }
 
-char			*ft_itoa_base(uintmax_t x, int base)
+char 			*ft_itoadup(uintmax_t input, unsigned int radix)
 {
-	int		n;
-	char	*str;
+	char	*buffer;
 
-	n = 0;
-	if (x == 0)
-		return (ft_strdup("0"));
-	while (ft_pow(base, n) < x)
-		n++;
-	n--;
-	str = ft_strnew(n);
-	str = do_conversion(x, base, n, str);
-		
-	return (str);
+	if (radix <= 1
+		|| radix >= (int)sizeof(SLIDER)
+		|| !(buffer = malloc(sizeof(*buffer) * buffer_len(input, radix))))
+		return (NULL);
+	ft_itoa_base(input, buffer, radix);
+	return (buffer);
 }
-
-
-
-
-/* ------- OTHER VERSION ------- */
-/*static size_t	nbrlen(int input, unsigned int radix)
-{
-  size_t	i;
-
-  i = 1;
-  if (input < 0)
-    ++i;
-  while (radix > 1 && (input /= radix))
-    ++i;
-  return (i);
-}
-
-static void		ft_itoa_base(unsigned int input, char *buffer, unsigned int radix)
-{
-  size_t	i;
-
-  i = nbrlen(input, radix) - 1;
-  buffer[i] = '\0';
-  if (input < 0)
-    buffer[0] = '-';
-  while ((input))
-    {
-      buffer[i] = RADIX[ft_abs(input) % radix];
-      input /= radix;
-      --i;
-    }
-}
-
-char *		itoadup(unsigned int input, unsigned int radix)
-{
-  char *	buffer;
-
-  if (radix <= 1
-      || radix >= (int)sizeof(RADIX)
-      || !(buffer = malloc(sizeof(*buffer)
-			   * ((nbrlen(input, radix) - 1) + 2))))
-    return (NULL);
-  ft_itoa_base(input, buffer, radix);
-  return (buffer);
-}*/
-
