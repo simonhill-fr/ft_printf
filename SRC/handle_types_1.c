@@ -29,23 +29,26 @@ static int	get_int_len(uintmax_t n)
 
 void	print_pre(t_param *param, uintmax_t nb, char *prefix)
 {
-	if (nb == 0)
+	if (nb == 0 || param->hash == FALSE)
+	{
 		param->hash = FALSE;
+		prefix = "";
+	}
 	if (param->width == 0 || param->minus == TRUE)
 	{
-		if (param->hash == TRUE)
+//		if (param->hash == TRUE)
 			param->ret += ft_putstr(prefix);
 		return ;
 	}
 	if (param->zero == TRUE)
 	{
-		if (param->hash)
+//		if (param->hash)
 			param->ret += ft_putstr(prefix);
 		print_width(param, get_int_len(nb));
 		return ;
 	}
 	print_width(param, get_int_len(nb));
-	if (param->hash)
+//	if (param->hash) //removed for test 43
 		param->ret += ft_putstr(prefix);
 }
 
@@ -56,6 +59,8 @@ int	decimal(va_list ap, t_param *param)
 
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, SIGNED);
+	if (param->hash) //set length of prefix
+		param->hash = 0;
 	print_pre(param, nb, "");
 	param->ret += ft_putnbr(nb);
 	if (param->minus == TRUE && param->width)
@@ -71,6 +76,8 @@ int	udecimal(va_list ap, t_param *param)
 
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, UNSIGNED);
+	if (param->hash)
+		param->hash = 0;
 	print_pre(param, nb, "");
 	str = ft_itoadup(nb, 10);
 	if (param->precision == 0 && nb == 0)
@@ -93,6 +100,8 @@ int hexadecimal(va_list ap, t_param *param)
 
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, UNSIGNED);
+	if (param->hash && nb != 0) //set length of prefix
+		param->hash = 2;
 	print_pre(param, nb, "0x");
 	str = ft_itoadup(nb, 16);
 	if (param->precision == 0 && nb == 0)
@@ -115,6 +124,8 @@ int upper_hexadecimal(va_list ap, t_param *param)
 
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, UNSIGNED);
+	if (param->hash) //set length of prefix
+		param->hash = 2;
 	print_pre(param, nb, "0X");
 	str = ft_itoadup(nb, 16);
 	if (param->precision == 0 && nb == 0)
@@ -138,6 +149,8 @@ int octal(va_list ap, t_param *param)
 
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, UNSIGNED);
+	if (param->hash) //set length of prefix
+		param->hash = 1;
 	str = ft_itoadup(nb, 8);
 	print_pre(param, ft_atoi(str), "0");	
 	if (param->precision == 0 && nb == 0)
@@ -148,7 +161,7 @@ int octal(va_list ap, t_param *param)
 	}
 	param->ret += ft_putstr(str);
 	if (param->minus == TRUE && param->width)
-		print_width(param, ft_atoi(str));
+		print_width(param, get_int_len(ft_atoi(str)));
 	return (0);
 }
 
