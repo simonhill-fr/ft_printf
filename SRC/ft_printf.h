@@ -54,6 +54,8 @@ typedef struct 		s_param
 }					t_param;
 
 typedef	int (*t_functab)(va_list, t_param *);
+typedef	uintmax_t (*t_ftab_cast)(va_list);
+
 
 union	u_types
 {
@@ -64,34 +66,41 @@ union	u_types
 	intmax_t		imax;
 };
 
-int		ft_printf(const char *format, ...);
+int				ft_printf(const char *format, ...);
 
-int		decimal(va_list ap, t_param *param);
-int		udecimal(va_list ap, t_param *param);
-int		character(va_list ap, t_param *param);
-int		string(va_list ap, t_param *param);
-int		hexadecimal(va_list ap, t_param *param);
-int		upper_hexadecimal(va_list ap, t_param *param);
-int		octal(va_list ap, t_param *param);
+int				decimal(va_list ap, t_param *param);
+int				udecimal(va_list ap, t_param *param);
+int				character(va_list ap, t_param *param);
+int				string(va_list ap, t_param *param);
+int				hexadecimal(va_list ap, t_param *param);
+int				upper_hexadecimal(va_list ap, t_param *param);
+int				octal(va_list ap, t_param *param);
 
-int		placeholder(va_list ap, t_param *param);
-int 	empty(va_list ap, t_param *param);
-int 	digit(va_list ap, t_param *param);
+int				placeholder(va_list ap, t_param *param);
+int 			empty(va_list ap, t_param *param);
+int 			digit(va_list ap, t_param *param);
 
-int		minus(va_list ap, t_param *param);
-int 	plus(va_list ap, t_param *param);
-int		space(va_list ap, t_param *param);
-int		zero(va_list ap, t_param *param);
-int		hash(va_list ap, t_param *param);
+int				minus(va_list ap, t_param *param);
+int 			plus(va_list ap, t_param *param);
+int				space(va_list ap, t_param *param);
+int				zero(va_list ap, t_param *param);
+int				hash(va_list ap, t_param *param);
 
-void	init_index_array(t_functab *func_array);
-void	init_integer_array(t_functab *int_array);
-void	print_width(t_param *param, int n);
+uintmax_t 		cast_uint(va_list ap);
+uintmax_t 		cast_ulong(va_list ap);
+uintmax_t 		cast_ulonglong(va_list ap);
+uintmax_t 		cast_sizet(va_list ap);
+uintmax_t 		cast_uintmax(va_list ap);
 
-int 	short_len(va_list ap, t_param *param);
-int 	long_len(va_list ap, t_param *param);
-int 	sizet_len(va_list ap, t_param *param);
-int 	intmax_len(va_list ap, t_param *param);
+void			init_index_array(t_functab *func_array);
+void			init_integer_array(t_functab *int_array);
+t_ftab_cast		*init_cast_array(void);
+void			print_width(t_param *param, int n);
+
+int 			short_len(va_list ap, t_param *param);
+int 			long_len(va_list ap, t_param *param);
+int 			sizet_len(va_list ap, t_param *param);
+int 			intmax_len(va_list ap, t_param *param);
 
 
 #endif

@@ -80,10 +80,14 @@ int hexadecimal(va_list ap, t_param *param)
 	uintmax_t	nb;
 	char		*str;
 	char		*prefix;
+	t_ftab_cast	*ftab_cast;
 
 	prefix = ft_strdup("0x");
+	ftab_cast = init_cast_array();
 	nb = 0;
-	if (param->length == INT)
+	nb = ftab_cast[param->length](ap);
+	
+	/*if (param->length == INT)
 		nb = va_arg(ap, unsigned int);
 	else if (param->length == LONG)
 		nb = va_arg(ap, unsigned long);
@@ -92,7 +96,7 @@ int hexadecimal(va_list ap, t_param *param)
 	else if (param->length == SIZE_T)
 		nb = va_arg(ap, size_t);
 	else if (param->length == INTMAX)
-		nb = (uintmax_t)va_arg(ap, intmax_t);
+		nb = (uintmax_t)va_arg(ap, intmax_t);*/
 
 	print_pre(param, nb, prefix);
 	str = ft_itoadup(nb, 16);

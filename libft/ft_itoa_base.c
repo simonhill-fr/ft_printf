@@ -34,7 +34,7 @@ void			ft_itoa_base(uintmax_t input, char *buffer, unsigned int radix)
 	if (radix > 16)
 		return ;
 	i = buffer_len(input, radix) - 1;
-	buffer[i] = '\0';
+	buffer[i + 1] = '\0';
 	if (input == 0)
 		buffer[0] = '0';
 	while ((input))
@@ -51,7 +51,7 @@ char 			*ft_itoadup(uintmax_t input, unsigned int radix)
 
 	if (radix <= 1
 		|| radix >= (int)sizeof(SLIDER)
-		|| !(buffer = malloc(sizeof(*buffer) * buffer_len(input, radix))))
+		|| !(buffer = malloc(sizeof(*buffer) * (buffer_len(input, radix) + 1 ))))
 		return (NULL);
 	ft_itoa_base(input, buffer, radix);
 	return (buffer);

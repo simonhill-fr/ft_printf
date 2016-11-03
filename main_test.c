@@ -17,7 +17,8 @@
 
 int 	main()
 {
-	ft_printf("%x", 42);
+	ft_printf("%x\n", 42);
+	   printf("%x\n", 42);
 
 
 
