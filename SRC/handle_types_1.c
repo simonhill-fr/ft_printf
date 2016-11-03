@@ -79,26 +79,11 @@ int hexadecimal(va_list ap, t_param *param)
 {
 	uintmax_t	nb;
 	char		*str;
-	char		*prefix;
 	t_ftab_cast	*ftab_cast;
 
-	prefix = ft_strdup("0x");
 	ftab_cast = init_cast_array();
-	nb = 0;
 	nb = ftab_cast[param->length](ap);
-	
-	/*if (param->length == INT)
-		nb = va_arg(ap, unsigned int);
-	else if (param->length == LONG)
-		nb = va_arg(ap, unsigned long);
-	else if (param->length == LONG_LONG)
-		nb = va_arg(ap, unsigned long long);
-	else if (param->length == SIZE_T)
-		nb = va_arg(ap, size_t);
-	else if (param->length == INTMAX)
-		nb = (uintmax_t)va_arg(ap, intmax_t);*/
-
-	print_pre(param, nb, prefix);
+	print_pre(param, nb, "0x");
 	str = ft_itoadup(nb, 16);
 	if (param->precision == 0 && nb == 0)
 	{
@@ -107,7 +92,6 @@ int hexadecimal(va_list ap, t_param *param)
 		str = ft_strdup(" ");
 	}
 	param->ret += ft_putstr(str);
-
 	if (param->minus == TRUE && param->width)
 		print_width(param, get_int_len(nb));
 	return (0);
@@ -117,28 +101,21 @@ int upper_hexadecimal(va_list ap, t_param *param)
 {
 	uintmax_t 	nb;
 	char		*str;
-	int			i;
+	t_ftab_cast	*ftab_cast;
 
-	nb = 0;
-	if (param->length == INT)
-		nb = va_arg(ap, unsigned int);
-	else if (param->length == LONG)
-		nb = va_arg(ap, unsigned long);
-	else if (param->length == LONG_LONG)
-		nb = va_arg(ap, unsigned long long);
-	if (param->minus == FALSE)
-		print_width(param, get_int_len(nb));
+	ftab_cast = init_cast_array();
+	nb = ftab_cast[param->length](ap);
+	print_pre(param, nb, "0X");
 	str = ft_itoadup(nb, 16);
-	i = 0;
-	while (str[i])
+	if (param->precision == 0 && nb == 0)
 	{
-		str[i] = ft_toupper(str[i]);
-		i++;
+		if (param->width == 0)
+			return (0);
+		str = ft_strdup(" ");
 	}
-	if (param->hash == TRUE)
-		param->ret = ft_putstr("0X");
+	ft_str_toupper(str);
 	param->ret += ft_putstr(str);
-	if (param->minus == TRUE)
+	if (param->minus == TRUE && param->width)
 		print_width(param, get_int_len(nb));
 	return (0);
 }
@@ -147,22 +124,13 @@ int octal(va_list ap, t_param *param)
 {
 	uintmax_t	nb;
 	char		*str;
-	char		*prefix;
+	t_ftab_cast	*ftab_cast;
 
-	prefix = ft_strdup("0");
+	ftab_cast = init_cast_array();
 	nb = 0;
-	if (param->length == INT)
-		nb = va_arg(ap, unsigned int);
-	else if (param->length == LONG)
-		nb = va_arg(ap, unsigned long);
-	else if (param->length == LONG_LONG)
-		nb = va_arg(ap, unsigned long long);
-	else if (param->length == SIZE_T)
-		nb = va_arg(ap, size_t);
-	else if (param->length == INTMAX)
-		nb = (uintmax_t)va_arg(ap, intmax_t);
+	nb = ftab_cast[param->length](ap);
 
-	print_pre(param, nb, prefix);
+	print_pre(param, nb, "0");
 	str = ft_itoadup(nb, 8);
 	if (param->precision == 0 && nb == 0)
 	{
@@ -177,33 +145,4 @@ int octal(va_list ap, t_param *param)
 	return (0);
 }
 
-int	character(va_list ap, t_param *param)
-{
-	if (param->minus == FALSE && param->width > 0)
-		print_width(param, 1);
-	param->ret += ft_putchar(va_arg(ap, int));
-	if (param->minus == TRUE)
-		print_width(param, 1);
-	return (0);
-}
 
-int	string(va_list ap, t_param *param)
-{
-	char 	*str;
-
-	str = va_arg(ap, char *);
-	if (!(str))
-	{
-		param->ret += ft_putstr("(null)");
-		return (0);
-	}
-
-	if (param->precision != -1)
-		str = ft_strndup(str, param->precision);
-	if (param->minus == FALSE)
-		print_width(param, ft_strlen(str));	
-	param->ret += ft_putstr(str);
-	if (param->minus == TRUE)
-		print_width(param, ft_strlen(str));
-	return (0);
-}

@@ -31,7 +31,6 @@ RETURN VALUES
 #define DIGIT		-2
 #define EMPTY		-1
 
-//replace by enum
 #define INT 		0
 #define	CHAR 		1
 #define SHORT 		2
