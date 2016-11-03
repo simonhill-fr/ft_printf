@@ -14,11 +14,12 @@
 #include <limits.h>
 #include <stdio.h>
 
+// TEST: %d %u %x %X %o
 
 int 	main()
 {
-	ft_printf("%x\n", 42);
-	   printf("%x\n", 42);
+	ft_printf("mine:%10o\n", 42);
+	   printf("them:%10o\n", 42);
 
 
 

@@ -23,6 +23,8 @@
 #define FALSE 		0
 #define	SET			1
 #define	CLEAR		0
+#define	SIGNED		1
+#define	UNSIGNED	0
 
 /*
 RETURN VALUES
@@ -53,7 +55,7 @@ typedef struct 		s_param
 }					t_param;
 
 typedef	int (*t_functab)(va_list, t_param *);
-typedef	uintmax_t (*t_ftab_cast)(va_list);
+typedef	uintmax_t (*t_ftab_cast)(va_list, int);
 
 
 union	u_types
@@ -85,11 +87,11 @@ int				space(va_list ap, t_param *param);
 int				zero(va_list ap, t_param *param);
 int				hash(va_list ap, t_param *param);
 
-uintmax_t 		cast_uint(va_list ap);
-uintmax_t 		cast_ulong(va_list ap);
-uintmax_t 		cast_ulonglong(va_list ap);
-uintmax_t 		cast_sizet(va_list ap);
-uintmax_t 		cast_uintmax(va_list ap);
+uintmax_t 		cast_int(va_list ap, int is_signed);
+uintmax_t 		cast_long(va_list ap, int is_signed);
+uintmax_t 		cast_longlong(va_list ap, int is_signed);
+uintmax_t 		cast_sizet(va_list ap, int is_signed);
+uintmax_t 		cast_intmax(va_list ap, int is_signed);
 
 void			init_index_array(t_functab *func_array);
 void			init_integer_array(t_functab *int_array);

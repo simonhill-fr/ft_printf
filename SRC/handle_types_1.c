@@ -51,13 +51,14 @@ void	print_pre(t_param *param, uintmax_t nb, char *prefix)
 
 int	decimal(va_list ap, t_param *param)
 {	
-	intmax_t nb;
+	intmax_t 	nb;
+	t_ftab_cast	*ftab_cast;
 
-	nb = va_arg(ap, intmax_t);
-	if (param->minus == FALSE)
-		print_width(param, get_int_len(nb));	
+	ftab_cast = init_cast_array();
+	nb = ftab_cast[param->length](ap, SIGNED);
+	print_pre(param, nb, "");	
 	param->ret += ft_putnbr(nb);
-	if (param->minus == TRUE)
+	if (param->minus == TRUE && param->width)
 		print_width(param, get_int_len(nb));
 	return (0);
 }
@@ -65,10 +66,11 @@ int	decimal(va_list ap, t_param *param)
 int	udecimal(va_list ap, t_param *param)
 {	
 	uintmax_t nb;
+	t_ftab_cast	*ftab_cast;
 
-	nb = va_arg(ap, uintmax_t);
-	if (param->minus == FALSE)
-		print_width(param, get_int_len(nb));	
+	ftab_cast = init_cast_array();
+	nb = ftab_cast[param->length](ap, UNSIGNED);
+	print_pre(param, nb, "");	
 	param->ret += ft_putnbr(nb);
 	if (param->minus == TRUE)
 		print_width(param, get_int_len(nb));
@@ -82,7 +84,7 @@ int hexadecimal(va_list ap, t_param *param)
 	t_ftab_cast	*ftab_cast;
 
 	ftab_cast = init_cast_array();
-	nb = ftab_cast[param->length](ap);
+	nb = ftab_cast[param->length](ap, UNSIGNED);
 	print_pre(param, nb, "0x");
 	str = ft_itoadup(nb, 16);
 	if (param->precision == 0 && nb == 0)
@@ -104,7 +106,7 @@ int upper_hexadecimal(va_list ap, t_param *param)
 	t_ftab_cast	*ftab_cast;
 
 	ftab_cast = init_cast_array();
-	nb = ftab_cast[param->length](ap);
+	nb = ftab_cast[param->length](ap, UNSIGNED);
 	print_pre(param, nb, "0X");
 	str = ft_itoadup(nb, 16);
 	if (param->precision == 0 && nb == 0)
@@ -127,9 +129,7 @@ int octal(va_list ap, t_param *param)
 	t_ftab_cast	*ftab_cast;
 
 	ftab_cast = init_cast_array();
-	nb = 0;
-	nb = ftab_cast[param->length](ap);
-
+	nb = ftab_cast[param->length](ap, UNSIGNED);
 	print_pre(param, nb, "0");
 	str = ft_itoadup(nb, 8);
 	if (param->precision == 0 && nb == 0)
@@ -139,7 +139,6 @@ int octal(va_list ap, t_param *param)
 		str = ft_strdup(" ");
 	}
 	param->ret += ft_putstr(str);
-
 	if (param->minus == TRUE && param->width)
 		print_width(param, get_int_len(nb));
 	return (0);
