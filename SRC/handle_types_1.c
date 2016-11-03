@@ -138,8 +138,8 @@ int octal(va_list ap, t_param *param)
 
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, UNSIGNED);
-	print_pre(param, nb, "0");
 	str = ft_itoadup(nb, 8);
+	print_pre(param, ft_atoi(str), "0");	
 	if (param->precision == 0 && nb == 0)
 	{
 		if (param->width == 0)
@@ -148,7 +148,7 @@ int octal(va_list ap, t_param *param)
 	}
 	param->ret += ft_putstr(str);
 	if (param->minus == TRUE && param->width)
-		print_width(param, get_int_len(nb));
+		print_width(param, ft_atoi(str));
 	return (0);
 }
 

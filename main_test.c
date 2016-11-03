@@ -18,10 +18,10 @@
 
 int 	main()
 {
-	printf("%jd\n", (intmax_t)ft_pow(256, 4));
+//	printf("%jd\n", (intmax_t)ft_pow(256, 4));
 	int test = 0;
-//	ft_printf("mine:%lld\n", 9223372036854775808);
-//	   printf("them:%lld\n", 9223372036854775808);
+	ft_printf("mine:%011o<\n", 542);
+	   printf("them:%011o<\n", 542);
 
 
 
