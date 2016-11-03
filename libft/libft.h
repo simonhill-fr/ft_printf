@@ -80,6 +80,7 @@ int					ft_putchar(char c);
 int					ft_putstr(const char *s);
 void				ft_putendl(char const *s);
 int					ft_putnbr(intmax_t n);
+int					ft_putnbr_u(uintmax_t n);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);

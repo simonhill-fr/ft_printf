@@ -56,7 +56,7 @@ int	decimal(va_list ap, t_param *param)
 
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, SIGNED);
-	print_pre(param, nb, "");	
+	print_pre(param, nb, "");
 	param->ret += ft_putnbr(nb);
 	if (param->minus == TRUE && param->width)
 		print_width(param, get_int_len(nb));
@@ -67,12 +67,20 @@ int	udecimal(va_list ap, t_param *param)
 {	
 	uintmax_t nb;
 	t_ftab_cast	*ftab_cast;
+	char		*str;
 
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, UNSIGNED);
-	print_pre(param, nb, "");	
-	param->ret += ft_putnbr(nb);
-	if (param->minus == TRUE)
+	print_pre(param, nb, "");
+	str = ft_itoadup(nb, 10);
+	if (param->precision == 0 && nb == 0)
+	{
+		if (param->width == 0)
+			return (0);
+		str = ft_strdup(" ");
+	}
+	param->ret += ft_putstr(str);
+	if (param->minus == TRUE && param->width)
 		print_width(param, get_int_len(nb));
 	return (0);
 }
