@@ -12,50 +12,77 @@
 
 #include "ft_printf.h"
 
-/*void	print_pre(t_param *param, uintmax_t nb, char *prefix, int len)
+int		get_width_len(t_param *param, int prefix_len, int nb_len)
 {
-	if (nb == 0 || param->hash == FALSE)
+	int width_len;
+
+	width_len = nb_len;
+	if (param->plus || param->space || param->negative)
+		width_len += 1;
+	if (param->precision > width_len)
 	{
-		param->hash = FALSE;
-		prefix = "";
+		param->precision -= width_len;	
+		width_len += param->precision;
 	}
-	if (param->width == 0 || param->minus == TRUE)
+	else if (param->precision < width_len)
+		param->precision = 0;
+	if (param->hash)
+		width_len += prefix_len;
+	if (param->width > width_len)
 	{
-		param->ret += ft_putstr(prefix);
-		return ;
+		param->width -= width_len;
+		width_len += param->width;
 	}
-	if (param->zero == TRUE || param->precision >= 0)
-	{
-		param->ret += ft_putstr(prefix);
-		param->zero = TRUE;
-		print_width(param, len);
-		return ;
-	}
-	print_width(param, len);
-	param->ret += ft_putstr(prefix);
+	else if (param->width < width_len)
+		param->width = 0;
+	return width_len;
 }
 
-void	print_width(t_param *param, int len)
+void	print_padding(t_param *param, int len, char c)
 {
 	int		i;
-	char	c;
 
-	c = ' ';
-	if (param->zero == TRUE)
-		c = '0';
-	i = 1 + len;
-	if (param->hash)
-	{
-		i += param->hash;
-		param->hash = FALSE;
-	}
-	while (i <= param->width)
+	i = 0;
+	while (i < len)
 	{
 		param->ret += ft_putchar(c);
 		i++;
 	}
-	if (len >= 0 && param->plus == TRUE)
+}
+
+void	print_prefix(t_param *param, char *prefix)
+{
+	param->ret += ft_putstr(prefix);
+}
+
+void	print_sign(t_param *param, int nb)
+{
+	if ((param->space == TRUE && nb < 0) || (param->plus == TRUE && nb < 0)
+		|| param->negative)
+		param->ret += ft_putchar('-');
+	else if (param->plus == TRUE && nb > 0)
 		param->ret += ft_putchar('+');
-	else if (len > 0 && param->space == TRUE)
+	else if (param->space == TRUE && nb > 0)
 		param->ret += ft_putchar(' ');
-}*/
+}
+
+void	final_print(t_param *param, char *str, char *prefix, int sign)
+{
+	if (param->hash)
+		param->hash = ft_strlen(prefix);
+	get_width_len(param, param->hash, ft_strlen(str));
+	if (param->width && param->zero == FALSE && param->minus == FALSE)
+		print_padding(param, param->width, ' ');
+	if (param->hash)
+		print_prefix(param, prefix);
+	if (param->precision && param->alpha == FALSE)
+		print_padding(param, param->precision, '0');
+	if (param->width && param->zero == TRUE)
+		print_padding(param, param->width, '0');
+	if (param->space || param->plus || param->negative)
+		print_sign(param, sign);
+	param->ret += ft_putstr(str);
+	if (param->minus)
+		print_padding(param, param->width, ' ');
+	//remember to free
+}

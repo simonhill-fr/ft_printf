@@ -18,11 +18,13 @@ t_param	*init_param(t_param *param)
 	param->minus = FALSE;
 	param->plus = FALSE;
 	param->space = FALSE;
+	param->negative = FALSE;
 	param->zero = FALSE;
 	param->hash = FALSE;
 	param->width = 0;
 	param->precision = -1;
 	param->length = 0;
+	param->alpha = FALSE;
 	return (param);
 }
 
@@ -38,6 +40,7 @@ void	get_digits(const char **format, t_param *param)
 	if (**format == '.')
 	{
 		param->precision = 0;
+		param->zero = FALSE;
 		(*format)++;
 		while (ft_isdigit(n = **format))
 		{

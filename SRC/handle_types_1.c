@@ -12,67 +12,43 @@
 
 #include "ft_printf.h"
 
-//precision on int is converted to width :
-/*static	void	convert_int_precision_to_width(t_param *param, char *prefix, int len)
+void	check_zero_exception(t_param *param, uintmax_t nb)
 {
-	int i = 0;
-	i = 1 + len;
-	if (param->precision >= 0) 
-	{
-		param->ret += ft_putstr(prefix);
-		while (i <= param->precision)
-		{
-			param->ret += ft_putchar('0');
-			i++;
-		}
-		return ;	
-	}	
-}*/
-
-static	void	set_prefix_len(t_param *param, int len)
-{
-	if (param->hash) 
-		param->hash = len;
+	if (nb == 0)
+		param->hash = 0;
 }
 
 int	decimal(va_list ap, t_param *param)
 {	
 	intmax_t 	nb;
+	char		*str;
 	t_ftab_cast	*ftab_cast;
 
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, SIGNED);
-	set_prefix_len(param, 0);
-//	convert_int_precision_to_width(param);
-	print_pre(param, nb, "", get_int_len(nb));
-	param->ret += ft_putnbr(nb);
-	if (param->minus == TRUE && param->width)
-		print_width(param, get_int_len(nb));
-	return (0);
+	str = ft_itoadup(nb, 10);
+	if (nb < 0)
+	{
+		param->negative = TRUE;
+		final_print(param, str, "", -1);
+	}
+	else 
+		final_print(param, str, "", 1);
+	return (END);
 }
 
 int	udecimal(va_list ap, t_param *param)
 {	
-	uintmax_t nb;
-	t_ftab_cast	*ftab_cast;
+	uintmax_t 	nb;
 	char		*str;
+	t_ftab_cast	*ftab_cast;
 
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, UNSIGNED);
-	set_prefix_len(param, 0);
-	str = ft_itoadup(nb, 10);
-//	convert_int_precision_to_width(param);
-	print_pre(param, nb, "", ft_strlen(str));
-		if (param->precision == 0 && nb == 0)
-	{
-		if (param->width == 0)
-			return (0);
-		str = ft_strdup(" ");
-	}
-	param->ret += ft_putstr(str);
-	if (param->minus == TRUE && param->width)
-		print_width(param, ft_strlen(str));
-	return (0);
+	check_zero_exception(param, nb);
+	str = ft_utoadup(nb, 10);
+	final_print(param, str, "", 0);
+	return (END);
 }
 
 int hexadecimal(va_list ap, t_param *param)
@@ -83,21 +59,10 @@ int hexadecimal(va_list ap, t_param *param)
 
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, UNSIGNED);
-	if (param->hash && nb != 0) //set length of prefix
-		param->hash = 2;
-	str = ft_itoadup(nb, 16);
-	
-	print_pre(param, nb, "0x", ft_strlen(str));	
-	if (param->precision == 0 && nb == 0)
-	{
-		if (param->width == 0)
-			return (0);
-		str = ft_strdup(" ");
-	}
-	param->ret += ft_putstr(str);
-	if (param->minus == TRUE && param->width)
-		print_width(param, ft_strlen(str));
-	return (0);
+	check_zero_exception(param, nb);
+	str = ft_utoadup(nb, 16);
+	final_print(param, str, "0x", 0);	
+	return (END);
 }
 
 int upper_hexadecimal(va_list ap, t_param *param)
@@ -108,22 +73,11 @@ int upper_hexadecimal(va_list ap, t_param *param)
 
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, UNSIGNED);
-	if (param->hash) //set length of prefix
-		param->hash = 2;
-	str = ft_itoadup(nb, 16);
-//	convert_int_precision_to_width(param);
-	print_pre(param, nb, "0X", ft_strlen(str));	
-	if (param->precision == 0 && nb == 0)
-	{
-		if (param->width == 0)
-			return (0);
-		str = ft_strdup(" ");
-	}
+	check_zero_exception(param, nb);
+	str = ft_utoadup(nb, 16);
 	ft_str_toupper(str);
-	param->ret += ft_putstr(str);
-	if (param->minus == TRUE && param->width)
-		print_width(param, ft_strlen(str));
-	return (0);
+	final_print(param, str, "0X", 0);
+	return (END);	
 }
 
 int octal(va_list ap, t_param *param)
@@ -134,21 +88,10 @@ int octal(va_list ap, t_param *param)
 
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, UNSIGNED);
-	if (param->hash) //set length of prefix
-		param->hash = 1;
-	str = ft_itoadup(nb, 8);
-//	convert_int_precision_to_width(param);
-	print_pre(param, ft_atoi(str), "0", ft_strlen(str));	
-	if (param->precision == 0 && nb == 0)
-	{
-		if (param->width == 0)
-			return (0);
-		str = ft_strdup(" ");
-	}
-	param->ret += ft_putstr(str);
-	if (param->minus == TRUE && param->width)
-		print_width(param, get_int_len(ft_atoi(str)));
-	return (0);
+	check_zero_exception(param, nb);
+	str = ft_utoadup(nb, 8);
+	final_print(param, str, "0", 0);
+	return (END);
 }
 
 

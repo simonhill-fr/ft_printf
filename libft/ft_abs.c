@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_abs(int n)
+#include "libft.h"
+
+intmax_t	ft_abs(intmax_t n)
 {
 	if (n < 0)
 		return (n * -1);

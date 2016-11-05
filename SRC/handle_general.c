@@ -14,12 +14,11 @@
 
 int		placeholder(va_list ap, t_param *param)
 {
+	char	*str;
+
 	(void)(ap);
-	if (param->minus == FALSE && param->width)
-		print_width(param, 1);
-	param->ret += ft_putchar('%');
-	if (param->minus == TRUE && param->width)
-		print_width(param, 1);
+	str = ft_strdup("%");	
+	final_print(param, str, "", 0);	
 	return (END);
 }
 

@@ -14,12 +14,12 @@
 
 int	character(va_list ap, t_param *param)
 {
-	if (param->minus == FALSE && param->width > 0)
-		print_width(param, 1);
-	param->ret += ft_putchar(va_arg(ap, int));
-	if (param->minus == TRUE)
-		print_width(param, 1);
-	return (0);
+	char	*str;
+
+	str = ft_strnew(1);
+	str[0] = va_arg(ap, int);
+	final_print(param, str, "", 0);	
+	return (END);
 }
 
 int	string(va_list ap, t_param *param)
@@ -30,15 +30,11 @@ int	string(va_list ap, t_param *param)
 	if (!(str))
 	{
 		param->ret += ft_putstr("(null)");
-		return (0);
+		return (END);
 	}
-
+	param->alpha = TRUE;
 	if (param->precision != -1)
 		str = ft_strndup(str, param->precision);
-	if (param->minus == FALSE)
-		print_width(param, ft_strlen(str));	
-	param->ret += ft_putstr(str);
-	if (param->minus == TRUE)
-		print_width(param, ft_strlen(str));
+	final_print(param, str, "", 0);
 	return (0);
 }
