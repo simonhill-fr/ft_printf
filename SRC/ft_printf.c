@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-t_param	*init_param(t_param *param) //Better if malloc wouldnt occur on every call
+t_param	*init_param(t_param *param)
 {
 	param->ret = 0;
 	param->minus = FALSE;

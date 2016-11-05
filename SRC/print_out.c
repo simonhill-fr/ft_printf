@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	print_pre(t_param *param, uintmax_t nb, char *prefix)
+/*void	print_pre(t_param *param, uintmax_t nb, char *prefix, int len)
 {
 	if (nb == 0 || param->hash == FALSE)
 	{
@@ -24,17 +24,18 @@ void	print_pre(t_param *param, uintmax_t nb, char *prefix)
 		param->ret += ft_putstr(prefix);
 		return ;
 	}
-	if (param->zero == TRUE)
+	if (param->zero == TRUE || param->precision >= 0)
 	{
 		param->ret += ft_putstr(prefix);
-		print_width(param, get_int_len(nb));
+		param->zero = TRUE;
+		print_width(param, len);
 		return ;
 	}
-	print_width(param, get_int_len(nb));
+	print_width(param, len);
 	param->ret += ft_putstr(prefix);
 }
 
-void	print_width(t_param *param, int n)
+void	print_width(t_param *param, int len)
 {
 	int		i;
 	char	c;
@@ -42,7 +43,7 @@ void	print_width(t_param *param, int n)
 	c = ' ';
 	if (param->zero == TRUE)
 		c = '0';
-	i = 1 + n;
+	i = 1 + len;
 	if (param->hash)
 	{
 		i += param->hash;
@@ -53,8 +54,8 @@ void	print_width(t_param *param, int n)
 		param->ret += ft_putchar(c);
 		i++;
 	}
-	if (n >= 0 && param->plus == TRUE)
+	if (len >= 0 && param->plus == TRUE)
 		param->ret += ft_putchar('+');
-	else if (n > 0 && param->space == TRUE)
+	else if (len > 0 && param->space == TRUE)
 		param->ret += ft_putchar(' ');
-}
+}*/

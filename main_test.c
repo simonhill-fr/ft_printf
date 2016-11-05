@@ -19,8 +19,8 @@
 int 	main()
 {
 
-	ft_printf("%-.8x<\n", 2500);
-	   printf("%-.8x<\n", 2500);
+//	ft_printf("%#-10.5x<\n", 2500);
+	   printf("%-#016x<\n", 2500);
 
 
 
