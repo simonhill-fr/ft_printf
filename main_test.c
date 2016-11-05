@@ -19,10 +19,8 @@
 int 	main()
 {
 
-	ft_printf("mine:@moulitest: %#.d %#.0d<\n", 0, 0);
-	   printf("them:@moulitest: %#.d %#.0d<\n", 0, 0);
-
-
+	ft_printf("%-.8x<\n", 2500);
+	   printf("%-.8x<\n", 2500);
 
 
 
@@ -31,6 +29,8 @@ int 	main()
 
 
 /*
+
+
 //x
 ft_printf("mine:%#x<\n", 42);
    printf("them:%#x<\n", 42);
@@ -51,6 +51,28 @@ ft_printf("mine:%#08x<\n", 42);
 
 ft_printf("mine:%#-08x<\n", 42);
    printf("them:%#-08x<\n", 42);
+
+
+ft_printf("mine:%#X<\n", 42);
+   printf("them:%#X<\n", 42);
+ft_printf("mine:%#llX<\n", 9223372036854775807);
+   printf("them:%#llX<\n", 9223372036854775807);
+
+ft_printf("mine:%#X<\n", 0);
+   printf("them:%#X<\n", 0);
+
+ft_printf("mine:%#X<\n", 42);
+   printf("them:%#X<\n", 42);
+
+ft_printf("mine:%#8X<\n", 42);
+   printf("them:%#8X<\n", 42);
+
+ft_printf("mine:%#08X<\n", 42);
+   printf("them:%#08X<\n", 42);
+
+ft_printf("mine:%#-08X<\n", 42);
+   printf("them:%#-08X<\n", 42);
+
 
 
 //d
@@ -121,9 +143,9 @@ ft_printf("mine:%#08o<\n", 42);
 ft_printf("mine:%#-08o<\n", 42);
    printf("them:%#-08o<\n", 42);
 
+
+
 */
-
-
 
 
 

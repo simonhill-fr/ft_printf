@@ -12,6 +12,27 @@
 
 #include "ft_printf.h"
 
+void	print_pre(t_param *param, uintmax_t nb, char *prefix)
+{
+	if (nb == 0 || param->hash == FALSE)
+	{
+		param->hash = FALSE;
+		prefix = "";
+	}
+	if (param->width == 0 || param->minus == TRUE)
+	{
+		param->ret += ft_putstr(prefix);
+		return ;
+	}
+	if (param->zero == TRUE)
+	{
+		param->ret += ft_putstr(prefix);
+		print_width(param, get_int_len(nb));
+		return ;
+	}
+	print_width(param, get_int_len(nb));
+	param->ret += ft_putstr(prefix);
+}
 
 void	print_width(t_param *param, int n)
 {

@@ -96,12 +96,16 @@ uintmax_t 		cast_intmax(va_list ap, int is_signed);
 void			init_index_array(t_functab *func_array);
 void			init_integer_array(t_functab *int_array);
 t_ftab_cast		*init_cast_array(void);
+
+void			print_pre(t_param *param, uintmax_t nb, char *prefix);
 void			print_width(t_param *param, int n);
 
 int 			short_len(va_list ap, t_param *param);
 int 			long_len(va_list ap, t_param *param);
 int 			sizet_len(va_list ap, t_param *param);
 int 			intmax_len(va_list ap, t_param *param);
+
+int				get_int_len(uintmax_t n);
 
 
 #endif

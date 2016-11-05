@@ -12,44 +12,25 @@
 
 #include "ft_printf.h"
 
-static int	get_int_len(uintmax_t n)
+//precision on int is converted to width :
+static	void	convert_int_precision_to_width(t_param *param)
 {
-	uintmax_t	len;
-
-	len = 0;
-	if (n == 0)
-		return (1);
-	while (n != 0)
+	/*if (param->precision >= 0 && param->precision >= param->width) 
 	{
-		n = n / 10;
-		len++;
+		param->minus = FALSE;
+		param->zero = TRUE;
+		param->width = param->precision;
+	}*/
+	if (param->precision >= 0 && param->precision >= param->width)
+	{
+		
 	}
-	return (len);
 }
 
-void	print_pre(t_param *param, uintmax_t nb, char *prefix)
+static	void	set_prefix_len(t_param *param, int len)
 {
-	if (nb == 0 || param->hash == FALSE)
-	{
-		param->hash = FALSE;
-		prefix = "";
-	}
-	if (param->width == 0 || param->minus == TRUE)
-	{
-//		if (param->hash == TRUE)
-			param->ret += ft_putstr(prefix);
-		return ;
-	}
-	if (param->zero == TRUE)
-	{
-//		if (param->hash)
-			param->ret += ft_putstr(prefix);
-		print_width(param, get_int_len(nb));
-		return ;
-	}
-	print_width(param, get_int_len(nb));
-//	if (param->hash) //removed for test 43
-		param->ret += ft_putstr(prefix);
+	if (param->hash) 
+		param->hash = len;
 }
 
 int	decimal(va_list ap, t_param *param)
@@ -59,8 +40,8 @@ int	decimal(va_list ap, t_param *param)
 
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, SIGNED);
-	if (param->hash) //set length of prefix
-		param->hash = 0;
+	set_prefix_len(param, 0);
+	convert_int_precision_to_width(param);
 	print_pre(param, nb, "");
 	param->ret += ft_putnbr(nb);
 	if (param->minus == TRUE && param->width)
@@ -76,8 +57,8 @@ int	udecimal(va_list ap, t_param *param)
 
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, UNSIGNED);
-	if (param->hash)
-		param->hash = 0;
+	set_prefix_len(param, 0);
+	convert_int_precision_to_width(param);
 	print_pre(param, nb, "");
 	str = ft_itoadup(nb, 10);
 	if (param->precision == 0 && nb == 0)
@@ -102,6 +83,7 @@ int hexadecimal(va_list ap, t_param *param)
 	nb = ftab_cast[param->length](ap, UNSIGNED);
 	if (param->hash && nb != 0) //set length of prefix
 		param->hash = 2;
+	convert_int_precision_to_width(param);
 	print_pre(param, nb, "0x");
 	str = ft_itoadup(nb, 16);
 	if (param->precision == 0 && nb == 0)
@@ -126,6 +108,7 @@ int upper_hexadecimal(va_list ap, t_param *param)
 	nb = ftab_cast[param->length](ap, UNSIGNED);
 	if (param->hash) //set length of prefix
 		param->hash = 2;
+	convert_int_precision_to_width(param);
 	print_pre(param, nb, "0X");
 	str = ft_itoadup(nb, 16);
 	if (param->precision == 0 && nb == 0)
@@ -152,6 +135,7 @@ int octal(va_list ap, t_param *param)
 	if (param->hash) //set length of prefix
 		param->hash = 1;
 	str = ft_itoadup(nb, 8);
+	convert_int_precision_to_width(param);
 	print_pre(param, ft_atoi(str), "0");	
 	if (param->precision == 0 && nb == 0)
 	{
