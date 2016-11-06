@@ -53,7 +53,9 @@ typedef struct 		s_param
 	int 			width;
 	int 			precision;
 	int 			length;
+	int				nulchar;
 	int				alpha;
+	int				empty_str;
 }					t_param;
 
 typedef	int (*t_functab)(va_list, t_param *);
@@ -90,6 +92,8 @@ int				zero(va_list ap, t_param *param);
 int				hash(va_list ap, t_param *param);
 
 uintmax_t 		cast_int(va_list ap, int is_signed);
+uintmax_t 		cast_char(va_list ap, int is_signed);
+uintmax_t 		cast_short(va_list ap, int is_signed);
 uintmax_t 		cast_long(va_list ap, int is_signed);
 uintmax_t 		cast_longlong(va_list ap, int is_signed);
 uintmax_t 		cast_sizet(va_list ap, int is_signed);

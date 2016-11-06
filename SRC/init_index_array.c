@@ -44,6 +44,7 @@ void	init_index_array(t_functab *func_array)
 	func_array['i'] = decimal;
 	func_array['o'] = octal;
 	func_array['u'] = udecimal;
+	func_array['U'] = udecimal;
 	func_array['x'] = hexadecimal;
 	func_array['X'] = upper_hexadecimal;
 	func_array['c'] = character;

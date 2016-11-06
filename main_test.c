@@ -19,8 +19,8 @@
 int 	main()
 {
 
-	ft_printf("%d", -1);
-//	   printf("%d", 1);
+	ft_printf("%<\n");
+	   printf("%<\n");
 
 
 

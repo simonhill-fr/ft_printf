@@ -18,6 +18,9 @@ int	character(va_list ap, t_param *param)
 
 	str = ft_strnew(1);
 	str[0] = va_arg(ap, int);
+	if (str[0] == '\0')
+		param->nulchar = TRUE;
+	param->alpha = TRUE;
 	final_print(param, str, "", 0);	
 	return (END);
 }
@@ -28,13 +31,17 @@ int	string(va_list ap, t_param *param)
 
 	str = va_arg(ap, char *);
 	if (!(str))
-	{
-		param->ret += ft_putstr("(null)");
-		return (END);
-	}
+		str = ft_strdup("(null)");
 	param->alpha = TRUE;
-	if (param->precision != -1)
+	if (ft_strcmp(str, "") == 0 && param->width == 0)
+	{
+		param->empty_str = TRUE;
+	}
+	if (param->precision != -1){
 		str = ft_strndup(str, param->precision);
+		param->precision = -1;
+	}
+
 	final_print(param, str, "", 0);
 	return (0);
 }

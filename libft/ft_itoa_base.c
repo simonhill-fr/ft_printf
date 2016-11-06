@@ -13,12 +13,20 @@
 #include "libft.h"
 #include <stdio.h> //REMOVE
 
+/*
+This function was created for ft_printf, and is not tested for radix != 10
+Is does not return '-' in case input number is positive
+*/
+
 #define	SLIDER		"0123456789abcdefghijklmnopqrstuvwxyz"
+#define	MAX			(intmax_t)ft_pow(256, sizeof(intmax_t))
 
 static size_t	buffer_len(intmax_t input, unsigned int radix)
 {
 	size_t	i;
 
+	if (input == MAX)
+		return (19);
 	if (input == 0)
 		return (2);
 	i = 1;
@@ -32,6 +40,11 @@ void			ft_itoa_base(intmax_t input, char *buffer, unsigned int radix)
 {
 	size_t	i;
 
+	if (input == MAX)
+	{
+		ft_strcpy(buffer, "9223372036854775808");
+		return;
+	}
 	if (radix > 16)
 		return ;
 	i = buffer_len(input, radix) - 1;

@@ -19,15 +19,13 @@ t_ftab_cast	*init_cast_array(void)
 	ftab_cast = malloc(sizeof(t_ftab_cast) * 7);
 
 	ftab_cast[INT] = cast_int;
-	ftab_cast[CHAR] = cast_int;
-	ftab_cast[SHORT] = cast_int;
+	ftab_cast[CHAR] = cast_char;
+	ftab_cast[SHORT] = cast_short;
 	ftab_cast[LONG] = cast_long;
 	ftab_cast[LONG_LONG] = cast_longlong;
 	ftab_cast[SIZE_T] = cast_sizet;
 	ftab_cast[INTMAX] = cast_intmax;
-
 	return (ftab_cast);
-
 }
 
 
@@ -38,6 +36,22 @@ uintmax_t cast_int(va_list ap, int is_signed)
 		return (va_arg(ap, int));
 	else
 		return (va_arg(ap, unsigned int));
+}
+
+uintmax_t cast_char(va_list ap, int is_signed)
+{
+	if (is_signed == TRUE)
+		return ((char)va_arg(ap, int));
+	else
+		return ((unsigned char)va_arg(ap, unsigned int));
+}
+
+uintmax_t cast_short(va_list ap, int is_signed)
+{
+	if (is_signed == TRUE)
+		return ((short)va_arg(ap, int));
+	else
+		return ((unsigned short)va_arg(ap, unsigned int));
 }
 
 uintmax_t cast_long(va_list ap, int is_signed)

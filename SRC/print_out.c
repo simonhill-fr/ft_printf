@@ -17,8 +17,8 @@ int		get_width_len(t_param *param, int prefix_len, int nb_len)
 	int width_len;
 
 	width_len = nb_len;
-	if (param->plus || param->space || param->negative)
-		width_len += 1;
+	if (param->nulchar)
+		width_len++;	
 	if (param->precision > width_len)
 	{
 		param->precision -= width_len;	
@@ -26,6 +26,9 @@ int		get_width_len(t_param *param, int prefix_len, int nb_len)
 	}
 	else if (param->precision < width_len)
 		param->precision = 0;
+
+	if (param->plus || param->space || param->negative)
+		width_len += 1;
 	if (param->hash)
 		width_len += prefix_len;
 	if (param->width > width_len)
@@ -75,13 +78,25 @@ void	final_print(t_param *param, char *str, char *prefix, int sign)
 		print_padding(param, param->width, ' ');
 	if (param->hash)
 		print_prefix(param, prefix);
-	if (param->precision && param->alpha == FALSE)
-		print_padding(param, param->precision, '0');
-	if (param->width && param->zero == TRUE)
-		print_padding(param, param->width, '0');
 	if (param->space || param->plus || param->negative)
 		print_sign(param, sign);
-	param->ret += ft_putstr(str);
+	if (param->precision)
+	{
+		if (param->alpha == FALSE)
+		{
+			print_padding(param, param->precision, '0');
+
+		}
+		else if (param->empty_str == TRUE)//if str == ""
+			print_padding(param, param->precision, ' ');
+	}
+	
+	if (param->width && param->zero == TRUE)
+		print_padding(param, param->width, '0');
+	if (param->nulchar)
+		param->ret += ft_putchar('\0');
+	else
+		param->ret += ft_putstr(str);
 	if (param->minus)
 		print_padding(param, param->width, ' ');
 	//remember to free
