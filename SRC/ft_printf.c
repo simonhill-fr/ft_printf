@@ -24,6 +24,7 @@ t_param	*init_param(t_param *param)
 	param->width = 0;
 	param->precision = -1;
 	param->length = 0;
+	param->len_flag = CLEAR;
 	param->nulchar = FALSE;
 	param->alpha = FALSE;
 	param->empty_str = FALSE;
@@ -77,7 +78,15 @@ int	parse(const char *format, va_list ap, t_functab *func_array)
 				if (ret == DIGIT)
 					get_digits(&format, param);
 				else if (ret == EMPTY)
-					exit(0);
+				{
+					if (ft_isalpha(*format))
+					{
+						print += ft_putchar(*format);
+						break;
+					}
+					else
+						return(print);
+				}
 				format++;
 			}
 		}

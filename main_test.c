@@ -18,12 +18,10 @@
 
 int 	main()
 {
-	ft_printf("% 10.5d<\n", 4242);
-	   printf("% 10.5d<\n", 4242);	
+//	ft_printf("%zhd", "4294967296");
+	   printf("%zhd", "4294967296");
 
-	ft_printf("%.4d<\n", 1);
-	   printf("%.4d<\n", 1);
-
+	
 
 
 

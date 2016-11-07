@@ -22,7 +22,6 @@ int 	short_len(va_list ap, t_param *param)
 	}
 	param->length = SHORT;
 	return (1);
-
 }
 
 int 	long_len(va_list ap, t_param *param)

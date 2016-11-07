@@ -53,6 +53,7 @@ typedef struct 		s_param
 	int 			width;
 	int 			precision;
 	int 			length;
+	int				len_flag;
 	int				nulchar;
 	int				alpha;
 	int				empty_str;
