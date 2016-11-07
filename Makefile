@@ -33,6 +33,7 @@ SRC 	= 	SRC/ft_printf.c 			\
 			SRC/handle_types_1.c 		\
 			SRC/handle_types_2.c		\
 			SRC/handle_length.c 		\
+			SRC/handle_wint.c			\
 			SRC/init_index_array.c 		\
 			SRC/type_cast.c				\
 			SRC/utilities.c

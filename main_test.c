@@ -19,8 +19,8 @@
 int 	main()
 {
 
-	ft_printf("%<\n");
-	   printf("%<\n");
+	ft_printf("%D<\n", "4294967296");
+	   printf("%D<\n", "4294967296");
 
 
 

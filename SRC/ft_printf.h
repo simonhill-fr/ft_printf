@@ -81,6 +81,10 @@ int				hexadecimal(va_list ap, t_param *param);
 int				upper_hexadecimal(va_list ap, t_param *param);
 int				octal(va_list ap, t_param *param);
 
+int 			w_udecimal(va_list ap, t_param *param);
+int 			w_decimal(va_list ap, t_param *param);
+int 			w_octal(va_list ap, t_param *param);
+
 int				placeholder(va_list ap, t_param *param);
 int 			empty(va_list ap, t_param *param);
 int 			digit(va_list ap, t_param *param);
