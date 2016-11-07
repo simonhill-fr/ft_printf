@@ -10,18 +10,83 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "SRC/ft_printf.h"
+/*#include "SRC/ft_printf.h"
 #include <limits.h>
 #include <stdio.h>
-
-// TEST: %x %d %u %X %o
+#include <locale.h>
 
 int 	main()
 {
-//	ft_printf("%zhd", "4294967296");
-	   printf("%zhd", "4294967296");
+	setlocale(LC_ALL, "en_US.UTF-8");
 
+	return (0);
+}*/
 	
+
+
+
+#include <wchar.h>
+#include <stddef.h>
+#include <unistd.h>
+//#include <Endian.h>
+	
+/*# define LOCALIZED_WIDE_CHARACTERS_STRING	L"\xE2809C\x41\xE2809C\n\n\0"
+# pragma message							"__BIG_ENDIAN  is used."*/
+# define LOCALIZED_WIDE_CHARACTERS_STRING	L"\x9C80E2\x3b1\x9C80E2\n\n\0"
+# pragma message							"__LITTLE_ENDIAN  is used."
+/*# define LOCALIZED_WIDE_CHARACTERS_STRING	L"\xE2009C80\x41\xE2009C80\n\n\0"
+# pragma message							"__PDP_ENDIAN  is used."*/
+/*#else
+# error										An unknown endianness is used.*/
+
+size_t	ft_wcslen(wchar_t *wcs)
+{
+	size_t	sz;
+
+	sz = 0;
+	while (*(wcs++))
+		sz++;
+	return (sz);
+}
+
+int		main(void)
+{
+	wchar_t	*wcs;
+
+	wcs = LOCALIZED_WIDE_CHARACTERS_STRING;
+	return (write(1, wcs, (ft_wcslen(wcs) * sizeof(wchar_t))));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -164,5 +229,3 @@ ft_printf("mine:%#-08o<\n", 42);
 
 
 
-	return (0);
-}

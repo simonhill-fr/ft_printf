@@ -74,13 +74,14 @@ union	u_types
 
 int				ft_printf(const char *format, ...);
 
-int				decimal(va_list ap, t_param *param);
-int				udecimal(va_list ap, t_param *param);
 int				character(va_list ap, t_param *param);
 int				string(va_list ap, t_param *param);
+int				decimal(va_list ap, t_param *param);
+int				udecimal(va_list ap, t_param *param);
 int				hexadecimal(va_list ap, t_param *param);
 int				upper_hexadecimal(va_list ap, t_param *param);
 int				octal(va_list ap, t_param *param);
+int				pointer(va_list ap, t_param *param);
 
 int 			w_udecimal(va_list ap, t_param *param);
 int 			w_decimal(va_list ap, t_param *param);
@@ -116,6 +117,7 @@ int 			sizet_len(va_list ap, t_param *param);
 int 			intmax_len(va_list ap, t_param *param);
 
 int				get_int_len(uintmax_t n);
+void			check_zero_exception(t_param *param, uintmax_t nb, char *str, int display);
 
 
 #endif

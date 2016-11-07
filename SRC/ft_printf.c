@@ -79,7 +79,7 @@ int	parse(const char *format, va_list ap, t_functab *func_array)
 					get_digits(&format, param);
 				else if (ret == EMPTY)
 				{
-					if (ft_isalpha(*format))
+					if (ft_isprint(*format))
 					{
 						print += ft_putchar(*format);
 						break;

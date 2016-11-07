@@ -45,3 +45,19 @@ int	string(va_list ap, t_param *param)
 	final_print(param, str, "", 0);
 	return (0);
 }
+
+int	pointer(va_list ap, t_param *param)
+{
+	param->length = INTMAX;
+	param->hash = TRUE;
+	uintmax_t	nb;
+	char		*str;
+	t_ftab_cast	*ftab_cast;
+
+	ftab_cast = init_cast_array();
+	nb = ftab_cast[param->length](ap, UNSIGNED);	
+	str = ft_utoadup(nb, 16);
+	check_zero_exception(param, nb, str, TRUE);
+	final_print(param, str, "0x", 0);	
+	return (END);
+}

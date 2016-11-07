@@ -50,7 +50,10 @@ void	init_index_array(t_functab *func_array)
 	func_array['x'] = hexadecimal;
 	func_array['X'] = upper_hexadecimal;
 	func_array['c'] = character;
+	func_array['C'] = w_character;
 	func_array['s'] = string;
+	func_array['S'] = w_string;
+	func_array['p'] = pointer;
 
 	func_array['h'] = short_len;
 	func_array['l'] = long_len;	
