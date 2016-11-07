@@ -38,7 +38,9 @@ int	decimal(va_list ap, t_param *param)
 		final_print(param, str, "", -1);
 	}
 	else 
+	{
 		final_print(param, str, "", 1);
+	}
 	return (END);
 }
 

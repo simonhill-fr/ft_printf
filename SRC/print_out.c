@@ -17,27 +17,33 @@ int		get_width_len(t_param *param, int prefix_len, int nb_len)
 	int width_len;
 
 	width_len = nb_len;
+
+//nul character exeption :	
 	if (param->nulchar)
-		width_len++;	
+		width_len++;
+//precision :
 	if (param->precision > width_len)
 	{
 		param->precision -= width_len;	
 		width_len += param->precision;
 	}
-	else if (param->precision < width_len)
+	else if (param->precision <= width_len)
 		param->precision = 0;
-
+//sign symbol + - 
 	if (param->plus || param->space || param->negative)
-		width_len += 1;
+		width_len += 1;	
+//prefix :	
 	if (param->hash)
 		width_len += prefix_len;
+//width = precision + sign + prefix :
 	if (param->width > width_len)
 	{
 		param->width -= width_len;
 		width_len += param->width;
 	}
-	else if (param->width < width_len)
+	else if (param->width <= width_len)
 		param->width = 0;
+//printf("prec=%d width=%d\n", param->precision, param->width);	
 	return width_len;
 }
 
@@ -83,14 +89,10 @@ void	final_print(t_param *param, char *str, char *prefix, int sign)
 	if (param->precision)
 	{
 		if (param->alpha == FALSE)
-		{
 			print_padding(param, param->precision, '0');
-
-		}
 		else if (param->empty_str == TRUE)//if str == ""
 			print_padding(param, param->precision, ' ');
 	}
-	
 	if (param->width && param->zero == TRUE)
 		print_padding(param, param->width, '0');
 	if (param->nulchar)
