@@ -89,8 +89,7 @@ int 			w_octal(va_list ap, t_param *param);
 
 int				w_character(va_list ap, t_param *param);
 int				w_string(va_list ap, t_param *param);
-int				ft_put_wchar(unsigned int value);
-int				ft_put_wstr(unsigned int *wstr);
+
 int				placeholder(va_list ap, t_param *param);
 int 			empty(va_list ap, t_param *param);
 int 			digit(va_list ap, t_param *param);
@@ -113,7 +112,11 @@ void			init_index_array(t_functab *func_array);
 void			init_integer_array(t_functab *int_array);
 t_ftab_cast		*init_cast_array(void);
 
-void			final_print(t_param *param, char *str, char *prefix, int sign);
+void			final_print(t_param *param,char *str, char *prefix, int sign);
+int				get_width_len(t_param *param, int prefix_len, int nb_len);
+void			print_padding(t_param *param, int len, char c);
+void			print_prefix(t_param *param, char *prefix);
+void			print_sign(t_param *param, int nb);
 
 int 			short_len(va_list ap, t_param *param);
 int 			long_len(va_list ap, t_param *param);

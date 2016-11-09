@@ -20,13 +20,15 @@ int 	main()
 {
 	setlocale(LC_ALL, "");
 
-//	ft_printf("%C", 'c');
+	int ret = 0, ret2 = 0;
 
-	unsigned buff[4] = {'a', 'b', 'c', L'\0'};
-	
-	ft_put_wstr(buff);
+	ret = ft_printf("%S<\n", L"米");
+	ret2 =   printf("%S<\n", L"米");
 
+	printf("%d \t %d\n", ret, ret2);
 
+/*	printf("%d\n", ft_wputstr(L"米"));
+*/
 	
 
 	return (0);

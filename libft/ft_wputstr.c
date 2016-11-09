@@ -10,19 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_put_wstr(unsigned int *wstr)
+int		ft_wputstr(unsigned int *wstr)
 {
 	int		i;
+	int		ret;
 
 	i = 0;
-	if (wstr[3] == L'\0')
-		printf("enter\n");
-	while (wstr != L'\0')
+	ret = 0;
+	while (wstr[i] != L'\0')
 	{
-		ft_put_wchar(wstr[i]);
-		i++;
+		ret += ft_wputchar(wstr[i]);
+			i++;
 	}
-	return (i);
+	return (ret);
 }

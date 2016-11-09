@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 
 static int		get_binary_size(unsigned int value)
@@ -25,7 +25,7 @@ static int		get_binary_size(unsigned int value)
 	return (i);
 }
 
-int		ft_put_wchar(unsigned int value)
+int		ft_wputchar(unsigned int value)
 {
 //		unsigned int mask0 = 0;
         unsigned int mask1 = 49280;
@@ -36,9 +36,10 @@ int		ft_put_wchar(unsigned int value)
         int size = get_binary_size(value);
 //        int res = 0;
         unsigned char octet;
- 
+ printf("enter\n");
         if (size <= 7)
         {
+
                 octet = value;
                 write(1, &octet, 1);
                 return (1);

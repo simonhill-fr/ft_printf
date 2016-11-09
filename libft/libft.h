@@ -13,12 +13,15 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <stdio.h> //REMOVE
+
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/uio.h>
 # define BUFF_SIZE 32
+# define wchar	unsigned int 
 
 typedef struct		s_list
 {
@@ -98,6 +101,9 @@ char				*ft_strndup(const char *s, size_t n);
 double				ft_pow(double x, double y);
 void				ft_printlist(t_list *elem);
 int					ft_lstsize(t_list *begin_list);
+int					ft_wputchar(wchar value);
+int					ft_wputstr(wchar *wstr);
+size_t				ft_wstrlen(const wchar *str);
 
 int					get_next_line(int const fd, char **line);
 
