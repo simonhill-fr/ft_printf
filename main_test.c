@@ -15,33 +15,17 @@
 #include <stdio.h>
 #include <locale.h>
 
-void	print_wchar(unsigned v)
-{
-	char octet;
-	unsigned int mask0 = 0;
-    unsigned int mask1 = 0b1100000010000000;
-
-    unsigned char o2 = v & 0b111111; // recuperation des 6 premiers bits 110xxxxx 10(xxxxxx)
-	unsigned o1 = (v & 0b11111111000000) >> 6 ; // recuperation des 5 derniers bits 110(xxxxx) 10xxxxxx
-
-
-printf("%u\n", o1 >> 6);
-printf("%u\n", o2);
-
-	octet = 0b11000000 | o1; // application des bits du premier octet sur le premier octet mask
-	write(1, &octet, 1);
-	octet = ((mask1 << 24) >> 24) | o2; // application des bits du seond octet sur le second octet du mask
-	write(1, &octet, 1);
-
-}
-
 
 int 	main()
 {
 	setlocale(LC_ALL, "");
 
-//	printf("%C\n", L'α');
-	print_wchar(L'α');
+//	ft_printf("%C", 'c');
+
+	unsigned buff[4] = {'a', 'b', 'c', L'\0'};
+	
+	ft_put_wstr(buff);
+
 
 	
 

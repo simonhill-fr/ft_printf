@@ -34,9 +34,12 @@ SRC 	= 	SRC/ft_printf.c 			\
 			SRC/handle_types_2.c		\
 			SRC/handle_length.c 		\
 			SRC/handle_wint.c			\
+			SRC/handle_wchar.c			\
 			SRC/init_index_array.c 		\
 			SRC/type_cast.c				\
-			SRC/utilities.c
+			SRC/utilities.c				\
+			SRC/ft_put_wchar.c			\
+			SRC/ft_put_wstr.c		\
 
 LIBFT	= libft/libft.a
 

@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_wchar.c                                     :+:      :+:    :+:   */
+/*   ft_put_wstr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 19:13:15 by shill             #+#    #+#             */
-/*   Updated: 2016/11/07 19:13:17 by shill            ###   ########.fr       */
+/*   Created: 2016/11/09 18:00:27 by shill             #+#    #+#             */
+/*   Updated: 2016/11/09 18:41:46 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	w_character(va_list ap, t_param *param)
+int		ft_put_wstr(unsigned int *wstr)
 {
-	int value =va_arg(ap, unsigned int);
-	param->ret += ft_put_wchar(value);	
-	return (END);
+	int		i;
 
-	return (END);
-
-}
-
-int	w_string(va_list ap, t_param *param)
-{
-	(void)(ap);
-	(void)(param);
-	return (END);
+	i = 0;
+	if (wstr[3] == L'\0')
+		printf("enter\n");
+	while (wstr != L'\0')
+	{
+		ft_put_wchar(wstr[i]);
+		i++;
+	}
+	return (i);
 }

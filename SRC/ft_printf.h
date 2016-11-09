@@ -87,6 +87,10 @@ int 			w_udecimal(va_list ap, t_param *param);
 int 			w_decimal(va_list ap, t_param *param);
 int 			w_octal(va_list ap, t_param *param);
 
+int				w_character(va_list ap, t_param *param);
+int				w_string(va_list ap, t_param *param);
+int				ft_put_wchar(unsigned int value);
+int				ft_put_wstr(unsigned int *wstr);
 int				placeholder(va_list ap, t_param *param);
 int 			empty(va_list ap, t_param *param);
 int 			digit(va_list ap, t_param *param);
