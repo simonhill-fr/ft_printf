@@ -10,82 +10,44 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*#include "SRC/ft_printf.h"
+#include "SRC/ft_printf.h"
 #include <limits.h>
 #include <stdio.h>
 #include <locale.h>
 
+void	print_wchar(unsigned v)
+{
+	char octet;
+	unsigned int mask0 = 0;
+    unsigned int mask1 = 0b1100000010000000;
+
+    unsigned char o2 = v & 0b111111; // recuperation des 6 premiers bits 110xxxxx 10(xxxxxx)
+	unsigned o1 = (v & 0b11111111000000) >> 6 ; // recuperation des 5 derniers bits 110(xxxxx) 10xxxxxx
+
+
+printf("%u\n", o1 >> 6);
+printf("%u\n", o2);
+
+	octet = 0b11000000 | o1; // application des bits du premier octet sur le premier octet mask
+	write(1, &octet, 1);
+	octet = ((mask1 << 24) >> 24) | o2; // application des bits du seond octet sur le second octet du mask
+	write(1, &octet, 1);
+
+}
+
+
 int 	main()
 {
-	setlocale(LC_ALL, "en_US.UTF-8");
+	setlocale(LC_ALL, "");
+
+//	printf("%C\n", L'α');
+	print_wchar(L'α');
+
+	
 
 	return (0);
-}*/
-	
-
-
-
-#include <wchar.h>
-#include <stddef.h>
-#include <unistd.h>
-//#include <Endian.h>
-	
-/*# define LOCALIZED_WIDE_CHARACTERS_STRING	L"\xE2809C\x41\xE2809C\n\n\0"
-# pragma message							"__BIG_ENDIAN  is used."*/
-# define LOCALIZED_WIDE_CHARACTERS_STRING	L"\x9C80E2\x3b1\x9C80E2\n\n\0"
-# pragma message							"__LITTLE_ENDIAN  is used."
-/*# define LOCALIZED_WIDE_CHARACTERS_STRING	L"\xE2009C80\x41\xE2009C80\n\n\0"
-# pragma message							"__PDP_ENDIAN  is used."*/
-/*#else
-# error										An unknown endianness is used.*/
-
-size_t	ft_wcslen(wchar_t *wcs)
-{
-	size_t	sz;
-
-	sz = 0;
-	while (*(wcs++))
-		sz++;
-	return (sz);
 }
-
-int		main(void)
-{
-	wchar_t	*wcs;
-
-	wcs = LOCALIZED_WIDE_CHARACTERS_STRING;
-	return (write(1, wcs, (ft_wcslen(wcs) * sizeof(wchar_t))));
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
 
 
 
