@@ -16,7 +16,7 @@ void	wfinal_print(t_param *param, wchar *str, char *prefix, int sign)
 {
 	if (param->hash)
 		param->hash = ft_strlen(prefix);
-	get_width_len(param, param->hash, ft_wstrlen(str));
+	get_width_len(param, param->hash, ft_wstrbytes(str));
 	if (param->width && param->zero == FALSE && param->minus == FALSE)
 		print_padding(param, param->width, ' ');
 	if (param->hash)
@@ -38,21 +38,20 @@ void	wfinal_print(t_param *param, wchar *str, char *prefix, int sign)
 		param->ret += ft_wputstr(str);
 	if (param->minus)
 		print_padding(param, param->width, ' ');
-	//remember to free
 }
 
 int	w_character(va_list ap, t_param *param)
 {
 	wchar	*str;
 
-	str = malloc(sizeof(unsigned int) * 2);
+	str = malloc(sizeof(wchar) * 2);
 	str[0] = va_arg(ap, unsigned int);
 	if (str[0] == L'\0')
 		param->nulchar = TRUE;
+	str[1] = L'\0';
 	param->alpha = TRUE;
 	wfinal_print(param, str, "", 0);	
 	return (END);
-
 }
 
 int	w_string(va_list ap, t_param *param)
@@ -60,17 +59,18 @@ int	w_string(va_list ap, t_param *param)
 	wchar 	*str;
 
 	str = va_arg(ap, unsigned int *);
-/*	if (!(str))
-		str = ft_wstrdup("(null)");*/
+	if (str == L'\0')
+		str = ft_wstrdup((wchar *)L"(null)");
 	param->alpha = TRUE;
-	/*if (ft_strcmp(str, L"") == 0 && param->width == 0)
+	if (ft_wstrcmp(str, (wchar *)L"") == 0 && param->width == 0)
 	{
 		param->empty_str = TRUE;
-	}*/
-	/*if (param->precision != -1){
-		str = ft_strndup(str, param->precision);
+	}
+	if (param->precision != -1)
+	{
+		str = ft_wstrndup(str, param->precision);
 		param->precision = -1;
-	}*/
+	}
 
 	wfinal_print(param, str, "", 0);
 	return (0);

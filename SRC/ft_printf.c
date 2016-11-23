@@ -52,6 +52,7 @@ void	get_digits(const char **format, t_param *param)
 		}
 	}
 	(*format)--;
+	
 
 }//would be better to index all digits to this function instead of 
 // using if (ret == DIGIT)
@@ -81,7 +82,11 @@ int	parse(const char *format, va_list ap, t_functab *func_array)
 				{
 					if (ft_isprint(*format))
 					{
+						if (param->width && !(param->minus))
+							print_padding(param, param->width - 1, ' ');
 						print += ft_putchar(*format);
+						if (param->width && param->minus)
+							print_padding(param, param->width - 1, ' ');
 						break;
 					}
 					else
@@ -89,7 +94,7 @@ int	parse(const char *format, va_list ap, t_functab *func_array)
 				}
 				format++;
 			}
-		}
+		}		
 		print += param->ret;
 		format++;
 	}

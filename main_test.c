@@ -22,13 +22,13 @@ int 	main()
 
 	int ret = 0, ret2 = 0;
 
-	ret = ft_printf("%S<\n", L"米");
-	ret2 =   printf("%S<\n", L"米");
-
+	ret = ft_printf("{%-15Z}<\n", 123);
+printf("\n");
+	ret2 =   printf("{%-15Z}<\n", 123);
+printf("\n");
 	printf("%d \t %d\n", ret, ret2);
 
-/*	printf("%d\n", ft_wputstr(L"米"));
-*/
+
 	
 
 	return (0);

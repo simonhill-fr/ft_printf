@@ -36,7 +36,7 @@ int		ft_wputchar(unsigned int value)
         int size = get_binary_size(value);
 //        int res = 0;
         unsigned char octet;
- printf("enter\n");
+
         if (size <= 7)
         {
 

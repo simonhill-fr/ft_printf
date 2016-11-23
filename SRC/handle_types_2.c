@@ -16,6 +16,8 @@ int	character(va_list ap, t_param *param)
 {
 	char	*str;
 
+	if (param->length == LONG)
+		return (w_character(ap, param));
 	str = ft_strnew(1);
 	str[0] = va_arg(ap, int);
 	if (str[0] == '\0')
@@ -29,6 +31,8 @@ int	string(va_list ap, t_param *param)
 {
 	char 	*str;
 
+	if (param->length == LONG)
+		return (w_string(ap, param));
 	str = va_arg(ap, char *);
 	if (!(str))
 		str = ft_strdup("(null)");
@@ -37,7 +41,8 @@ int	string(va_list ap, t_param *param)
 	{
 		param->empty_str = TRUE;
 	}
-	if (param->precision != -1){
+	if (param->precision != -1)
+	{
 		str = ft_strndup(str, param->precision);
 		param->precision = -1;
 	}

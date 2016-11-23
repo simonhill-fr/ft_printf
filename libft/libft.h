@@ -104,6 +104,10 @@ int					ft_lstsize(t_list *begin_list);
 int					ft_wputchar(wchar value);
 int					ft_wputstr(wchar *wstr);
 size_t				ft_wstrlen(const wchar *str);
+size_t				ft_wstrbytes(const wchar *str);
+wchar				*ft_wstrdup(const wchar *s1);
+wchar				*ft_wstrndup(const wchar *s, size_t n);
+int					ft_wstrcmp(const wchar *s1, const wchar *s2);
 
 int					get_next_line(int const fd, char **line);
 

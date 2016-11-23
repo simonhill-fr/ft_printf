@@ -34,7 +34,8 @@ SRC 	= \
 		ft_lstiter.c	ft_lstmap.c		ft_strndup.c	ft_strnjoin.c	\
 		get_next_line.c	ft_atoi_short.c	ft_itoa_base.c	ft_str_toupper.c \
 		ft_putnbr_u.c	ft_utoa_base.c	ft_wputchar.c	ft_wputstr.c	\
-		ft_wstrlen.c
+		ft_wstrlen.c	ft_wstrdup.c	ft_wstrndup.c	ft_wstrcmp.c	\
+		ft_wstrbytes.c
 		
 OBJ	= $(SRC:.c=.o)
 
