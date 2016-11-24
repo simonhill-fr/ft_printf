@@ -10,18 +10,46 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+	Warning : size 'n' is value in bytes, the number of characters to be 
+	included in the string is 'len'
+*/
+
 #include "libft.h"
 
-wchar		*ft_wstrndup(const wchar *s, size_t n)
+size_t		get_wstrlen(const wchar *s, int n)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
+	while (s[i] != L'\0')
+	{		
+		if (n - ft_wchar_bytes(s[i]) >= 0)
+		{
+			n -= ft_wchar_bytes(s[i]);
+			i++;
+		}
+		else
+			return (i);
+	}
+	return (i);
+}
+
+
+wchar				*ft_wstrndup(const wchar *s, size_t n)
 {
 	wchar		*buff;
 	size_t		i;
+	size_t		len;
 
-	buff = malloc(sizeof(wchar) * (n + 1));
+	len = get_wstrlen(s, n);
+	buff = malloc(sizeof(wchar) * (len + 1));
 	i = 0;
 	if (!buff)
 		return (0);
-	while (s[i] != L'\0' || i >= n)
+	while (s[i] != L'\0' && i < len)
 	{
 		buff[i] = s[i];
 		i++;

@@ -22,16 +22,15 @@ int 	main()
 
 	int ret = 0, ret2 = 0;
 
-	ret = ft_printf("{%-15Z}<\n", 123);
-printf("\n");
-	ret2 =   printf("{%-15Z}<\n", 123);
-printf("\n");
+	ret = ft_printf("%jzd<\n", "9223372036854775807");
+	ret2 =   printf("%jzd<\n", "9223372036854775807");
 	printf("%d \t %d\n", ret, ret2);
-
-
-	
-
 	return (0);
+
+
+
+
+
 }
 	
 

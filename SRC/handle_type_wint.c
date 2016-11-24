@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_general.c                                   :+:      :+:    :+:   */
+/*   handle_type_wint.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/18 16:39:06 by shill             #+#    #+#             */
-/*   Updated: 2016/09/18 16:41:25 by shill            ###   ########.fr       */
+/*   Created: 2016/11/07 13:57:59 by shill             #+#    #+#             */
+/*   Updated: 2016/11/07 13:58:03 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		placeholder(va_list ap, t_param *param)
+int		w_udecimal(va_list ap, t_param *param)
 {
-	char	*str;
-
-	(void)(ap);
-	str = ft_strdup("%");
-	param->alpha = TRUE;
-	final_print(param, str, "", 0);
-	return (END);
+	param->length = INTMAX;
+	return (udecimal(ap, param));
 }
 
-int		empty(va_list ap, t_param *param)
+int		w_decimal(va_list ap, t_param *param)
 {
-	(void)(ap);
-	(void)(param);
-	return (EMPTY);
+	param->length = INTMAX;
+	return (decimal(ap, param));
 }
 
-int		digit(va_list ap, t_param *param)
+int		w_octal(va_list ap, t_param *param)
 {
-	(void)(ap);
-	(void)(param);
-	return (DIGIT);
+	param->length = INTMAX;
+	return (octal(ap, param));
 }

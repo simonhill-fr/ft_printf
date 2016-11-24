@@ -20,7 +20,7 @@ int	minus(va_list ap, t_param *param)
 	return (1);
 }
 
-int plus(va_list ap, t_param *param)
+int	plus(va_list ap, t_param *param)
 {
 	(void)(ap);
 	param->plus = TRUE;

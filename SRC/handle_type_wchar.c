@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_wchar.c                                     :+:      :+:    :+:   */
+/*   handle_type_wchar.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,7 +16,7 @@ void	wfinal_print(t_param *param, wchar *str, char *prefix, int sign)
 {
 	if (param->hash)
 		param->hash = ft_strlen(prefix);
-	get_width_len(param, param->hash, ft_wstrbytes(str));
+	get_width_len(param, param->hash, ft_wstr_bytes(str));
 	if (param->width && param->zero == FALSE && param->minus == FALSE)
 		print_padding(param, param->width, ' ');
 	if (param->hash)
@@ -27,7 +27,7 @@ void	wfinal_print(t_param *param, wchar *str, char *prefix, int sign)
 	{
 		if (param->alpha == FALSE)
 			print_padding(param, param->precision, '0');
-		else if (param->empty_str == TRUE)//if str == ""
+		else if (param->empty_str == TRUE)
 			print_padding(param, param->precision, ' ');
 	}
 	if (param->width && param->zero == TRUE)
@@ -40,7 +40,7 @@ void	wfinal_print(t_param *param, wchar *str, char *prefix, int sign)
 		print_padding(param, param->width, ' ');
 }
 
-int	w_character(va_list ap, t_param *param)
+int		w_character(va_list ap, t_param *param)
 {
 	wchar	*str;
 
@@ -50,13 +50,13 @@ int	w_character(va_list ap, t_param *param)
 		param->nulchar = TRUE;
 	str[1] = L'\0';
 	param->alpha = TRUE;
-	wfinal_print(param, str, "", 0);	
+	wfinal_print(param, str, "", 0);
 	return (END);
 }
 
-int	w_string(va_list ap, t_param *param)
+int		w_string(va_list ap, t_param *param)
 {
-	wchar 	*str;
+	wchar	*str;
 
 	str = va_arg(ap, unsigned int *);
 	if (str == L'\0')
@@ -71,7 +71,6 @@ int	w_string(va_list ap, t_param *param)
 		str = ft_wstrndup(str, param->precision);
 		param->precision = -1;
 	}
-
 	wfinal_print(param, str, "", 0);
 	return (0);
 }

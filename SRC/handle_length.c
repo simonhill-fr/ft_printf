@@ -12,8 +12,8 @@
 
 #include "ft_printf.h"
 
-int 	short_len(va_list ap, t_param *param)
-{	
+int		short_len(va_list ap, t_param *param)
+{
 	(void)(ap);
 	if (param->length == SHORT)
 	{
@@ -24,7 +24,7 @@ int 	short_len(va_list ap, t_param *param)
 	return (1);
 }
 
-int 	long_len(va_list ap, t_param *param)
+int		long_len(va_list ap, t_param *param)
 {
 	(void)(ap);
 	if (param->length == LONG)
@@ -36,14 +36,14 @@ int 	long_len(va_list ap, t_param *param)
 	return (1);
 }
 
-int 	sizet_len(va_list ap, t_param *param)
+int		sizet_len(va_list ap, t_param *param)
 {
 	(void)(ap);
 	param->length = SIZE_T;
 	return (1);
 }
 
-int 	intmax_len(va_list ap, t_param *param)
+int		intmax_len(va_list ap, t_param *param)
 {
 	(void)(ap);
 	param->length = INTMAX;

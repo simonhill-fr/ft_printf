@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_general.c                                   :+:      :+:    :+:   */
+/*   type_cast_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/18 16:39:06 by shill             #+#    #+#             */
-/*   Updated: 2016/09/18 16:41:25 by shill            ###   ########.fr       */
+/*   Created: 2016/11/24 17:20:50 by shill             #+#    #+#             */
+/*   Updated: 2016/11/24 17:20:52 by shill            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		placeholder(va_list ap, t_param *param)
+uintmax_t	cast_longlong(va_list ap, int is_signed)
 {
-	char	*str;
-
-	(void)(ap);
-	str = ft_strdup("%");
-	param->alpha = TRUE;
-	final_print(param, str, "", 0);
-	return (END);
+	if (is_signed == TRUE)
+		return (va_arg(ap, long long));
+	else
+		return (va_arg(ap, unsigned long long));
 }
 
-int		empty(va_list ap, t_param *param)
+uintmax_t	cast_sizet(va_list ap, int is_signed)
 {
-	(void)(ap);
-	(void)(param);
-	return (EMPTY);
+	(void)is_signed;
+	return (va_arg(ap, size_t));
 }
 
-int		digit(va_list ap, t_param *param)
+uintmax_t	cast_intmax(va_list ap, int is_signed)
 {
-	(void)(ap);
-	(void)(param);
-	return (DIGIT);
+	if (is_signed == TRUE)
+		return (va_arg(ap, intmax_t));
+	else
+		return (va_arg(ap, uintmax_t));
 }

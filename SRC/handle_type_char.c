@@ -23,13 +23,18 @@ int	character(va_list ap, t_param *param)
 	if (str[0] == '\0')
 		param->nulchar = TRUE;
 	param->alpha = TRUE;
-	final_print(param, str, "", 0);	
+	if (param->precision == 0 && param->width > 0 && param->zero == TRUE)
+	{
+		param->alpha = FALSE;
+		param->zero = TRUE;
+	}
+	final_print(param, str, "", 0);
 	return (END);
 }
 
 int	string(va_list ap, t_param *param)
 {
-	char 	*str;
+	char	*str;
 
 	if (param->length == LONG)
 		return (w_string(ap, param));
@@ -46,23 +51,27 @@ int	string(va_list ap, t_param *param)
 		str = ft_strndup(str, param->precision);
 		param->precision = -1;
 	}
-
+	if (param->precision == 0 && param->width > 0 && param->zero == TRUE)
+	{
+		param->alpha = FALSE;
+		param->zero = TRUE;
+	}
 	final_print(param, str, "", 0);
 	return (0);
 }
 
 int	pointer(va_list ap, t_param *param)
 {
-	param->length = INTMAX;
-	param->hash = TRUE;
+	t_ftab_cast	*ftab_cast;
 	uintmax_t	nb;
 	char		*str;
-	t_ftab_cast	*ftab_cast;
 
+	param->length = INTMAX;
+	param->hash = TRUE;
 	ftab_cast = init_cast_array();
-	nb = ftab_cast[param->length](ap, UNSIGNED);	
+	nb = ftab_cast[param->length](ap, UNSIGNED);
 	str = ft_utoadup(nb, 16);
-	check_zero_exception(param, nb, str, TRUE);
-	final_print(param, str, "0x", 0);	
+	check_zero_exception(param, nb, str, PTR);
+	final_print(param, str, "0x", 0);
 	return (END);
 }

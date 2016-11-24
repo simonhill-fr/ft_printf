@@ -10,9 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+Returns number of bytes used by unicode wide-character
+*/
+
 #include "libft.h"
 
-static size_t		get_bytes(unsigned int value)
+int		ft_wchar_bytes(wchar value)
 {
  	size_t	i;
 
@@ -29,19 +33,4 @@ static size_t		get_bytes(unsigned int value)
 		return (3);
 	else
 		return (4);
-}
-
-size_t				ft_wstrbytes(const wchar *str)
-{
-	int		i;
-	size_t	ret;
-
-	i = 0;
-	ret = 0;
-	while (str[i] != L'\0')
-	{
-		ret += get_bytes(str[i]);
-		i++;
-	}
-	return (ret);
 }

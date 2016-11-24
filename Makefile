@@ -27,16 +27,19 @@ NAME 	= libftprintf.a
 CC		= gcc
 
 SRC 	= 	SRC/ft_printf.c 			\
+			SRC/parse.c					\
 			SRC/print_out.c 			\
 			SRC/handle_general.c 		\
 			SRC/handle_flags.c 			\
-			SRC/handle_types_1.c 		\
-			SRC/handle_types_2.c		\
+			SRC/handle_type_num1.c 		\
+			SRC/handle_type_num2.c		\
+			SRC/handle_type_char.c		\
 			SRC/handle_length.c 		\
-			SRC/handle_wint.c			\
-			SRC/handle_wchar.c			\
+			SRC/handle_type_wint.c		\
+			SRC/handle_type_wchar.c		\
 			SRC/init_index_array.c 		\
 			SRC/type_cast.c				\
+			SRC/type_cast_2.c			\
 			SRC/utilities.c				\
 			
 
