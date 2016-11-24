@@ -44,6 +44,7 @@ int		decimal(va_list ap, t_param *param)
 	}
 	else
 		final_print(param, str, "", 1);
+	free(str);
 	return (END);
 }
 
@@ -58,6 +59,7 @@ int		udecimal(va_list ap, t_param *param)
 	str = ft_utoadup(nb, 10);
 	check_zero_exception(param, nb, str, FALSE);
 	final_print(param, str, "", 0);
+	free(str);
 	return (END);
 }
 
@@ -72,6 +74,7 @@ int		hexadecimal(va_list ap, t_param *param)
 	str = ft_utoadup(nb, 16);
 	check_zero_exception(param, nb, str, FALSE);
 	final_print(param, str, "0x", 0);
+	free(str);
 	return (END);
 }
 
@@ -87,5 +90,6 @@ int		upper_hexadecimal(va_list ap, t_param *param)
 	check_zero_exception(param, nb, str, FALSE);
 	ft_str_toupper(str);
 	final_print(param, str, "0X", 0);
+	free(str);
 	return (END);
 }

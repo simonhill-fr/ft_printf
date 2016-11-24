@@ -44,5 +44,7 @@ int		ft_printf(const char *format, ...)
 	param = malloc(sizeof(t_param));
 	total = parse(format, ap, func_array, param);
 	va_end(ap);
+	free(param);
+	free(func_array);
 	return (total);
 }

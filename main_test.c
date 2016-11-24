@@ -18,16 +18,16 @@
 
 int 	main()
 {
-	setlocale(LC_ALL, "");
+	/*setlocale(LC_ALL, "");
 
 	int ret = 0, ret2 = 0;
 
 	ret = ft_printf("%");
 	ret2 =   printf("%");
 	printf("%d \t %d\n", ret, ret2);
-	return (0);
+	return (0);*/
 
-
+printf("%f\n", 12.55);
 
 
 
