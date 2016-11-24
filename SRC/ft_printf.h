@@ -44,6 +44,7 @@ RETURN VALUES
 
 typedef struct 		s_param
 {
+	int				fret;
 	int				ret;
 	int 			minus;
 	int 			plus;
@@ -75,7 +76,7 @@ union	u_types
 
 int				ft_printf(const char *format, ...);
 t_param			*init_param(t_param *param);
-int				parse(const char *format, va_list ap, t_functab *func_array);
+int				parse(const char *format, va_list ap, t_functab *func_array, t_param *param);
 
 int				character(va_list ap, t_param *param);
 int				string(va_list ap, t_param *param);

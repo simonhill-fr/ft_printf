@@ -22,8 +22,8 @@ int 	main()
 
 	int ret = 0, ret2 = 0;
 
-	ret = ft_printf("%jzd<\n", "9223372036854775807");
-	ret2 =   printf("%jzd<\n", "9223372036854775807");
+	ret = ft_printf("%");
+	ret2 =   printf("%");
 	printf("%d \t %d\n", ret, ret2);
 	return (0);
 

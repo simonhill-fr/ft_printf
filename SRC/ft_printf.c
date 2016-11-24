@@ -35,12 +35,14 @@ int		ft_printf(const char *format, ...)
 {
 	va_list		ap;
 	t_functab	*func_array;
+	t_param		*param;
 	int			total;
 
 	func_array = malloc(sizeof(t_functab) * 128);
 	init_index_array(func_array);
 	va_start(ap, format);
-	total = parse(format, ap, func_array);
+	param = malloc(sizeof(t_param));
+	total = parse(format, ap, func_array, param);
 	va_end(ap);
 	return (total);
 }

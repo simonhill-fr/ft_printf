@@ -14,7 +14,7 @@
 
 void	get_digits(const char **format, t_param *param)
 {
-	int 	n;
+	int		n;
 
 	while (ft_isdigit(n = **format))
 	{
@@ -36,13 +36,37 @@ void	get_digits(const char **format, t_param *param)
 	(*format)--;
 }
 
-int		parse(const char *format, va_list ap, t_functab *func_array)
+int		walk(const char **format, t_param *param, int *print)
 {
-	t_param		*param;
-	int 		ret;
+	if (param->fret == DIGIT)
+		get_digits(format, param);
+	else if (param->fret == EMPTY)
+	{
+		if (ft_isprint(**format))
+		{
+			if (param->width && !(param->minus))
+			{
+				if (param->precision == 0 && param->zero == TRUE)
+					print_padding(param, param->width - 1, '0');
+				else
+					print_padding(param, param->width - 1, ' ');
+			}
+			*print += ft_putchar(**format);
+			if (param->width && param->minus)
+				print_padding(param, param->width - 1, ' ');
+			return (END);
+		}
+		else
+			return (END);
+	}
+	(*format)++;
+	return (1);
+}
+
+int		parse(const char *format, va_list ap, t_functab *f_arr, t_param *param)
+{
 	int			print;
 
-	param = malloc(sizeof(t_param));
 	print = 0;
 	while (*format)
 	{
@@ -51,42 +75,17 @@ int		parse(const char *format, va_list ap, t_functab *func_array)
 			print += ft_putchar(*format);
 		else
 		{
+			if (*(format + 1) == '\0')
+				return (0);
 			format++;
-			while ((ret = func_array[(int)*format](ap, param)))
+			while ((param->fret = f_arr[(int)*format](ap, param)))
 			{
-				if (ret == DIGIT)
-					get_digits(&format, param);
-				else if (ret == EMPTY)
-				{
-					if (ft_isprint(*format))
-					{
-						if (param->width && !(param->minus))
-						{
-							if (param->precision == 0 && param->zero == TRUE)
-								print_padding(param, param->width - 1, '0');
-							else
-								print_padding(param, param->width - 1, ' ');
-						}
-						print += ft_putchar(*format);
-						if (param->width && param->minus)
-							print_padding(param, param->width - 1, ' ');
-						break;
-					}
-					else
-						return(print);
-				}
-				format++;
+				if (walk(&format, param, &print) == END)
+					break ;
 			}
-		}		
+		}
 		print += param->ret;
 		format++;
 	}
-	free(param);
 	return (print);
 }
-
-
-
-
-
-
