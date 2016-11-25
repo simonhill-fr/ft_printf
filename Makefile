@@ -28,6 +28,7 @@ CC		= gcc
 
 SRC 	= 	SRC/ft_printf.c 			\
 			SRC/parse.c					\
+			SRC/width_precision.c		\
 			SRC/print_out.c 			\
 			SRC/handle_general.c 		\
 			SRC/handle_flags.c 			\

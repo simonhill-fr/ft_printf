@@ -34,6 +34,7 @@ static void	init_index_digits(t_functab *func_array)
 	func_array['8'] = digit;
 	func_array['9'] = digit;
 	func_array['.'] = digit;
+	func_array['*'] = digit;
 }
 
 static void	init_index_types(t_functab *func_array)

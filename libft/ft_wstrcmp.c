@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		ft_wstrcmp(const wchar *s1, const wchar *s2)
+int		ft_wstrcmp(const t_wchar *s1, const t_wchar *s2)
 {
 	int		i;
 
@@ -22,7 +22,7 @@ int		ft_wstrcmp(const wchar *s1, const wchar *s2)
 		if (s1[i] == s2[i])
 			i++;
 		if (s1[i] != s2[i])
-			return ((wchar)s1[i] - (wchar)s2[i]);
+			return ((t_wchar)s1[i] - (t_wchar)s2[i]);
 	}
 	return (0);
 }

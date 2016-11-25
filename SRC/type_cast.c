@@ -17,6 +17,8 @@ t_ftab_cast	*init_cast_array(void)
 	t_ftab_cast	*ftab_cast;
 
 	ftab_cast = malloc(sizeof(t_ftab_cast) * 7);
+	if (!(ftab_cast))
+		exit(EXIT_FAILURE);
 	ftab_cast[INT] = cast_int;
 	ftab_cast[CHAR] = cast_char;
 	ftab_cast[SHORT] = cast_short;

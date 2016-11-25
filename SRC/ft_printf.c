@@ -39,12 +39,16 @@ int		ft_printf(const char *format, ...)
 	int			total;
 
 	func_array = malloc(sizeof(t_functab) * 128);
+	if (!(func_array))
+		exit(EXIT_FAILURE);
 	init_index_array(func_array);
 	va_start(ap, format);
 	param = malloc(sizeof(t_param));
+	if (!param)
+		exit(EXIT_FAILURE);
 	total = parse(format, ap, func_array, param);
 	va_end(ap);
-	free(param);
-	free(func_array);
+	ft_memdel((void*)&param);
+	ft_memdel((void*)&func_array);
 	return (total);
 }

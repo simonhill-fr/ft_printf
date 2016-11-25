@@ -16,7 +16,7 @@
 
 #include "libft.h"
 
-int		ft_wchar_bytes(wchar value)
+int		ft_wchar_bytes(t_wchar value)
 {
 	size_t	i;
 

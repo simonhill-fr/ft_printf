@@ -19,16 +19,13 @@ int 	main()
 {
 	setlocale(LC_ALL, "");
 
-/*	int ret = 0, ret2 = 0;
+	int ret = 0, ret2 = 0;
 
-	ret = ft_printf("%");
-	ret2 =   printf("%");
-	printf("%d \t %d\n", ret, ret2);*/
+	ret = ft_printf("%jU, %jU<\n", 0, USHRT_MAX);
+	ret2 =   printf("%jU, %jU<\n", 0, USHRT_MAX);
+	printf("%d \t %d\n", ret, ret2);
 
-	ft_wputchar_modif(L'k');
-	ft_wputchar_modif(L'α');
-	ft_wputchar_modif(L'닯');
-	ft_wputchar_modif(L'𩶘');
+
 
 	return (0);
 }

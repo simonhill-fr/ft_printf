@@ -12,34 +12,10 @@
 
 #include "ft_printf.h"
 
-void	get_digits(const char **format, t_param *param)
-{
-	int		n;
-
-	while (ft_isdigit(n = **format))
-	{
-		param->width = param->width * 10 + n - 48;
-		(*format)++;
-	}
-	if (**format == '.')
-	{
-		param->precision = 0;
-		(*format)++;
-		while (ft_isdigit(n = **format))
-		{
-			param->precision = param->precision * 10 + n - 48;
-			(*format)++;
-		}
-	}
-	if (param->precision > 0)
-		param->zero = FALSE;
-	(*format)--;
-}
-
-int		walk(const char **format, t_param *param, int *print)
+int		walk(const char **format, t_param *param, int *print, va_list ap)
 {
 	if (param->fret == DIGIT)
-		get_digits(format, param);
+		width_precision(format, param, ap);
 	else if (param->fret == EMPTY)
 	{
 		if (ft_isprint(**format))
@@ -80,7 +56,7 @@ int		parse(const char *format, va_list ap, t_functab *f_arr, t_param *param)
 			format++;
 			while ((param->fret = f_arr[(int)*format](ap, param)))
 			{
-				if (walk(&format, param, &print) == END)
+				if (walk(&format, param, &print, ap) == END)
 					break ;
 			}
 		}

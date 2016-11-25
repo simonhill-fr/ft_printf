@@ -16,7 +16,7 @@
 
 #include "libft.h"
 
-size_t				ft_wstr_bytes(const wchar *str)
+size_t				ft_wstr_bytes(const t_wchar *str)
 {
 	int		i;
 	size_t	ret;

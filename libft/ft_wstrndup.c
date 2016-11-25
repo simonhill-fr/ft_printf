@@ -17,7 +17,7 @@
 
 #include "libft.h"
 
-size_t		get_wstrlen(const wchar *s, int n)
+size_t		get_wstrlen(const t_wchar *s, int n)
 {
 	int	i;
 	int	len;
@@ -37,14 +37,14 @@ size_t		get_wstrlen(const wchar *s, int n)
 	return (i);
 }
 
-wchar		*ft_wstrndup(const wchar *s, size_t n)
+t_wchar		*ft_wstrndup(const t_wchar *s, size_t n)
 {
-	wchar		*buff;
+	t_wchar		*buff;
 	size_t		i;
 	size_t		len;
 
 	len = get_wstrlen(s, n);
-	buff = malloc(sizeof(wchar) * (len + 1));
+	buff = malloc(sizeof(t_wchar) * (len + 1));
 	i = 0;
 	if (!buff)
 		return (0);

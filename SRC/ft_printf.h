@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//F [FAIL] test_err_jd_up_max -> printf("%jD, %jD", 0, USHRT_MAX)
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
 #include <stdarg.h>
 #include "../libft/libft.h"
-
-#include <stdio.h> //REMOVE
-#include <limits.h> // REMOVE
 
 #define TRUE 		1
 #define FALSE 		0
@@ -28,7 +27,7 @@
 #define PTR			2
 
 /*
-RETURN VALUES
+** RETURN VALUES
 */
 #define	END			0
 #define DIGIT		-2
@@ -77,6 +76,7 @@ union	u_types
 int				ft_printf(const char *format, ...);
 t_param			*init_param(t_param *param);
 int				parse(const char *format, va_list ap, t_functab *func_array, t_param *param);
+void			width_precision(const char **format, t_param *param, va_list ap);
 
 int				character(va_list ap, t_param *param);
 int				string(va_list ap, t_param *param);
@@ -130,6 +130,5 @@ int 			intmax_len(va_list ap, t_param *param);
 
 int				get_int_len(uintmax_t n);
 void			check_zero_exception(t_param *param, uintmax_t nb, char *str, int display);
-
 
 #endif

@@ -36,6 +36,8 @@ int		decimal(va_list ap, t_param *param)
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, SIGNED);
 	str = ft_itoadup(nb, 10);
+	if (!(str))
+		exit(EXIT_FAILURE);
 	check_zero_exception(param, nb, str, FALSE);
 	if (nb < 0)
 	{
@@ -44,7 +46,8 @@ int		decimal(va_list ap, t_param *param)
 	}
 	else
 		final_print(param, str, "", 1);
-	free(str);
+	ft_memdel((void*)&str);
+	ft_memdel((void*)&ftab_cast);
 	return (END);
 }
 
@@ -57,9 +60,12 @@ int		udecimal(va_list ap, t_param *param)
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, UNSIGNED);
 	str = ft_utoadup(nb, 10);
+	if (!(str))
+		exit(EXIT_FAILURE);
 	check_zero_exception(param, nb, str, FALSE);
 	final_print(param, str, "", 0);
-	free(str);
+	ft_memdel((void*)&str);
+	ft_memdel((void*)&ftab_cast);
 	return (END);
 }
 
@@ -72,9 +78,12 @@ int		hexadecimal(va_list ap, t_param *param)
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, UNSIGNED);
 	str = ft_utoadup(nb, 16);
+	if (!(str))
+		exit(EXIT_FAILURE);
 	check_zero_exception(param, nb, str, FALSE);
 	final_print(param, str, "0x", 0);
-	free(str);
+	ft_memdel((void*)&str);
+	ft_memdel((void*)&ftab_cast);
 	return (END);
 }
 
@@ -87,9 +96,12 @@ int		upper_hexadecimal(va_list ap, t_param *param)
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, UNSIGNED);
 	str = ft_utoadup(nb, 16);
+	if (!(str))
+		exit(EXIT_FAILURE);
 	check_zero_exception(param, nb, str, FALSE);
 	ft_str_toupper(str);
 	final_print(param, str, "0X", 0);
-	free(str);
+	ft_memdel((void*)&str);
+	ft_memdel((void*)&ftab_cast);
 	return (END);
 }

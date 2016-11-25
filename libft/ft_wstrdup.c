@@ -12,12 +12,12 @@
 
 #include "libft.h"
 
-wchar	*ft_wstrdup(const wchar *s1)
+t_wchar	*ft_wstrdup(const t_wchar *s1)
 {
-	wchar	*buff;
+	t_wchar	*buff;
 	int		i;
 
-	buff = malloc(sizeof(wchar) * (ft_wstrlen(s1) + 1));
+	buff = malloc(sizeof(t_wchar) * (ft_wstrlen(s1) + 1));
 	i = 0;
 	if (!buff)
 		return (0);

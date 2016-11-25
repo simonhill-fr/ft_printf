@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	wfinal_print(t_param *param, wchar *str, char *prefix, int sign)
+void	wfinal_print(t_param *param, t_wchar *str, char *prefix, int sign)
 {
 	if (param->hash)
 		param->hash = ft_strlen(prefix);
@@ -42,35 +42,44 @@ void	wfinal_print(t_param *param, wchar *str, char *prefix, int sign)
 
 int		w_character(va_list ap, t_param *param)
 {
-	wchar	*str;
+	t_wchar	*str;
 
-	str = malloc(sizeof(wchar) * 2);
+	str = malloc(sizeof(t_wchar) * 2);
+	if (!(str))
+		exit(EXIT_FAILURE);
 	str[0] = va_arg(ap, unsigned int);
 	if (str[0] == L'\0')
 		param->nulchar = TRUE;
 	str[1] = L'\0';
 	param->alpha = TRUE;
 	wfinal_print(param, str, "", 0);
+	ft_memdel((void*)&str);
 	return (END);
 }
 
 int		w_string(va_list ap, t_param *param)
 {
-	wchar	*str;
+	t_wchar	*str;
+	int		free_flag;
 
+	free_flag = 0;
 	str = va_arg(ap, unsigned int *);
 	if (str == L'\0')
-		str = ft_wstrdup((wchar *)L"(null)");
-	param->alpha = TRUE;
-	if (ft_wstrcmp(str, (wchar *)L"") == 0 && param->width == 0)
 	{
-		param->empty_str = TRUE;
+		str = ft_wstrdup((t_wchar *)L"(null)");
+		free_flag = 1;
 	}
+	param->alpha = TRUE;
+	if (ft_wstrcmp(str, (t_wchar *)L"") == 0 && param->width == 0)
+		param->empty_str = TRUE;
 	if (param->precision != -1)
 	{
 		str = ft_wstrndup(str, param->precision);
 		param->precision = -1;
+		free_flag = 1;
 	}
 	wfinal_print(param, str, "", 0);
+	if (free_flag)
+		ft_memdel((void*)&str);
 	return (0);
 }

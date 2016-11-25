@@ -21,7 +21,8 @@ int		octal(va_list ap, t_param *param)
 
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, UNSIGNED);
-	str = ft_utoadup(nb, 8);
+	if (!(str = ft_utoadup(nb, 8)))
+		exit(EXIT_FAILURE);
 	display_prefix = FALSE;
 	if (param->hash && nb == 0)
 	{
@@ -35,6 +36,8 @@ int		octal(va_list ap, t_param *param)
 	}
 	check_zero_exception(param, nb, str, display_prefix);
 	final_print(param, str, "0", 0);
+	ft_memdel((void*)&str);
+	ft_memdel((void*)&ftab_cast);
 	return (END);
 }
 
@@ -47,7 +50,8 @@ int		binary(va_list ap, t_param *param)
 
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, UNSIGNED);
-	str = ft_utoadup(nb, 2);
+	if (!(str = ft_utoadup(nb, 2)))
+		exit(EXIT_FAILURE);
 	display_prefix = FALSE;
 	if (param->hash && nb == 0)
 	{
@@ -61,5 +65,7 @@ int		binary(va_list ap, t_param *param)
 	}
 	check_zero_exception(param, nb, str, display_prefix);
 	final_print(param, str, "0b", 0);
+	ft_memdel((void*)&str);
+	ft_memdel((void*)&ftab_cast);
 	return (END);
 }

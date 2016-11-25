@@ -12,13 +12,24 @@
 
 #include "ft_printf.h"
 
-int	character(va_list ap, t_param *param)
+static void	string_exception(t_param *param)
+{
+	if (param->precision == 0 && param->width > 0 && param->zero == TRUE)
+	{
+		param->alpha = FALSE;
+		param->zero = TRUE;
+	}
+}
+
+int			character(va_list ap, t_param *param)
 {
 	char	*str;
 
 	if (param->length == LONG)
 		return (w_character(ap, param));
 	str = ft_strnew(1);
+	if (!(str))
+		exit(EXIT_FAILURE);
 	str[0] = va_arg(ap, int);
 	if (str[0] == '\0')
 		param->nulchar = TRUE;
@@ -29,38 +40,40 @@ int	character(va_list ap, t_param *param)
 		param->zero = TRUE;
 	}
 	final_print(param, str, "", 0);
+	ft_memdel((void*)&str);
 	return (END);
 }
 
-int	string(va_list ap, t_param *param)
+int			string(va_list ap, t_param *param)
 {
 	char	*str;
+	int		free_flag;
 
+	free_flag = 0;
 	if (param->length == LONG)
 		return (w_string(ap, param));
-	str = va_arg(ap, char *);
-	if (!(str))
+	if (!(str = va_arg(ap, char *)))
+	{
 		str = ft_strdup("(null)");
+		free_flag = 1;
+	}
 	param->alpha = TRUE;
 	if (ft_strcmp(str, "") == 0 && param->width == 0)
-	{
 		param->empty_str = TRUE;
-	}
 	if (param->precision != -1)
 	{
 		str = ft_strndup(str, param->precision);
 		param->precision = -1;
+		free_flag = 1;
 	}
-	if (param->precision == 0 && param->width > 0 && param->zero == TRUE)
-	{
-		param->alpha = FALSE;
-		param->zero = TRUE;
-	}
+	string_exception(param);
 	final_print(param, str, "", 0);
+	if (free_flag)
+		ft_memdel((void*)&str);
 	return (0);
 }
 
-int	pointer(va_list ap, t_param *param)
+int			pointer(va_list ap, t_param *param)
 {
 	t_ftab_cast	*ftab_cast;
 	uintmax_t	nb;
@@ -71,7 +84,11 @@ int	pointer(va_list ap, t_param *param)
 	ftab_cast = init_cast_array();
 	nb = ftab_cast[param->length](ap, UNSIGNED);
 	str = ft_utoadup(nb, 16);
+	if (!(str))
+		exit(EXIT_FAILURE);
 	check_zero_exception(param, nb, str, PTR);
 	final_print(param, str, "0x", 0);
+	ft_memdel((void*)&str);
+	ft_memdel((void*)&ftab_cast);
 	return (END);
 }

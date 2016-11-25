@@ -18,8 +18,11 @@ int		placeholder(va_list ap, t_param *param)
 
 	(void)(ap);
 	str = ft_strdup("%");
+	if (!(str))
+		exit(EXIT_FAILURE);
 	param->alpha = TRUE;
 	final_print(param, str, "", 0);
+	ft_memdel((void*)&str);
 	return (END);
 }
 
