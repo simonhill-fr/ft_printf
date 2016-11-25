@@ -20,11 +20,16 @@ int 	main()
 	setlocale(LC_ALL, "");
 
 	int ret = 0, ret2 = 0;
-
-	ret = ft_printf("%jU, %jU<\n", 0, USHRT_MAX);
-	ret2 =   printf("%jU, %jU<\n", 0, USHRT_MAX);
-	printf("%d \t %d\n", ret, ret2);
-
+while (1)
+{
+	ret = ft_printf("m%jD, %jD<\n", 0, USHRT_MAX);
+	ret2 =   printf("t%jD, %jD<\n", 0, USHRT_MAX);
+	if (ret != ret2)
+	{
+		printf("%d \t %d\n", ret, ret2);
+		break;
+	}
+}
 
 
 	return (0);

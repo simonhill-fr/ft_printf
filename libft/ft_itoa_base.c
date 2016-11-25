@@ -48,7 +48,11 @@ void			ft_itoa_base(intmax_t input, char *buffer, unsigned int radix)
 		return ;
 	i = buff_len(input, radix) - 1;
 	if (input == 0)
+	{
 		buffer[0] = '0';
+		buffer[1] = '\0';
+		return ;
+	}
 	buffer[i + 1] = '\0';
 	input = ft_abs(input);
 	while ((input))
