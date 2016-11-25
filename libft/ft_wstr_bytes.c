@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 /*
-Returns number of bytes used by unicode wide-char string
+**	Returns number of bytes used by unicode wide-char string
 */
 
 #include "libft.h"

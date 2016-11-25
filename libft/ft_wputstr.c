@@ -22,7 +22,7 @@ int		ft_wputstr(unsigned int *wstr)
 	while (wstr[i] != L'\0')
 	{
 		ret += ft_wputchar(wstr[i]);
-			i++;
+		i++;
 	}
 	return (ret);
 }

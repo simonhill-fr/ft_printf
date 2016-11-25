@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shill <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,17 +11,16 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h> //REMOVE
 
 /*
-This function was created for ft_printf, and is not tested for radix != 10
-Is does not return '-' in case input number is positive
+**	This function was created for ft_printf, and is not tested for radix != 10
+**	It does not return '-' in case input number is positive
 */
 
-#define	SLIDER		"0123456789abcdefghijklmnopqrstuvwxyz"
-#define	MAX			(intmax_t)ft_pow(256, sizeof(intmax_t))
+#define SLIDER "0123456789abcdefghijklmnopqrstuvwxyz"
+#define MAX (intmax_t)ft_pow(256, sizeof(intmax_t))
 
-static size_t	buffer_len(intmax_t input, unsigned int radix)
+static size_t	buff_len(intmax_t input, unsigned int radix)
 {
 	size_t	i;
 
@@ -43,11 +42,11 @@ void			ft_itoa_base(intmax_t input, char *buffer, unsigned int radix)
 	if (input == MAX)
 	{
 		ft_strcpy(buffer, "9223372036854775808");
-		return;
+		return ;
 	}
 	if (radix > 16)
 		return ;
-	i = buffer_len(input, radix) - 1;
+	i = buff_len(input, radix) - 1;
 	if (input == 0)
 		buffer[0] = '0';
 	buffer[i + 1] = '\0';
@@ -60,13 +59,13 @@ void			ft_itoa_base(intmax_t input, char *buffer, unsigned int radix)
 	}
 }
 
-char 			*ft_itoadup(intmax_t input, unsigned int radix)
+char			*ft_itoadup(intmax_t input, unsigned int radix)
 {
 	char	*buffer;
 
 	if (radix <= 1
 		|| radix >= (int)sizeof(SLIDER)
-		|| !(buffer = malloc(sizeof(*buffer) * (buffer_len(input, radix) + 1 ))))
+		|| !(buffer = malloc(sizeof(*buffer) * (buff_len(input, radix) + 1))))
 		return (NULL);
 	ft_itoa_base(input, buffer, radix);
 	return (buffer);

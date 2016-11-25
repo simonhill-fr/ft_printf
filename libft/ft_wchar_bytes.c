@@ -11,14 +11,14 @@
 /* ************************************************************************** */
 
 /*
-Returns number of bytes used by unicode wide-character
+**	Returns number of bytes used by unicode wide-character
 */
 
 #include "libft.h"
 
 int		ft_wchar_bytes(wchar value)
 {
- 	size_t	i;
+	size_t	i;
 
 	if (value == 0)
 		return (0);

@@ -26,4 +26,3 @@ int	ft_putnbr_u(uintmax_t n)
 		ret += ft_putchar(n + '0');
 	return (ret);
 }
-

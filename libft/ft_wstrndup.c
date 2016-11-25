@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 /*
-	Warning : size 'n' is value in bytes, the number of characters to be 
-	included in the string is 'len'
+**	Warning : size 'n' is value in bytes, the number of characters to be
+**	included in the string is 'len'
 */
 
 #include "libft.h"
@@ -25,7 +25,7 @@ size_t		get_wstrlen(const wchar *s, int n)
 	i = 0;
 	len = 0;
 	while (s[i] != L'\0')
-	{		
+	{
 		if (n - ft_wchar_bytes(s[i]) >= 0)
 		{
 			n -= ft_wchar_bytes(s[i]);
@@ -37,8 +37,7 @@ size_t		get_wstrlen(const wchar *s, int n)
 	return (i);
 }
 
-
-wchar				*ft_wstrndup(const wchar *s, size_t n)
+wchar		*ft_wstrndup(const wchar *s, size_t n)
 {
 	wchar		*buff;
 	size_t		i;

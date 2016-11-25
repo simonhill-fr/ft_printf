@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-#define	SLIDER		"0123456789abcdefghijklmnopqrstuvwxyz"
+#define SLIDER "0123456789abcdefghijklmnopqrstuvwxyz"
 
-static size_t	buffer_len(uintmax_t input, unsigned int radix)
+static size_t	buff_len(uintmax_t input, unsigned int radix)
 {
 	size_t	i;
 
@@ -32,7 +32,7 @@ void			ft_utoa_base(uintmax_t input, char *buffer, unsigned int radix)
 
 	if (radix > 16)
 		return ;
-	i = buffer_len(input, radix) - 1;
+	i = buff_len(input, radix) - 1;
 	buffer[i + 1] = '\0';
 	if (input == 0)
 		buffer[0] = '0';
@@ -44,13 +44,13 @@ void			ft_utoa_base(uintmax_t input, char *buffer, unsigned int radix)
 	}
 }
 
-char 			*ft_utoadup(uintmax_t input, unsigned int radix)
+char			*ft_utoadup(uintmax_t input, unsigned int radix)
 {
 	char	*buffer;
 
 	if (radix <= 1
 		|| radix >= (int)sizeof(SLIDER)
-		|| !(buffer = malloc(sizeof(*buffer) * (buffer_len(input, radix) + 1 ))))
+		|| !(buffer = malloc(sizeof(*buffer) * (buff_len(input, radix) + 1))))
 		return (NULL);
 	ft_utoa_base(input, buffer, radix);
 	return (buffer);
