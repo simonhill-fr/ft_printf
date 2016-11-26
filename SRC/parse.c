@@ -35,7 +35,6 @@ int		walk(const char **format, t_param *param, int *print, va_list ap)
 		else
 			return (END);
 	}
-	(*format)++;
 	return (1);
 }
 
@@ -52,16 +51,18 @@ int		parse(const char *format, va_list ap, t_functab *f_arr, t_param *param)
 		else
 		{
 			if (*(format + 1) == '\0')
-				return (0);
+				return (print);
 			format++;
 			while ((param->fret = f_arr[(int)*format](ap, param)))
 			{
 				if (walk(&format, param, &print, ap) == END)
 					break ;
+				format++;
 			}
 		}
 		print += param->ret;
-		format++;
+		if (*format)
+			format++;
 	}
 	return (print);
 }
